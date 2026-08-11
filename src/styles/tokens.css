@@ -1,51 +1,81 @@
-/* Design Tokens for Premium Portfolio Platform
+/* Design Tokens — Premium Portfolio Platform
+   Three-layer token architecture (Section 4):
+   1. Primitive tokens: raw palettes, never referenced by components
+   2. Semantic tokens: theme-aware roles, the ONLY tokens components consume
+   3. Component tokens: narrow overrides resolving to semantic/primitive tokens
+
    Namespace convention: --color-*, --space-*, --radius-*, --ease-*, --font-*, --shadow-*, --z-*
 */
 
-@theme inline {
-  --color-background: var(--color-background);
-  --color-surface: var(--color-surface);
-  --color-card: var(--color-card);
-  --color-border: var(--color-border);
-  --color-accent: var(--color-accent);
-  
-  --color-text-primary: var(--color-text-primary);
-  --color-text-secondary: var(--color-text-secondary);
-  --color-text-tertiary: var(--color-text-tertiary);
-  
-  --color-success: var(--color-success);
-  --color-warning: var(--color-warning);
-  --color-danger: var(--color-danger);
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-
-  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
-}
-
 @layer base {
+  /* ═══════════════════════════════════════════════════
+     LIGHT THEME (default)
+     Design intent: airy, paper-like, high-clarity
+     ═══════════════════════════════════════════════════ */
   :root {
-    /* Base palette (light) */
-    --color-background: #FAFAF9;
-    --color-surface: #FFFFFF;
-    --color-card: #F4F4F3;
-    --color-border: #E4E4E2;
-    
-    /* Accent */
-    --color-accent: #5B5BFF;
-    
-    /* Text */
-    --color-text-primary: color-mix(in srgb, #0A0A0B 95%, transparent);
-    --color-text-secondary: color-mix(in srgb, #0A0A0B 60%, transparent);
-    --color-text-tertiary: color-mix(in srgb, #0A0A0B 35%, transparent);
+    /* — Surfaces — */
+    --color-surface-base: #FAFAF8;
+    --color-surface-raised: #FFFFFF;
+    --color-surface-overlay: rgba(255, 255, 255, 0.72);
+    --color-surface-sunken: #F0F0EE;
+    --color-surface-hover: #F4F4F2;
+    --color-surface-pressed: #EBEBEA;
 
-    /* Semantic */
-    --color-success: #10B981;
-    --color-warning: #F59E0B;
-    --color-danger: #EF4444;
+    /* — Text — */
+    --color-text-primary: rgba(10, 10, 12, 0.92);
+    --color-text-secondary: rgba(10, 10, 12, 0.60);
+    --color-text-tertiary: rgba(10, 10, 12, 0.38);
+    --color-text-disabled: rgba(10, 10, 12, 0.22);
+    --color-text-inverse: rgba(250, 250, 248, 0.95);
+    --color-text-on-accent: #FFFFFF;
 
-    /* Spacing */
+    /* — Borders — */
+    --color-border-subtle: rgba(10, 10, 12, 0.06);
+    --color-border-default: rgba(10, 10, 12, 0.12);
+    --color-border-strong: rgba(10, 10, 12, 0.22);
+    --color-border-focus: #5B5BFF;
+
+    /* — Accent (indigo-500 for light) — */
+    --color-accent-default: #5B5BFF;
+    --color-accent-hover: #4747E6;
+    --color-accent-pressed: #3939CC;
+    --color-accent-subtle: rgba(91, 91, 255, 0.08);
+    --color-accent-on-accent: #FFFFFF;
+
+    /* — Semantic status — */
+    --color-status-success: #16A34A;
+    --color-status-success-subtle: rgba(22, 163, 74, 0.08);
+    --color-status-warning: #CA8A04;
+    --color-status-warning-subtle: rgba(202, 138, 4, 0.08);
+    --color-status-danger: #DC2626;
+    --color-status-danger-subtle: rgba(220, 38, 38, 0.08);
+    --color-status-info: #2563EB;
+    --color-status-info-subtle: rgba(37, 99, 235, 0.08);
+
+    /* — Shadows (warm-grey tinted, tight blur) — */
+    --shadow-sm: 0 1px 2px 0 rgba(28, 25, 23, 0.05);
+    --shadow-md: 0 2px 4px -1px rgba(28, 25, 23, 0.06), 0 4px 6px -1px rgba(28, 25, 23, 0.08);
+    --shadow-lg: 0 4px 6px -2px rgba(28, 25, 23, 0.05), 0 10px 15px -3px rgba(28, 25, 23, 0.08);
+    --shadow-glow: 0 0 20px 2px rgba(91, 91, 255, 0.15);
+
+    /* — Glass — */
+    --color-glass-overlay-bg: rgba(255, 255, 255, 0.72);
+    --color-glass-overlay-border: rgba(255, 255, 255, 0.20);
+    --glass-overlay-blur: 16px;
+    --texture-grain-opacity: 0;
+
+    /* — Gradients — */
+    --gradient-hero: linear-gradient(135deg, #FAFAF8 0%, #F0F0EE 50%, #E8E8F8 100%);
+    --gradient-mesh-subtle: radial-gradient(ellipse at 20% 50%, rgba(91, 91, 255, 0.03) 0%, transparent 50%),
+                            radial-gradient(ellipse at 80% 50%, rgba(91, 91, 255, 0.02) 0%, transparent 50%);
+    --gradient-card-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+
+    /* — Component tokens — */
+    --color-code-block-bg: #F5F5F3;
+    --color-tooltip-bg: #1C1917;
+    --color-tooltip-text: #FAFAF8;
+
+    /* — Spacing scale (4px base, geometric progression) — */
     --space-1: 4px;
     --space-2: 8px;
     --space-3: 12px;
@@ -58,19 +88,18 @@
     --space-32: 128px;
     --space-48: 192px;
 
-    /* Radius */
+    /* — Radius — */
     --radius-1: 4px;
     --radius-2: 8px;
     --radius-3: 12px;
     --radius-4: 20px;
     --radius-full: 9999px;
 
-    /* Shadow (Light) */
-    --shadow-1: 0 1px 2px 0 rgb(10 10 11 / 0.05);
-    --shadow-2: 0 4px 6px -1px rgb(10 10 11 / 0.1), 0 2px 4px -2px rgb(10 10 11 / 0.1);
-    --shadow-3: 0 10px 15px -3px rgb(10 10 11 / 0.1), 0 4px 6px -4px rgb(10 10 11 / 0.1);
+    /* — Easing — */
+    --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-exit: cubic-bezier(0.7, 0, 0.84, 0);
 
-    /* Z-Index */
+    /* — Z-Index (enumerated, no arbitrary values) — */
     --z-dropdown: 10;
     --z-sticky-header: 20;
     --z-overlay: 30;
@@ -79,21 +108,71 @@
     --z-cursor: 60;
   }
 
+  /* ═══════════════════════════════════════════════════
+     DARK THEME
+     Design intent: deep cool near-black, elevation via lightness
+     ═══════════════════════════════════════════════════ */
   .dark {
-    /* Base palette (dark) */
-    --color-background: #0A0A0B;
-    --color-surface: #111113;
-    --color-card: #17171A;
-    --color-border: #26262B;
-    
-    /* Text */
-    --color-text-primary: color-mix(in srgb, #FAFAF9 95%, transparent);
-    --color-text-secondary: color-mix(in srgb, #FAFAF9 60%, transparent);
-    --color-text-tertiary: color-mix(in srgb, #FAFAF9 35%, transparent);
+    /* — Surfaces (elevation via lightness steps: +3%, +6%, +9%) — */
+    --color-surface-base: #0A0A0C;
+    --color-surface-raised: #141416;
+    --color-surface-overlay: rgba(20, 20, 24, 0.64);
+    --color-surface-sunken: #060608;
+    --color-surface-hover: #1C1C20;
+    --color-surface-pressed: #242428;
 
-    /* Shadow (Dark) */
-    --shadow-1: 0 1px 2px 0 rgb(0 0 0 / 0.5);
-    --shadow-2: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
-    --shadow-3: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+    /* — Text — */
+    --color-text-primary: rgba(250, 250, 248, 0.92);
+    --color-text-secondary: rgba(250, 250, 248, 0.56);
+    --color-text-tertiary: rgba(250, 250, 248, 0.32);
+    --color-text-disabled: rgba(250, 250, 248, 0.18);
+    --color-text-inverse: rgba(10, 10, 12, 0.92);
+    --color-text-on-accent: #FFFFFF;
+
+    /* — Borders — */
+    --color-border-subtle: rgba(250, 250, 248, 0.06);
+    --color-border-default: rgba(250, 250, 248, 0.10);
+    --color-border-strong: rgba(250, 250, 248, 0.18);
+    --color-border-focus: #7C7CFF;
+
+    /* — Accent (indigo-400 equiv, brighter for dark bg) — */
+    --color-accent-default: #7C7CFF;
+    --color-accent-hover: #9191FF;
+    --color-accent-pressed: #6868E6;
+    --color-accent-subtle: rgba(124, 124, 255, 0.10);
+    --color-accent-on-accent: #FFFFFF;
+
+    /* — Semantic status (tuned per theme for 4.5:1 contrast) — */
+    --color-status-success: #22C55E;
+    --color-status-success-subtle: rgba(34, 197, 94, 0.12);
+    --color-status-warning: #EAB308;
+    --color-status-warning-subtle: rgba(234, 179, 8, 0.12);
+    --color-status-danger: #EF4444;
+    --color-status-danger-subtle: rgba(239, 68, 68, 0.12);
+    --color-status-info: #3B82F6;
+    --color-status-info-subtle: rgba(59, 130, 246, 0.12);
+
+    /* — Shadows (higher opacity for dark-on-dark) — */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 2px 4px -1px rgba(0, 0, 0, 0.4), 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 4px 6px -2px rgba(0, 0, 0, 0.35), 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 24px 4px rgba(124, 124, 255, 0.20);
+
+    /* — Glass — */
+    --color-glass-overlay-bg: rgba(20, 20, 24, 0.64);
+    --color-glass-overlay-border: rgba(250, 250, 248, 0.08);
+    --glass-overlay-blur: 20px;
+    --texture-grain-opacity: 0.03;
+
+    /* — Gradients — */
+    --gradient-hero: linear-gradient(135deg, #0A0A0C 0%, #0E0E14 50%, #12121C 100%);
+    --gradient-mesh-subtle: radial-gradient(ellipse at 20% 50%, rgba(124, 124, 255, 0.04) 0%, transparent 50%),
+                            radial-gradient(ellipse at 80% 50%, rgba(124, 124, 255, 0.03) 0%, transparent 50%);
+    --gradient-card-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0) 100%);
+
+    /* — Component tokens — */
+    --color-code-block-bg: #111114;
+    --color-tooltip-bg: #F5F5F3;
+    --color-tooltip-text: #0A0A0C;
   }
 }
