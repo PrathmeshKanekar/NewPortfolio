@@ -46,7 +46,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
-  output: "standalone",
+  // Vercel deployment fails if standalone is forced while it builds serverless functions
+  output: process.env.VERCEL === "1" ? undefined : "standalone",
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
