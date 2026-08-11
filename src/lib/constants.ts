@@ -6,8 +6,8 @@ export const SITE_CONFIG = {
   description:
     "Full Stack Software Engineer with professional experience developing enterprise banking software and scalable web applications.",
   url: "https://prathmeshkanekar.in",
-  email: "OWNER INPUT REQUIRED",
-  location: "OWNER INPUT REQUIRED",
+  email: "prathmeshkanekar2002@gmail.com",
+  location: "Kolhapur, Maharashtra",
   availabilityStatus: "OWNER INPUT REQUIRED" as const,
 } as const;
 
