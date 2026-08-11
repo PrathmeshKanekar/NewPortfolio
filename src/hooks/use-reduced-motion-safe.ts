@@ -8,6 +8,7 @@ export function useReducedMotionSafe(): boolean {
 
   useEffect(() => {
     const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsSafe(!mql.matches);
 
     const handler = (e: MediaQueryListEvent) => setIsSafe(!e.matches);
