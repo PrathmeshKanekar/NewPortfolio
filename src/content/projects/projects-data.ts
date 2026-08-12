@@ -22,6 +22,5 @@ export function getAllProjects(): Project[] {
 export function getFeaturedProjects(): Project[] {
   return getAllProjects()
     .filter((p) => p.featured)
-    .sort((a, b) => (a.order ?? 99) - (b.order ?? 99))
-    .slice(0, 3);
+    .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 }

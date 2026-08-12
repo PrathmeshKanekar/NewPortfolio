@@ -1,26 +1,65 @@
 import { Hero } from "@/components/sections/Hero";
-import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
-import { AboutTeaser } from "@/components/sections/AboutTeaser";
+import { ProfessionalSnapshot } from "@/components/sections/ProfessionalSnapshot";
 import { SkillsOverview } from "@/components/sections/SkillsOverview";
-import { LatestPosts } from "@/components/sections/LatestPosts";
+import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
+import { Experience } from "@/components/sections/Experience";
+import { EngineeringCapabilities } from "@/components/sections/EngineeringCapabilities";
+import { GithubOpenSource } from "@/components/sections/GithubOpenSource";
+import { AboutMe } from "@/components/sections/AboutMe";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { getFeaturedProjects } from "@/content/projects/projects-data";
-import { getLatestBlogPosts } from "@/content/blog/blog-data";
 import { ISR_REVALIDATE_SECONDS } from "@/lib/constants";
 
 export const revalidate = 3600;
 
 export default function HomePage() {
   const featuredProjects = getFeaturedProjects();
-  const latestPosts = getLatestBlogPosts(2);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "@id": "https://prathmeshkanekar.in/#website",
+                "url": "https://prathmeshkanekar.in/",
+                "name": "Prathmesh Kanekar",
+                "description": "Full Stack Software Engineer focused on building secure, scalable enterprise applications and banking software.",
+                "publisher": {
+                  "@id": "https://prathmeshkanekar.in/#person"
+                }
+              },
+              {
+                "@type": "Person",
+                "@id": "https://prathmeshkanekar.in/#person",
+                "name": "Prathmesh Kanekar",
+                "url": "https://prathmeshkanekar.in/",
+                "jobTitle": "Full Stack Software Engineer",
+                "worksFor": {
+                  "@type": "Organization",
+                  "name": "Three Star Infotech Pvt. Ltd."
+                },
+                "sameAs": [
+                  "https://github.com/prathmeshkanekar",
+                  "https://www.linkedin.com/in/prathmesh-kanekar"
+                ]
+              }
+            ]
+          }),
+        }}
+      />
       <Hero />
-      <FeaturedProjects projects={featuredProjects} />
-      <AboutTeaser />
+      <ProfessionalSnapshot />
       <SkillsOverview />
-      <LatestPosts posts={latestPosts} />
+      <FeaturedProjects projects={featuredProjects} />
+      <Experience />
+      <EngineeringCapabilities />
+      <GithubOpenSource />
+      <AboutMe />
       <ClosingCTA />
     </>
   );

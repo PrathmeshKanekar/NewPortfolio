@@ -24,8 +24,8 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       <Container>
         <RevealOnScroll>
           <SectionHeading
-            number="01"
-            eyebrow="Selected Work"
+            number="04"
+            eyebrow="{ projects }"
             heading="Featured Projects"
             description="Enterprise-grade systems I've designed and built."
             id="featured-projects"

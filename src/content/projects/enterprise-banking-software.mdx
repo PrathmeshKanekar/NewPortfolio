@@ -5,21 +5,46 @@ published: true
 featured: true
 order: 1
 date: "2026-08-11"
-techStack: ["Angular", "ASP.NET Core", "SQL Server", "REST API"]
+techStack: ["Angular", "TypeScript", "ASP.NET Core", "C#", "SQL Server", "Dapper"]
 ---
 
-# Overview
+## 01 / Overview
 
-Enterprise Banking Software encompassing numerous critical financial modules for a large-scale institution.
+Designed and implemented mission-critical enterprise banking modules for a large-scale financial institution. The system manages core customer data, account requests, and complex financial authorization workflows while maintaining strict data integrity and security compliance.
 
-## Key Features Developed
-- Customer Management
-- Account Request Workflow
-- Authorization System
-- Nominee Management
-- Joint Holder Management
-- Guarantor Module
-- Freeze/Unfreeze Workflow
-- Transaction Processing
-- Dashboard Development
-- SQL Optimization & Performance Improvements
+## 02 / Problem
+
+The institution required a modernized, scalable platform to replace legacy workflows for customer onboarding, account management, and daily financial operations. The system needed to support high concurrency, provide sub-second response times for complex queries, and enforce rigid authorization protocols.
+
+## 03 / Architecture
+
+The application follows a secure, n-tier enterprise architecture:
+- **Presentation Layer**: A component-driven Angular frontend optimized for complex data grids and forms.
+- **Application Layer**: A robust ASP.NET Core REST API serving as the primary business logic and integration hub.
+- **Data Access Layer**: Highly optimized SQL queries utilizing Dapper for performance-critical reads and Entity Framework for complex state mutations.
+
+## 04 / Frontend
+
+- Developed responsive, data-heavy user interfaces using **Angular** and **TypeScript**.
+- Implemented state management for complex multi-step workflows like Account Requests and Guarantor assignments.
+- Built reusable UI components for consistent financial data presentation.
+
+## 05 / Backend
+
+- Architected secure **RESTful APIs** with ASP.NET Core and C#.
+- Implemented comprehensive **Authorization Workflows** utilizing role-based access control (RBAC) and maker-checker validation patterns.
+- Engineered specific modules including:
+  - Customer Management
+  - Nominee and Joint Holder Management
+  - Freeze/Unfreeze Account Workflows
+  - Financial Transaction Processing
+
+## 06 / Database
+
+- Designed normalized schemas in **SQL Server** to ensure ACID compliance across all financial transactions.
+- Wrote and optimized complex stored procedures and queries.
+- Leveraged **Dapper** for high-performance data retrieval, significantly reducing latency on heavy dashboard loads.
+
+## 07 / Solution & Impact
+
+The modernized platform successfully streamlined the institution's core operations. By replacing manual and legacy processes with optimized digital workflows, the system reduced onboarding friction, enhanced transaction security, and provided a scalable foundation for future financial products.

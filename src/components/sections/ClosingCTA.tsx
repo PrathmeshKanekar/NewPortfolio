@@ -3,22 +3,25 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/common/Container";
+import { SectionHeading } from "@/components/common/SectionHeading";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { SITE_CONFIG } from "@/lib/constants";
 
 /** Closing CTA section on the Home page */
 export function ClosingCTA() {
   return (
-    <section className="py-24 md:py-32" aria-labelledby="closing-cta">
+    <section className="py-24 md:py-32 bg-[color:var(--color-surface-sunken)] border-t border-[color:var(--color-border-subtle)]" aria-labelledby="closing-cta">
       <Container>
         <RevealOnScroll>
           <div className="max-w-2xl mx-auto text-center">
-            <h2
+            <SectionHeading
+              number="09"
+              eyebrow="Contact"
+              heading="Let's build something useful."
               id="closing-cta"
-              className="text-3xl sm:text-4xl font-bold tracking-tight text-[color:var(--color-text-primary)]"
-            >
-              Let&apos;s build something useful.
-            </h2>
+              align="center"
+              className="mb-6"
+            />
             <p className="mt-4 text-[color:var(--color-text-secondary)] leading-relaxed">
               I&apos;m currently {SITE_CONFIG.availabilityStatus.toLowerCase()}.
               If you&apos;re looking for a full stack engineer for your team or a

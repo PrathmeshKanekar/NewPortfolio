@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/common/Container";
 import { getDocumentBySlug, getAllDocuments } from "@/lib/mdx/loader";
-import { ISR_REVALIDATE_SECONDS } from "@/lib/constants";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Github } from "@/components/common/Icons";
 import Link from "next/link";
@@ -38,96 +37,88 @@ export default async function ProjectDetailPage(
   return (
     <article className="py-24 md:py-32" aria-labelledby="project-title">
       <Container>
-        {/* Back link */}
-        <Link
-          href="/projects"
-          className="inline-flex items-center gap-1 mb-8 text-sm text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] transition-colors duration-150"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          All Projects
-        </Link>
-
-        {/* Header */}
-        <div className="max-w-3xl">
-          <p className="text-eyebrow text-[color:var(--color-accent-default)]">
-            {project.frontmatter.date}
-          </p>
-          <h1
-            id="project-title"
-            className="mt-3 text-heading-1 font-bold text-[color:var(--color-text-primary)]"
+        <div className="max-w-3xl mx-auto">
+          {/* Back link */}
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 mb-12 text-xs font-mono uppercase tracking-widest text-[color:var(--color-text-tertiary)] hover:text-[color:var(--color-text-primary)] transition-colors duration-150"
           >
-            {project.frontmatter.title}
-          </h1>
-          <p className="mt-4 text-lg text-[color:var(--color-text-secondary)] leading-relaxed">
-            {project.frontmatter.description}
-          </p>
+            <ArrowLeft className="h-3.5 w-3.5" />
+            Back to Projects
+          </Link>
 
-          {/* Links */}
-          <div className="mt-6 flex flex-wrap gap-3">
-            {project.frontmatter.url && (
-              <a
-                href={project.frontmatter.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-9 items-center gap-1.5 rounded-[var(--radius-2)] bg-[color:var(--color-accent-default)] px-4 text-sm font-medium text-[color:var(--color-accent-on-accent)] transition-all duration-150 hover:bg-[color:var(--color-accent-hover)]"
-              >
-                <ExternalLink className="h-3.5 w-3.5" />
-                Live Demo
-              </a>
-            )}
+          {/* Header */}
+          <header className="mb-12">
+            <h1
+              id="project-title"
+              className="text-4xl md:text-5xl font-bold tracking-tight text-[color:var(--color-text-primary)] mb-6"
+            >
+              {project.frontmatter.title}
+            </h1>
+            <p className="text-xl text-[color:var(--color-text-secondary)] leading-relaxed">
+              {project.frontmatter.description}
+            </p>
+          </header>
+
+          {/* Meta Info Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y border-[color:var(--color-border-subtle)] mb-12">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-[color:var(--color-text-tertiary)] mb-2">Year</p>
+              <p className="text-sm font-medium text-[color:var(--color-text-primary)]">{new Date(project.frontmatter.date).getFullYear()}</p>
+            </div>
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-[color:var(--color-text-tertiary)] mb-2">Role</p>
+              <p className="text-sm font-medium text-[color:var(--color-text-primary)]">Full Stack Engineer</p>
+            </div>
             {project.frontmatter.repository && (
-              <a
-                href={project.frontmatter.repository}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-9 items-center gap-1.5 rounded-[var(--radius-2)] border border-[color:var(--color-border-default)] px-4 text-sm font-medium text-[color:var(--color-text-primary)] transition-all duration-150 hover:bg-[color:var(--color-surface-hover)]"
-              >
-                <Github className="h-3.5 w-3.5" />
-                Source Code
-              </a>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-[color:var(--color-text-tertiary)] mb-2">Source</p>
+                <a
+                  href={project.frontmatter.repository}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] transition-colors"
+                >
+                  <Github className="h-3.5 w-3.5" /> GitHub
+                </a>
+              </div>
+            )}
+            {project.frontmatter.url && (
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-[color:var(--color-text-tertiary)] mb-2">Live</p>
+                <a
+                  href={project.frontmatter.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] transition-colors"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" /> Visit Site
+                </a>
+              </div>
             )}
           </div>
-        </div>
 
-        {/* Metrics */}
-        {project.frontmatter.metrics && Object.keys(project.frontmatter.metrics).length > 0 && (
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 max-w-3xl">
-            {Object.entries(project.frontmatter.metrics).map(([label, value]) => (
-              <div
-                key={label}
-                className="rounded-[var(--radius-3)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] p-4"
-              >
-                <p className="font-mono text-2xl font-bold text-[color:var(--color-accent-default)]">
-                  {value as string}
-                </p>
-                <p className="mt-1 text-xs text-[color:var(--color-text-tertiary)]">
-                  {label}
-                </p>
-              </div>
-            ))}
+          {/* Stack */}
+          <div className="mb-16">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-[color:var(--color-text-tertiary)] mb-4">
+              Technologies Used
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {project.frontmatter.techStack.map((tech) => (
+                <span
+                  key={tech}
+                  className="inline-flex items-center rounded-md border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] px-3 py-1.5 font-mono text-xs text-[color:var(--color-text-secondary)]"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
-        )}
 
-        {/* Stack */}
-        <div className="mt-12 max-w-3xl">
-          <h2 className="text-heading-3 font-semibold text-[color:var(--color-text-primary)]">
-            Tech Stack
-          </h2>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.frontmatter.techStack.map((tech) => (
-              <span
-                key={tech}
-                className="inline-flex items-center rounded-[var(--radius-full)] bg-[color:var(--color-accent-subtle)] px-3 py-1 font-mono text-xs text-[color:var(--color-accent-default)]"
-              >
-                {tech}
-              </span>
-            ))}
+          {/* Content */}
+          <div className="prose prose-invert prose-slate max-w-none">
+            <CustomMDX source={project.source} />
           </div>
-        </div>
-
-        {/* MDX Content */}
-        <div className="mt-16 max-w-3xl rounded-[var(--radius-3)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] p-8">
-          <CustomMDX source={project.source} />
         </div>
       </Container>
     </article>

@@ -31,7 +31,7 @@ export function Header() {
       >
         <div
           className={cn(
-            "mx-auto max-w-5xl rounded-full border transition-all duration-300 px-1",
+            "mx-auto w-[calc(100%-2.5rem)] md:w-[calc(100%-4rem)] xl:w-[calc(100%-8rem)] max-w-[1280px] rounded-full border transition-all duration-300 px-1",
             isScrolled
               ? "bg-[color:var(--color-surface-overlay)] border-[color:var(--color-border-default)] shadow-lg"
               : "bg-[color:var(--color-surface-overlay)] border-[color:var(--color-border-subtle)] shadow-sm"
@@ -39,8 +39,6 @@ export function Header() {
           style={{
             backdropFilter: "blur(16px)",
             WebkitBackdropFilter: "blur(16px)",
-            marginLeft: "1rem",
-            marginRight: "1rem",
           } as React.CSSProperties}
         >
           <div className="flex h-12 items-center justify-between px-3 md:px-4">

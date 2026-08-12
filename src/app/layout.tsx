@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
+import { FloatingDock } from "@/components/navigation/FloatingDock";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/common/ScrollProgress";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -21,8 +21,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_CONFIG.name} — ${SITE_CONFIG.title}`,
-    template: `%s — ${SITE_CONFIG.name}`,
+    default: `${SITE_CONFIG.name} | ${SITE_CONFIG.title}`,
+    template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.description,
   metadataBase: new URL(SITE_CONFIG.url),
@@ -31,12 +31,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
-    title: `${SITE_CONFIG.name} — ${SITE_CONFIG.title}`,
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.title}`,
     description: SITE_CONFIG.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_CONFIG.name} — ${SITE_CONFIG.title}`,
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.title}`,
     description: SITE_CONFIG.description,
   },
   robots: {
@@ -49,6 +49,9 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
   },
   icons: {
     icon: "/favicon.ico",
@@ -75,9 +78,9 @@ export default function RootLayout({
           </a>
 
           <ScrollProgress />
-          <Header />
+          <FloatingDock />
 
-          <main id="main-content" className="min-h-screen pt-20">
+          <main id="main-content" className="min-h-screen pb-28 md:pb-32">
             {children}
           </main>
 
