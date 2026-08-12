@@ -14,7 +14,7 @@ interface FeaturedProjectsProps {
   projects: Project[];
 }
 
-/** Featured projects grid on the Home page (Section 15) */
+/** Featured projects grid on the Home page */
 export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
   return (
     <section
@@ -24,9 +24,10 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
       <Container>
         <RevealOnScroll>
           <SectionHeading
+            number="01"
             eyebrow="Selected Work"
             heading="Featured Projects"
-            description="Enterprise-grade systems I've designed and built — from banking platforms to healthcare solutions."
+            description="Enterprise-grade systems I've designed and built."
             id="featured-projects"
           />
         </RevealOnScroll>
@@ -36,7 +37,7 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"
+          className="grid grid-cols-1 gap-4 md:grid-cols-2"
         >
           {projects.map((project) => (
             <motion.div key={project.slug} variants={fadeUpVariants}>
@@ -45,13 +46,13 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           ))}
         </motion.div>
 
-        <RevealOnScroll className="mt-10 flex justify-center">
+        <RevealOnScroll className="mt-8 flex justify-center">
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--color-accent-default)] transition-colors duration-150 hover:text-[color:var(--color-accent-hover)]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[color:var(--color-text-secondary)] transition-colors hover:text-[color:var(--color-text-primary)]"
           >
             View all projects
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </RevealOnScroll>
       </Container>

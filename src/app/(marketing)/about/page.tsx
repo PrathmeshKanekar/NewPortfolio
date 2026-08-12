@@ -11,7 +11,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "About",
-  description: `Learn about ${SITE_CONFIG.name} — a product-focused software architect building premium SaaS products with Angular, .NET, and Azure.`,
+  description: `Learn about ${SITE_CONFIG.name} — a Full Stack Software Engineer focused on building secure, scalable enterprise applications.`,
 };
 
 export default function AboutPage() {
@@ -21,6 +21,7 @@ export default function AboutPage() {
       <section className="py-24 md:py-32" aria-labelledby="about-heading">
         <Container>
           <SectionHeading
+            number="01"
             eyebrow="About Me"
             heading="The Story So Far"
             id="about-heading"
@@ -41,11 +42,12 @@ export default function AboutPage() {
 
       {/* Experience Timeline */}
       <section
-        className="py-24 md:py-32 bg-[color:var(--color-surface-sunken)]"
+        className="py-24 md:py-32 bg-[color:var(--color-surface-sunken)] border-y border-[color:var(--color-border-subtle)]"
         aria-labelledby="experience-heading"
       >
         <Container>
           <SectionHeading
+            number="02"
             eyebrow="Career Timeline"
             heading="Experience"
             id="experience-heading"
@@ -62,20 +64,24 @@ export default function AboutPage() {
       <section className="py-24 md:py-32" aria-labelledby="education-heading">
         <Container>
           <SectionHeading
+            number="03"
             eyebrow="Education"
             heading="Academic Background"
             id="education-heading"
           />
-          <div className="max-w-2xl">
+          <div className="max-w-2xl space-y-8">
             {resumeData.education.map((edu) => (
               <div key={edu.institution} className="flex items-start gap-4">
-                <div className="h-3 w-3 mt-1.5 rounded-full bg-[color:var(--color-accent-default)] shrink-0" />
+                <div className="mt-2 h-2 w-2 shrink-0 rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] ring-4 ring-[color:var(--color-surface-default)]" />
                 <div>
                   <h3 className="font-semibold text-[color:var(--color-text-primary)]">
                     {edu.degree}
                   </h3>
-                  <p className="text-sm text-[color:var(--color-text-secondary)]">
-                    {edu.institution} · {edu.year}
+                  <p className="text-sm font-medium text-[color:var(--color-text-secondary)] mt-1">
+                    {edu.institution}
+                  </p>
+                  <p className="font-mono text-xs text-[color:var(--color-text-tertiary)] mt-1">
+                    {edu.year}
                   </p>
                 </div>
               </div>
@@ -94,7 +100,7 @@ export default function AboutPage() {
             <a
               href={`/resume/${RESUME_FILENAME}`}
               download
-              className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-2)] bg-[color:var(--color-accent-default)] px-6 text-sm font-medium text-[color:var(--color-accent-on-accent)] transition-all duration-150 hover:bg-[color:var(--color-accent-hover)] active:translate-y-px"
+              className="inline-flex h-11 items-center gap-2 rounded-lg bg-[color:var(--color-text-primary)] px-6 text-sm font-medium text-[color:var(--color-surface-sunken)] transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
             >
               <Download className="h-4 w-4" />
               Download Resume

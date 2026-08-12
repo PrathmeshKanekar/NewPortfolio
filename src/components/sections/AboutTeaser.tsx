@@ -3,69 +3,70 @@
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { SITE_CONFIG } from "@/lib/constants";
-import { Code2, Server, Cloud } from "lucide-react";
+import { Code2, Database, Cloud, Shield } from "lucide-react";
 
-/** About teaser on the Home page (Section 15) */
+const FOCUS_AREAS = [
+  {
+    icon: Code2,
+    title: "Full Stack",
+    desc: "Angular + ASP.NET Core end-to-end",
+  },
+  {
+    icon: Database,
+    title: "Database Engineering",
+    desc: "SQL Server, PostgreSQL, Dapper, EF Core",
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    desc: "Docker, Azure, Git, CI/CD",
+  },
+  {
+    icon: Shield,
+    title: "Enterprise Software",
+    desc: "Banking, auth, authorization workflows",
+  },
+];
+
+/** Professional snapshot on the Home page */
 export function AboutTeaser() {
   return (
     <section
-      className="py-24 md:py-32 bg-[color:var(--color-surface-sunken)]"
+      className="py-24 md:py-32 border-y border-[color:var(--color-border-subtle)]"
       aria-labelledby="about-teaser"
     >
       <Container>
         <RevealOnScroll>
           <SectionHeading
-            eyebrow="About Me"
-            heading="Engineer. Architect. Builder."
+            number="02"
+            eyebrow="Engineering Focus"
+            heading="What I Build"
             id="about-teaser"
           />
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <RevealOnScroll>
-            <p className="text-lg leading-relaxed text-[color:var(--color-text-secondary)]">
-              I&apos;m a product-focused software architect who thrives at the
-              intersection of system design and user experience. With 5+ years
-              shipping enterprise banking, healthcare, and commerce software,
-              I build systems that are as elegant internally as they are
-              externally.
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
+          <RevealOnScroll className="lg:col-span-3">
+            <p className="text-base sm:text-lg leading-relaxed text-[color:var(--color-text-secondary)]">
+              I am a Full Stack Software Engineer focused on building secure, scalable enterprise applications. Currently working on banking software — building customer management, account workflows, financial transactions, and authorization systems.
             </p>
-            <p className="mt-4 text-lg leading-relaxed text-[color:var(--color-text-secondary)]">
-              My stack spans Angular, TypeScript, ASP.NET Core, C#, SQL Server,
-              PostgreSQL, Docker, and Azure — but the technology is always in
-              service of the product, never the other way around.
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-[color:var(--color-text-secondary)]">
+              My stack spans Angular, TypeScript, ASP.NET Core, C#, SQL Server, PostgreSQL, Docker, and Azure — but the technology is always in service of the product, never the other way around.
             </p>
           </RevealOnScroll>
 
-          <RevealOnScroll delay={0.15}>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              {[
-                {
-                  icon: Code2,
-                  title: "Full Stack",
-                  desc: "Angular + .NET end-to-end engineering",
-                },
-                {
-                  icon: Server,
-                  title: "System Design",
-                  desc: "Microservices, event-driven, multi-tenant",
-                },
-                {
-                  icon: Cloud,
-                  title: "Cloud Native",
-                  desc: "Docker, Azure, CI/CD, IaC",
-                },
-              ].map((item) => (
+          <RevealOnScroll delay={0.1} className="lg:col-span-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {FOCUS_AREAS.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-[var(--radius-3)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] p-5"
+                  className="rounded-lg border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] p-4 transition-colors hover:bg-[color:var(--color-surface-raised)]"
                 >
-                  <item.icon className="h-5 w-5 text-[color:var(--color-accent-default)]" />
-                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--color-text-primary)]">
+                  <item.icon className="h-4 w-4 text-[color:var(--color-text-tertiary)] mb-3" />
+                  <h3 className="text-sm font-semibold text-[color:var(--color-text-primary)]">
                     {item.title}
                   </h3>
-                  <p className="mt-1 text-xs text-[color:var(--color-text-secondary)]">
+                  <p className="mt-1 text-xs text-[color:var(--color-text-tertiary)] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

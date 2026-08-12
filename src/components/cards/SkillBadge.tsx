@@ -1,32 +1,33 @@
 import { cn } from "@/lib/utils";
+import { Code2 } from "lucide-react";
 
 interface SkillGroup {
   category: string;
-  skills: { name: string; proficiency: number }[];
+  skills: { name: string; proficiency: string; level: number }[];
 }
 
 interface SkillBadgeProps {
   name: string;
-  proficiency: number;
+  proficiency: string;
+  level: number;
   className?: string;
 }
 
-/** Individual skill with subtle proficiency bar indicator (Section 9) */
 export function SkillBadge({ name, proficiency, className }: SkillBadgeProps) {
   return (
     <div
       className={cn(
-        "group relative overflow-hidden rounded-[var(--radius-2)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] px-3 py-2 text-sm",
+        "group relative flex items-center gap-2 overflow-hidden rounded-md border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] px-3 py-2 transition-all hover:bg-[color:var(--color-surface-raised)]",
         className
       )}
     >
-      <span className="relative z-10 font-mono text-xs text-[color:var(--color-text-primary)]">
+      <Code2 className="h-3 w-3 text-[color:var(--color-text-tertiary)]" />
+      <span className="font-mono text-xs font-medium text-[color:var(--color-text-primary)]">
         {name}
       </span>
-      <div
-        className="absolute bottom-0 left-0 h-[2px] bg-[color:var(--color-accent-default)] transition-all duration-300"
-        style={{ width: `${proficiency}%` }}
-      />
+      <span className="ml-1 text-[10px] text-[color:var(--color-text-tertiary)]">
+        {proficiency}
+      </span>
     </div>
   );
 }
@@ -49,6 +50,7 @@ export function SkillGroupCard({ group, className }: SkillGroupProps) {
             key={skill.name}
             name={skill.name}
             proficiency={skill.proficiency}
+            level={skill.level}
           />
         ))}
       </div>

@@ -43,6 +43,9 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-image: radial-gradient(var(--color-border-subtle) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
   }
 
   /* Theme transition for smooth theme swap (200ms cross-fade) */

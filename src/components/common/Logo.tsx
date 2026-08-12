@@ -5,14 +5,9 @@ import Link from "next/link";
 /** SVG logo mark with site name */
 export function Logo({ className }: { className?: string }) {
   return (
-    <Link href="/" className={cn("flex items-center gap-2 group", className)}>
-      <div className="flex h-8 w-8 items-center justify-center rounded-[var(--radius-2)] bg-[color:var(--color-accent-default)] transition-transform duration-150 group-hover:scale-105">
-        <span className="font-mono text-sm font-bold text-[color:var(--color-accent-on-accent)]">
-          {SITE_CONFIG.name.charAt(0)}
-        </span>
-      </div>
-      <span className="text-sm font-semibold text-[color:var(--color-text-primary)] hidden sm:inline-block">
-        {SITE_CONFIG.name}
+    <Link href="/" className={cn("flex items-center group", className)}>
+      <span className="font-mono text-sm font-medium text-[color:var(--color-text-primary)] transition-colors group-hover:text-[color:var(--color-text-secondary)]">
+        &lt;PK /&gt;
       </span>
     </Link>
   );

@@ -2,41 +2,38 @@
 
 import Link from "next/link";
 import { ArrowUp } from "lucide-react";
-import { Github, Linkedin, Twitter } from "@/components/common/Icons";
-import { NAV_LINKS, SOCIAL_LINKS, SITE_CONFIG } from "@/lib/constants";
+import { Github, Linkedin } from "@/components/common/Icons";
+import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
 import { Container } from "@/components/common/Container";
 
-const iconMap = {
-  Github,
-  Linkedin,
-  Twitter,
-} as const;
-
-/** Site footer with nav, social links, and back-to-top (Section 18) */
+/** Sophisticated developer footer */
 export function Footer() {
   return (
     <footer
-      className="border-t border-[color:var(--color-border-subtle)] py-16 md:py-24"
+      className="border-t border-[color:var(--color-border-subtle)] py-16"
       role="contentinfo"
     >
       <Container>
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           {/* Brand */}
-          <div>
-            <p className="text-sm font-semibold text-[color:var(--color-text-primary)]">
-              {SITE_CONFIG.name}
+          <div className="md:col-span-4">
+            <p className="font-mono text-sm font-semibold text-[color:var(--color-text-primary)]">
+              Prathmesh Kanekar
             </p>
-            <p className="mt-2 text-sm text-[color:var(--color-text-secondary)]">
-              {SITE_CONFIG.title}
+            <p className="mt-1 text-sm text-[color:var(--color-text-tertiary)]">
+              Full Stack Software Engineer
+            </p>
+            <p className="mt-3 text-xs text-[color:var(--color-text-tertiary)] leading-relaxed max-w-xs">
+              Building enterprise banking software with Angular, ASP.NET Core, and SQL Server.
             </p>
           </div>
 
           {/* Navigation */}
-          <nav aria-label="Footer navigation">
-            <p className="text-eyebrow mb-4 text-[color:var(--color-text-tertiary)]">
+          <nav className="md:col-span-4" aria-label="Footer navigation">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-[color:var(--color-text-tertiary)] mb-3">
               Navigation
             </p>
-            <ul className="space-y-2">
+            <ul className="grid grid-cols-2 gap-y-2 gap-x-4">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -50,43 +47,57 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Social */}
-          <div>
-            <p className="text-eyebrow mb-4 text-[color:var(--color-text-tertiary)]">
+          {/* Connect */}
+          <div className="md:col-span-4">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-[color:var(--color-text-tertiary)] mb-3">
               Connect
             </p>
-            <div className="flex items-center gap-3">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = iconMap[social.icon];
-                return (
-                  <a
-                    key={social.href}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-2)] text-[color:var(--color-text-secondary)] transition-colors duration-150 hover:text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)]"
-                    aria-label={social.label}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </a>
-                );
-              })}
+            <div className="flex items-center gap-2">
+              <a
+                href="https://github.com/prathmeshkanekar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-[color:var(--color-text-tertiary)] transition-colors hover:text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)]"
+                aria-label="GitHub"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/prathmesh-kanekar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-[color:var(--color-text-tertiary)] transition-colors hover:text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)]"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
             </div>
+            <a
+              href={`mailto:${SITE_CONFIG.email}`}
+              className="mt-3 block text-sm text-[color:var(--color-text-secondary)] transition-colors hover:text-[color:var(--color-text-primary)]"
+            >
+              {SITE_CONFIG.email}
+            </a>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex items-center justify-between border-t border-[color:var(--color-border-subtle)] pt-8">
-          <p className="text-xs text-[color:var(--color-text-tertiary)]">
-            © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights
-            reserved.
-          </p>
+        <div className="mt-12 flex items-center justify-between border-t border-[color:var(--color-border-subtle)] pt-6">
+          <div className="flex items-center gap-3">
+            <p className="text-[11px] text-[color:var(--color-text-tertiary)]">
+              © {new Date().getFullYear()} {SITE_CONFIG.name}
+            </p>
+            <span className="text-[color:var(--color-text-tertiary)]">·</span>
+            <p className="text-[11px] font-mono text-[color:var(--color-text-tertiary)]">
+              Built with Next.js + TypeScript
+            </p>
+          </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-2)] text-[color:var(--color-text-secondary)] transition-colors duration-150 hover:text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)]"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-[color:var(--color-text-tertiary)] transition-colors hover:text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)]"
             aria-label="Back to top"
           >
-            <ArrowUp className="h-4 w-4" />
+            <ArrowUp className="h-3.5 w-3.5" />
           </button>
         </div>
       </Container>

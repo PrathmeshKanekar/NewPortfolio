@@ -1,32 +1,38 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowRight, ArrowDown, Download } from "lucide-react";
 import Link from "next/link";
+import { Github, Linkedin } from "@/components/common/Icons";
 import { Container } from "@/components/common/Container";
 import { SITE_CONFIG, RESUME_FILENAME } from "@/lib/constants";
 
 const EASE_REVEAL: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-/** Full-viewport hero with statement, CTAs, and animated entrance (Section 15) */
+const PRIMARY_TECH = [
+  "Angular", "TypeScript", "C#", "ASP.NET Core",
+  "SQL Server", "PostgreSQL", "Docker", "Azure",
+];
+
+/** Full-viewport hero — recruiter-focused, technically confident */
 export function Hero() {
   const shouldReduce = useReducedMotion();
 
   const containerVariants = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: shouldReduce ? 0 : 0.12, delayChildren: 0.1 },
+      transition: { staggerChildren: shouldReduce ? 0 : 0.08, delayChildren: 0.1 },
     },
   };
 
   const itemVariants = shouldReduce
     ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
     : {
-        hidden: { opacity: 0, y: 32 },
+        hidden: { opacity: 0, y: 24 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.8, ease: EASE_REVEAL },
+          transition: { duration: 0.7, ease: EASE_REVEAL },
         },
       };
 
@@ -48,103 +54,123 @@ export function Hero() {
       />
 
       <Container className="relative py-24 lg:py-32">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.5fr_1fr] lg:items-center">
-          {/* Statement */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.p
-              variants={itemVariants}
-              className="text-eyebrow text-[color:var(--color-accent-default)]"
-            >
-              {SITE_CONFIG.title}
-            </motion.p>
-
-            <motion.h1
-              variants={itemVariants}
-              id="hero-heading"
-              className="mt-4 text-display font-bold text-[color:var(--color-text-primary)]"
-            >
-              Building premium{" "}
-              <span className="text-[color:var(--color-accent-default)]">
-                software
-              </span>{" "}
-              that scales.
-            </motion.h1>
-
-            <motion.p
-              variants={itemVariants}
-              className="mt-6 max-w-xl text-lg text-[color:var(--color-text-secondary)] leading-relaxed"
-            >
-              {SITE_CONFIG.description}
-            </motion.p>
-
-            <motion.div
-              variants={itemVariants}
-              className="mt-8 flex flex-wrap gap-3"
-            >
-              <Link
-                href="/projects"
-                className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-2)] bg-[color:var(--color-accent-default)] px-5 text-sm font-medium text-[color:var(--color-accent-on-accent)] transition-all duration-150 hover:bg-[color:var(--color-accent-hover)] active:translate-y-px"
-              >
-                View Projects
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-2)] border border-[color:var(--color-border-default)] px-5 text-sm font-medium text-[color:var(--color-text-primary)] transition-all duration-150 hover:bg-[color:var(--color-surface-hover)] active:translate-y-px"
-              >
-                Get in Touch
-              </Link>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-12 flex items-center gap-8"
-            >
-              {[
-                { value: "5+", label: "Years Experience" },
-                { value: "2M+", label: "Transactions/Day" },
-                { value: "99.9%", label: "Uptime" },
-              ].map((stat) => (
-                <div key={stat.label}>
-                  <p className="font-mono text-2xl font-bold text-[color:var(--color-text-primary)]">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs text-[color:var(--color-text-tertiary)]">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Visual placeholder (3D scene will go here) */}
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            className="hidden lg:flex items-center justify-center"
-            aria-hidden="true"
-          >
-            <div className="relative h-80 w-80">
-              <div className="absolute inset-0 rounded-full bg-[color:var(--color-accent-subtle)] animate-pulse" />
-              <div className="absolute inset-4 rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="font-mono text-4xl font-bold text-[color:var(--color-accent-default)]">
-                    {"</>"}
-                  </div>
-                  <p className="mt-2 text-xs text-[color:var(--color-text-tertiary)]">
-                    R3F scene placeholder
-                  </p>
-                </div>
-              </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-3xl"
+        >
+          {/* Status */}
+          <motion.div variants={itemVariants} className="mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] px-3 py-1 text-xs font-medium text-[color:var(--color-text-secondary)]">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+              </span>
+              {SITE_CONFIG.availabilityStatus}
             </div>
           </motion.div>
-        </div>
+
+          {/* Name */}
+          <motion.h1
+            variants={itemVariants}
+            id="hero-heading"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[color:var(--color-text-primary)] leading-[1.1]"
+          >
+            Prathmesh Kanekar
+          </motion.h1>
+
+          {/* Role */}
+          <motion.p
+            variants={itemVariants}
+            className="mt-4 text-xl sm:text-2xl font-medium text-[color:var(--color-text-secondary)]"
+          >
+            Full Stack Software Engineer
+          </motion.p>
+
+          {/* Domain tag */}
+          <motion.p
+            variants={itemVariants}
+            className="mt-2 font-mono text-sm text-[color:var(--color-text-tertiary)]"
+          >
+            Enterprise Banking Software · Angular + .NET · Docker + Azure
+          </motion.p>
+
+          {/* Statement */}
+          <motion.p
+            variants={itemVariants}
+            className="mt-6 text-base sm:text-lg text-[color:var(--color-text-secondary)] leading-relaxed max-w-2xl"
+          >
+            {SITE_CONFIG.description}
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-8 flex flex-wrap items-center gap-3"
+          >
+            <Link
+              href="/projects"
+              className="inline-flex h-10 items-center gap-2 rounded-lg bg-[color:var(--color-text-primary)] px-5 text-sm font-medium text-[color:var(--color-surface-sunken)] transition-all duration-150 hover:opacity-90 active:scale-[0.98]"
+            >
+              View Projects
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <a
+              href={`/resume/${RESUME_FILENAME}`}
+              download
+              className="inline-flex h-10 items-center gap-2 rounded-lg border border-[color:var(--color-border-subtle)] px-5 text-sm font-medium text-[color:var(--color-text-primary)] transition-all duration-150 hover:bg-[color:var(--color-surface-hover)] active:scale-[0.98]"
+            >
+              <Download className="h-3.5 w-3.5" />
+              Resume
+            </a>
+          </motion.div>
+
+          {/* Social row */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-6 flex items-center gap-2"
+          >
+            <a
+              href="https://github.com/prathmeshkanekar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[color:var(--color-text-tertiary)] transition-colors hover:text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)]"
+              aria-label="GitHub"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/prathmesh-kanekar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-[color:var(--color-text-tertiary)] transition-colors hover:text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)]"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
+            </a>
+          </motion.div>
+
+          {/* Primary tech strip */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-12 pt-6 border-t border-[color:var(--color-border-subtle)]"
+          >
+            <p className="text-[10px] font-mono uppercase tracking-widest text-[color:var(--color-text-tertiary)] mb-3">
+              Primary Stack
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {PRIMARY_TECH.map((tech) => (
+                <span
+                  key={tech}
+                  className="inline-flex items-center rounded-md border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] px-2.5 py-1 font-mono text-xs text-[color:var(--color-text-secondary)]"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
       </Container>
 
       {/* Scroll indicator */}
@@ -154,14 +180,14 @@ export function Hero() {
         transition={{ delay: 1.5, duration: 0.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2"
       >
-        <span className="text-xs text-[color:var(--color-text-tertiary)]">
+        <span className="text-[10px] font-mono uppercase tracking-widest text-[color:var(--color-text-tertiary)]">
           Scroll
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown className="h-4 w-4 text-[color:var(--color-text-tertiary)]" />
+          <ArrowDown className="h-3.5 w-3.5 text-[color:var(--color-text-tertiary)]" />
         </motion.div>
       </motion.div>
     </section>
