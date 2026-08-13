@@ -2,39 +2,50 @@ import type { Experience } from "@/types/experience";
 
 export const resumeData = {
   name: "Prathmesh Kanekar",
-  title: "Full Stack Software Engineer",
-  email: "hello@prathmeshkanekar.in",
-  location: "India",
+  title: "Full Stack Developer",
+  email: "prathmeshkanekar2002@gmail.com",
+  location: "Kolhapur, Maharashtra, India",
   summary:
-    "A Full Stack Software Engineer working in enterprise banking software, with experience across frontend development, backend API development, relational databases, application architecture, and deployment.",
+    "Full Stack Developer with ~1+ year of professional experience building enterprise software and banking domain applications using Angular 17, ASP.NET Core Web API, C#, and SQL Server.",
 
   experience: [
     {
-      company: "Three Star Infotech Pvt. Ltd.",
-      role: "Full Stack Software Engineer",
-      startDate: "Unknown",
-      endDate: "Present",
+      company: "SaniSoft Infotech Pvt. Ltd.",
+      role: "Software Developer",
+      startDate: "08/2023",
+      endDate: "01/2024",
       highlights: [
-        "Customer management and Account management modules",
-        "Account request, Nominee management, and Joint holder workflows",
-        "Guarantor workflows and Freeze/unfreeze workflows",
-        "Authorization workflows and Financial transaction modules",
-        "Database design and performance optimization using SQL Server"
+        "Architected enterprise banking modules including customer onboarding and financial transaction workflows.",
+        "Built reactive Angular V15+ interfaces with Angular Material data tables, forms, and custom modal dialogs.",
+        "Engineered ASP.NET Core RESTful Web APIs with Dapper and Entity Framework for high-throughput database reads.",
+        "Wrote normalized SQL Server schemas, stored procedures, and authorization checker workflows."
       ],
-      stack: ["Angular", "ASP.NET Core", "C#", "SQL Server", "Dapper"]
+      stack: ["Angular", "ASP.NET Core", "C#", "SQL Server", "Dapper", "TypeScript"]
+    },
+    {
+      company: "iGAP Technologies Pvt. Ltd.",
+      role: "Trainee Developer / Intern",
+      startDate: "01/2023",
+      endDate: "07/2023",
+      highlights: [
+        "Mastered full stack fundamentals across HTML5, CSS3, Bootstrap, JavaScript, and TypeScript.",
+        "Built single-page application (SPA) frontends in Angular integrated with backend REST services.",
+        "Developed C# .NET Core Web API endpoints connecting to MySQL and MS SQL databases."
+      ],
+      stack: ["Angular", "TypeScript", "C#", ".NET Core", "MySQL", "MS SQL", "Bootstrap"]
     }
   ] as Experience[],
 
   education: [
     {
       institution: "Sanjeevan Group of Institutions, Panhala, Kolhapur",
-      degree: "Computer Science Engineering",
-      year: "Started 2023"
+      degree: "B.Tech in Computer Science Engineering",
+      year: "08/2023–Present"
     },
     {
-      institution: "Institute of Civil & Rural Engineering, Gargoti",
-      degree: "Diploma in Computer Engineering",
-      year: "2018–2022"
+      institution: "Institute of Civil & Rural Engineering (ICRE), Gargoti",
+      degree: "Diploma in Computer Engineering (81.03%)",
+      year: "2019–2022"
     }
   ],
 
@@ -45,65 +56,55 @@ export const resumeData = {
       date: "01/04/2024"
     },
     {
-      name: ".NET Full Stack Using Angular",
-      issuer: "Unknown",
+      name: ".NET Full Stack Development Using Angular",
+      issuer: "iGAP Technologies",
       date: "17/07/2023"
     }
   ],
 
   skills: {
-    languages: [
-      { name: "C#", proficiency: "Primary", level: 100 },
-      { name: "TypeScript", proficiency: "Primary", level: 100 },
-      { name: "JavaScript", proficiency: "Professional", level: 80 },
-      { name: "Python", proficiency: "Working Knowledge", level: 60 },
-      { name: "C", proficiency: "Learning", level: 40 },
-      { name: "C++", proficiency: "Learning", level: 40 },
-      { name: "Java", proficiency: "Learning", level: 40 }
-    ],
     frontend: [
-      { name: "Angular", proficiency: "Primary", level: 100 },
-      { name: "TypeScript", proficiency: "Primary", level: 100 },
-      { name: "React", proficiency: "Professional", level: 80 },
-      { name: "Next.js", proficiency: "Working Knowledge", level: 60 },
-      { name: "JavaScript", proficiency: "Professional", level: 80 },
-      { name: "HTML5", proficiency: "Professional", level: 80 },
-      { name: "CSS3", proficiency: "Professional", level: 80 },
-      { name: "Tailwind CSS", proficiency: "Professional", level: 80 },
-      { name: "Bootstrap", proficiency: "Professional", level: 80 }
+      "Angular 17",
+      "TypeScript",
+      "JavaScript",
+      "HTML5/CSS3",
+      "Tailwind CSS",
+      "Bootstrap",
+      "GSAP"
     ],
     backend: [
-      { name: "ASP.NET Core Web API", proficiency: "Primary", level: 100 },
-      { name: "C#", proficiency: "Primary", level: 100 },
-      { name: "REST APIs", proficiency: "Primary", level: 100 },
-      { name: "Entity Framework Core", proficiency: "Professional", level: 80 },
-      { name: "Dapper", proficiency: "Professional", level: 80 }
+      "ASP.NET Core Web API",
+      "C#",
+      "REST APIs",
+      "Dapper",
+      "JWT Authentication",
+      "API Security"
     ],
-    databases: [
-      { name: "Microsoft SQL Server", proficiency: "Primary", level: 100 },
-      { name: "PostgreSQL", proficiency: "Primary", level: 100 },
-      { name: "MySQL", proficiency: "Professional", level: 80 },
-      { name: "SQLite", proficiency: "Working Knowledge", level: 60 }
+    database: [
+      "SQL Server",
+      "PostgreSQL",
+      "PostGIS",
+      "SQL Optimization",
+      "Stored Procedures",
+      "Transactions",
+      "Database Design"
     ],
-    cloudDevOps: [
-      { name: "Docker", proficiency: "Primary", level: 100 },
-      { name: "Azure", proficiency: "Primary", level: 100 },
-      { name: "Git", proficiency: "Professional", level: 80 },
-      { name: "GitHub", proficiency: "Professional", level: 80 }
+    devopsCloud: [
+      "Docker",
+      "Azure",
+      "IIS",
+      "Git/GitHub",
+      "CI/CD concepts",
+      "Load/Performance Testing",
+      "k6"
     ],
-    architecture: [
-      { name: "REST API Design", proficiency: "Primary", level: 100 },
-      { name: "Database Design", proficiency: "Primary", level: 100 },
-      { name: "Authentication", proficiency: "Professional", level: 80 },
-      { name: "Authorization", proficiency: "Professional", level: 80 },
-      { name: "Enterprise Application Development", proficiency: "Primary", level: 100 },
-      { name: "System Design", proficiency: "Professional", level: 80 },
-      { name: "SaaS Architecture", proficiency: "Professional", level: 80 },
-      { name: "Performance Optimization", proficiency: "Professional", level: 80 }
-    ],
-    tools: [
-      { name: "AI-assisted Development", proficiency: "Professional", level: 80 },
-      { name: "AI-powered Product Development", proficiency: "Professional", level: 80 }
+    other: [
+      "Flutter",
+      "Node.js",
+      "Next.js",
+      "Redis",
+      "Microservices concepts",
+      "System Design"
     ]
-  },
+  }
 };

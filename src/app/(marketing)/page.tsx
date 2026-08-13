@@ -4,11 +4,8 @@ import { SkillsOverview } from "@/components/sections/SkillsOverview";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Experience } from "@/components/sections/Experience";
 import { EngineeringCapabilities } from "@/components/sections/EngineeringCapabilities";
-import { GithubOpenSource } from "@/components/sections/GithubOpenSource";
-import { AboutMe } from "@/components/sections/AboutMe";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { getFeaturedProjects } from "@/content/projects/projects-data";
-import { ISR_REVALIDATE_SECONDS } from "@/lib/constants";
 
 export const revalidate = 3600;
 
@@ -58,8 +55,6 @@ export default function HomePage() {
       <FeaturedProjects projects={featuredProjects} />
       <Experience />
       <EngineeringCapabilities />
-      <GithubOpenSource />
-      <AboutMe />
       <ClosingCTA />
     </>
   );
