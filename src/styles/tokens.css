@@ -8,39 +8,44 @@
 */
 
 @layer base {
+
   /* ═══════════════════════════════════════════════════
      LIGHT THEME (default)
      Design intent: airy, paper-like, high-clarity
      ═══════════════════════════════════════════════════ */
   :root {
     /* — Surfaces — */
-    --color-surface-base: #FAFAF8;
+    --color-surface-base: #FAFAF9; /* Stone 50 */
     --color-surface-raised: #FFFFFF;
-    --color-surface-overlay: rgba(255, 255, 255, 0.72);
-    --color-surface-sunken: #F0F0EE;
-    --color-surface-hover: #F4F4F2;
-    --color-surface-pressed: #EBEBEA;
+    --color-surface-overlay: rgba(255, 255, 255, 0.85);
+    --color-surface-sunken: #F5F5F4; /* Stone 100 */
+    --color-surface-hover: #E7E5E4; /* Stone 200 */
+    --color-surface-pressed: #D6D3D1; /* Stone 300 */
 
     /* — Text — */
-    --color-text-primary: rgba(10, 10, 12, 0.92);
-    --color-text-secondary: rgba(10, 10, 12, 0.60);
-    --color-text-tertiary: rgba(10, 10, 12, 0.38);
-    --color-text-disabled: rgba(10, 10, 12, 0.22);
-    --color-text-inverse: rgba(250, 250, 248, 0.95);
+    --color-text-primary: #1C1917; /* Stone 900 */
+    --color-text-secondary: #57534E; /* Stone 600 */
+    --color-text-tertiary: #A8A29E; /* Stone 400 */
+    --color-text-disabled: #D6D3D1; /* Stone 300 */
+    --color-text-inverse: #FAFAF9;
     --color-text-on-accent: #FFFFFF;
 
     /* — Borders — */
-    --color-border-subtle: rgba(10, 10, 12, 0.06);
-    --color-border-default: rgba(10, 10, 12, 0.12);
-    --color-border-strong: rgba(10, 10, 12, 0.22);
-    --color-border-focus: #5B5BFF;
+    --color-border-subtle: #E7E5E4; /* Stone 200 */
+    --color-border-default: #D6D3D1; /* Stone 300 */
+    --color-border-strong: #A8A29E; /* Stone 400 */
+    --color-border-focus: #0F766E; /* Teal 600 */
 
-    /* — Accent (indigo-500 for light) — */
-    --color-accent-default: #5B5BFF;
-    --color-accent-hover: #4747E6;
-    --color-accent-pressed: #3939CC;
-    --color-accent-subtle: rgba(91, 91, 255, 0.08);
+    /* — Accent (Teal-600 for light) — */
+    --color-accent-default: #0F766E;
+    --color-accent-hover: #115E59;
+    --color-accent-pressed: #134E4A;
+    --color-accent-subtle: rgba(15, 118, 110, 0.08);
     --color-accent-on-accent: #FFFFFF;
+
+    /* — Gradients — */
+    --color-gradient-start: #6366F1;
+    --color-gradient-end: #A855F7;
 
     /* — Semantic status — */
     --color-status-success: #16A34A;
@@ -67,7 +72,7 @@
     /* — Gradients — */
     --gradient-hero: linear-gradient(135deg, #FAFAF8 0%, #F0F0EE 50%, #E8E8F8 100%);
     --gradient-mesh-subtle: radial-gradient(ellipse at 20% 50%, rgba(91, 91, 255, 0.03) 0%, transparent 50%),
-                            radial-gradient(ellipse at 80% 50%, rgba(91, 91, 255, 0.02) 0%, transparent 50%);
+      radial-gradient(ellipse at 80% 50%, rgba(91, 91, 255, 0.02) 0%, transparent 50%);
     --gradient-card-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
 
     /* — Component tokens — */
@@ -114,33 +119,37 @@
      ═══════════════════════════════════════════════════ */
   .dark {
     /* — Surfaces (elevation via lightness steps: +3%, +6%, +9%) — */
-    --color-surface-base: #0A0A0C;
-    --color-surface-raised: #141416;
-    --color-surface-overlay: rgba(20, 20, 24, 0.64);
-    --color-surface-sunken: #060608;
-    --color-surface-hover: #1C1C20;
-    --color-surface-pressed: #242428;
+    --color-surface-base: #0C0A09; /* Stone 950 */
+    --color-surface-raised: #1C1917; /* Stone 900 */
+    --color-surface-overlay: rgba(28, 25, 23, 0.85);
+    --color-surface-sunken: #000000;
+    --color-surface-hover: #292524; /* Stone 800 */
+    --color-surface-pressed: #44403C; /* Stone 700 */
 
     /* — Text — */
-    --color-text-primary: rgba(250, 250, 248, 0.92);
-    --color-text-secondary: rgba(250, 250, 248, 0.56);
-    --color-text-tertiary: rgba(250, 250, 248, 0.32);
-    --color-text-disabled: rgba(250, 250, 248, 0.18);
-    --color-text-inverse: rgba(10, 10, 12, 0.92);
+    --color-text-primary: #FAFAF9; /* Stone 50 */
+    --color-text-secondary: #A8A29E; /* Stone 400 */
+    --color-text-tertiary: #78716C; /* Stone 500 */
+    --color-text-disabled: #57534E; /* Stone 600 */
+    --color-text-inverse: #1C1917;
     --color-text-on-accent: #FFFFFF;
 
     /* — Borders — */
-    --color-border-subtle: rgba(250, 250, 248, 0.06);
-    --color-border-default: rgba(250, 250, 248, 0.10);
-    --color-border-strong: rgba(250, 250, 248, 0.18);
-    --color-border-focus: #7C7CFF;
+    --color-border-subtle: #292524; /* Stone 800 */
+    --color-border-default: #44403C; /* Stone 700 */
+    --color-border-strong: #78716C; /* Stone 500 */
+    --color-border-focus: #2DD4BF; /* Teal 400 */
 
-    /* — Accent (indigo-400 equiv, brighter for dark bg) — */
-    --color-accent-default: #7C7CFF;
-    --color-accent-hover: #9191FF;
-    --color-accent-pressed: #6868E6;
-    --color-accent-subtle: rgba(124, 124, 255, 0.10);
-    --color-accent-on-accent: #FFFFFF;
+    /* — Accent (Teal-400 for dark) — */
+    --color-accent-default: #2DD4BF;
+    --color-accent-hover: #5EEAD4;
+    --color-accent-pressed: #14B8A6;
+    --color-accent-subtle: rgba(45, 212, 191, 0.15);
+    --color-accent-on-accent: #042F2E;
+
+    /* — Gradients — */
+    --color-gradient-start: #818CF8;
+    --color-gradient-end: #C084FC;
 
     /* — Semantic status (tuned per theme for 4.5:1 contrast) — */
     --color-status-success: #22C55E;
@@ -167,7 +176,7 @@
     /* — Gradients — */
     --gradient-hero: linear-gradient(135deg, #0A0A0C 0%, #0E0E14 50%, #12121C 100%);
     --gradient-mesh-subtle: radial-gradient(ellipse at 20% 50%, rgba(124, 124, 255, 0.04) 0%, transparent 50%),
-                            radial-gradient(ellipse at 80% 50%, rgba(124, 124, 255, 0.03) 0%, transparent 50%);
+      radial-gradient(ellipse at 80% 50%, rgba(124, 124, 255, 0.03) 0%, transparent 50%);
     --gradient-card-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0) 100%);
 
     /* — Component tokens — */

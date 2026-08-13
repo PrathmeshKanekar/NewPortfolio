@@ -32,57 +32,59 @@ export function ClosingCTA() {
         <div className="absolute inset-0 bg-[radial-gradient(#00000008_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:24px_24px]" />
       </div>
 
-      <Container className="relative z-10 max-w-4xl">
-        <RevealOnScroll>
-          <div className="relative flex flex-col items-center text-center p-8 md:p-16 rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-glow overflow-hidden">
-            {/* Status indicator */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              {SITE_CONFIG.availabilityStatus}
+      <Container className="relative z-10">
+        <div className="mx-auto max-w-4xl">
+          <RevealOnScroll>
+            <div className="relative flex flex-col items-center text-center p-8 md:p-16 rounded-3xl border border-slate-200/80 dark:border-white/10 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-glow overflow-hidden">
+              {/* Status indicator */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                {SITE_CONFIG.availabilityStatus}
+              </div>
+
+              <h2 id="closing-cta" className="font-space text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
+                Let&apos;s build something <span className="bg-gradient-to-r from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] bg-clip-text text-transparent">extraordinary.</span>
+              </h2>
+
+              <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed">
+                If you&apos;re looking for a full stack engineer to tackle complex enterprise challenges, build scalable architecture, or discuss technical opportunities—my inbox is open.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <ShimmerButton
+                  onClick={handleCopyEmail}
+                  className="h-14 px-8 text-base font-bold"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="h-5 w-5 text-emerald-400" />
+                      Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-5 w-5" />
+                      Copy Direct Email
+                    </>
+                  )}
+                </ShimmerButton>
+
+                <Link
+                  href="/contact"
+                  className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-white/10 bg-white/50 dark:bg-slate-800/50 px-8 text-base font-semibold text-slate-800 dark:text-slate-200 shadow-sm backdrop-blur-md transition-all duration-200 hover:bg-slate-100 dark:hover:bg-slate-700 hover:border-slate-400 dark:hover:border-white/20 active:scale-95"
+                >
+                  Go to Contact Form
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              </div>
+
+              {/* MagicUI Border Beam */}
+              <BorderBeam size={250} duration={8} delay={0} colorFrom="var(--color-gradient-start)" colorTo="var(--color-gradient-end)" />
             </div>
-
-            <h2 id="closing-cta" className="font-space text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
-              Let&apos;s build something <span className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text text-transparent">extraordinary.</span>
-            </h2>
-
-            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed">
-              If you&apos;re looking for a full stack engineer to tackle complex enterprise challenges, build scalable architecture, or discuss technical opportunities—my inbox is open.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <ShimmerButton
-                onClick={handleCopyEmail}
-                className="h-14 px-8 text-base font-bold"
-              >
-                {copied ? (
-                  <>
-                    <Check className="h-5 w-5 text-emerald-400" />
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <Copy className="h-5 w-5" />
-                    Copy Direct Email
-                  </>
-                )}
-              </ShimmerButton>
-
-              <Link
-                href="/contact"
-                className="inline-flex h-14 items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-white/10 bg-white/50 dark:bg-slate-800/50 px-8 text-base font-semibold text-slate-800 dark:text-slate-200 shadow-sm backdrop-blur-md transition-all duration-200 hover:bg-slate-100 dark:hover:bg-slate-700 hover:border-slate-400 dark:hover:border-white/20 active:scale-95"
-              >
-                Go to Contact Form
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
-
-            {/* MagicUI Border Beam */}
-            <BorderBeam size={250} duration={8} delay={0} colorFrom="#6366f1" colorTo="#a855f7" />
-          </div>
-        </RevealOnScroll>
+          </RevealOnScroll>
+        </div>
       </Container>
     </section>
   );

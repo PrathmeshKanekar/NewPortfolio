@@ -5,7 +5,7 @@ import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import { staggerContainerVariants, fadeUpVariants } from "@/lib/animation-variants";
-import { Code2, Server, Database, Shield, Cloud, Layers } from "lucide-react";
+import { Code2, Server, Database, ShieldCheck, Cloud, Cpu } from "lucide-react";
 
 const CAPABILITIES = [
   {
@@ -13,36 +13,42 @@ const CAPABILITIES = [
     title: "Full Stack Development",
     tech: "Angular + ASP.NET Core",
     desc: "End-to-end development of robust enterprise applications with modern component-based frontends and strongly-typed backends.",
+    accentColor: "#DD0031",
   },
   {
     icon: Server,
     title: "Backend Engineering",
     tech: "REST APIs + C#",
     desc: "Designing and implementing scalable, secure, and well-documented RESTful APIs supporting complex business logic.",
+    accentColor: "#512BD4",
   },
   {
     icon: Database,
     title: "Database Engineering",
     tech: "SQL Server + PostgreSQL",
     desc: "Relational database design, query optimization, indexing strategies, and reliable data migrations using Entity Framework and Dapper.",
+    accentColor: "#CC292B",
   },
   {
-    icon: Shield,
+    icon: ShieldCheck,
     title: "Enterprise Software",
     tech: "Banking apps + Business workflows",
     desc: "Building mission-critical software handling complex authorization rules, financial transactions, and compliance requirements.",
+    accentColor: "#10B981",
   },
   {
     icon: Cloud,
     title: "DevOps & Infrastructure",
-    tech: "Docker + Azure",
-    desc: "Containerizing applications for consistent deployment and leveraging cloud infrastructure for scalable hosting.",
+    tech: "Docker + Azure + IIS",
+    desc: "Containerizing applications for consistent deployment and leveraging cloud infrastructure and web servers for scalable hosting.",
+    accentColor: "#2496ED",
   },
   {
-    icon: Layers,
+    icon: Cpu,
     title: "Product Engineering",
     tech: "SaaS + Scalable applications",
     desc: "Translating business requirements into technical architecture that scales with user growth and feature complexity.",
+    accentColor: "#8B5CF6",
   },
 ];
 
@@ -54,7 +60,7 @@ export function EngineeringCapabilities() {
         <RevealOnScroll>
           <SectionHeading
             number="06"
-            eyebrow="$ build"
+            eyebrow="Architecture"
             heading="Engineering Capabilities"
             id="capabilities-heading"
           />
@@ -71,18 +77,21 @@ export function EngineeringCapabilities() {
             <motion.div
               key={cap.title}
               variants={fadeUpVariants}
-              className="flex flex-col rounded-[var(--radius-sm)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] shadow-sm p-8 transition-all duration-250 ease-[var(--ease-reveal)] hover:-translate-y-1 hover:shadow-md hover:border-[color:var(--color-border-default)] hover:bg-[color:var(--color-surface-raised)]"
+              className="group flex flex-col rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-slate-300 dark:hover:border-white/20"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[color:var(--color-surface-hover)] mb-6">
-                <cap.icon className="h-6 w-6 text-[color:var(--color-text-secondary)]" />
+              <div
+                className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 mb-6 shadow-inner transition-transform group-hover:scale-105"
+                style={{ color: cap.accentColor }}
+              >
+                <cap.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-semibold text-[color:var(--color-text-primary)] mb-2">
+              <h3 className="font-space text-lg font-bold text-slate-900 dark:text-white mb-1.5">
                 {cap.title}
               </h3>
-              <span className="font-mono text-xs text-[color:var(--color-accent-default)] mb-4 block">
+              <span className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 mb-4 block">
                 {cap.tech}
               </span>
-              <p className="text-sm text-[color:var(--color-text-secondary)] leading-relaxed mt-auto">
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-auto">
                 {cap.desc}
               </p>
             </motion.div>
