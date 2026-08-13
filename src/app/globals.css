@@ -44,9 +44,19 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-image: radial-gradient(var(--color-border-subtle) 1px, transparent 1px);
-    background-size: 24px 24px;
+    background-color: var(--color-background);
+    background-image: 
+      radial-gradient(circle at top left, var(--color-accent-subtle) 0%, transparent 40%),
+      radial-gradient(circle at bottom right, var(--color-accent-subtle) 0%, transparent 40%);
     background-attachment: fixed;
+  }
+  
+  /* Fallback for reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    body {
+      animation: ambientMesh 20s ease-in-out infinite alternate;
+      background-size: 150% 150%;
+    }
   }
 
   /* Theme transition for smooth theme swap (200ms cross-fade) */
@@ -124,4 +134,28 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 500;
+}
+
+@layer utilities {
+  .animate-gradient-text {
+    background-size: 200% auto;
+    animation: textGradientShift 8s linear infinite;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .animate-gradient-text {
+      animation: none;
+    }
+  }
+}
+
+@keyframes textGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes ambientMesh {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
 }

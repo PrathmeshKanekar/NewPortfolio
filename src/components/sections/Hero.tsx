@@ -97,7 +97,7 @@ export function Hero({ imageSrc }: HeroProps) {
             variants={itemVariants}
             className="font-display text-[clamp(2.75rem,7vw,5.25rem)] font-bold tracking-tight leading-[1.05] text-[color:var(--color-text-primary)]"
           >
-            Prathmesh <span className="bg-gradient-to-r from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] bg-clip-text text-transparent">Kanekar</span>
+            Prathmesh <span className="bg-gradient-to-r from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] bg-clip-text text-transparent animate-gradient-text">Kanekar</span>
           </motion.h1>
 
           {/* 3. ROLE (One line: what I do / specialization) */}
@@ -155,10 +155,10 @@ export function Hero({ imageSrc }: HeroProps) {
           >
             <Link
               href="/projects"
-              className="group inline-flex items-center justify-center gap-2 text-sm font-medium text-[color:var(--color-text-primary)] hover:text-[color:var(--color-accent-default)] transition-colors"
+              className="group inline-flex items-center justify-center gap-2 text-sm font-medium text-[color:var(--color-text-primary)] hover:text-[color:var(--color-accent-default)] hover:drop-shadow-[0_0_8px_var(--color-accent-subtle)] transition-all duration-300"
             >
               View My Work
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
 
             <span className="text-[color:var(--color-border-strong)]">|</span>

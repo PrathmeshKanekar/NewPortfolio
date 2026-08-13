@@ -115,7 +115,7 @@ const SKILL_GROUPS: SkillCategory[] = [
 
 export function SkillsOverview() {
   return (
-    <section className="py-24 md:py-32 relative bg-slate-50/50 dark:bg-slate-900/50" id="skills">
+    <section className="py-24 md:py-32 relative bg-[color:var(--color-surface-sunken)]/50" id="skills">
       <Container>
         <RevealOnScroll>
           <SectionHeading
@@ -130,18 +130,18 @@ export function SkillsOverview() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {SKILL_GROUPS.map((group, groupIndex) => (
             <RevealOnScroll key={group.title} delay={0.05 + groupIndex * 0.08}>
-              <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 shadow-sm h-full flex flex-col justify-between hover:shadow-md hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300">
+              <div className="p-6 rounded-2xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)] shadow-sm h-full flex flex-col justify-between hover:shadow-md hover:border-[color:var(--color-border-strong)] transition-all duration-300">
                 <div>
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2.5 bg-indigo-500/10 dark:bg-indigo-500/20 rounded-xl text-indigo-600 dark:text-indigo-400">
+                    <div className="p-2.5 bg-[color:var(--color-accent-subtle)] rounded-xl text-[color:var(--color-accent-default)]">
                       <group.icon className="w-5 h-5" />
                     </div>
-                    <h3 className="font-space text-lg font-bold text-slate-900 dark:text-white">
+                    <h3 className="text-lg font-bold text-[color:var(--color-text-primary)]">
                       {group.title}
                     </h3>
                   </div>
 
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mb-5 leading-relaxed">
+                  <p className="text-xs text-[color:var(--color-text-tertiary)] mb-5 leading-relaxed">
                     {group.description}
                   </p>
 
@@ -155,13 +155,13 @@ export function SkillsOverview() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         whileHover={{ y: -2 }}
-                        className="group flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-slate-800/60 shadow-sm hover:border-indigo-500/30 transition-all duration-200"
+                        className="group flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-sunken)]/80 shadow-sm hover:border-[color:var(--color-accent-default)]/30 transition-all duration-200"
                       >
                         <skill.Icon
-                          className="w-3.5 h-3.5 group-hover:scale-110 transition-transform dark:text-slate-200"
+                          className="w-3.5 h-3.5 group-hover:scale-110 transition-transform"
                           style={{ color: skill.brandColor }}
                         />
-                        <span className="text-xs font-mono font-medium text-slate-700 dark:text-slate-300">
+                        <span className="text-xs font-mono font-medium text-[color:var(--color-text-secondary)]">
                           {skill.name}
                         </span>
                       </motion.div>

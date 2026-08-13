@@ -49,7 +49,7 @@ const SNAPSHOT_ITEMS = [
 export function ProfessionalSnapshot() {
   return (
     <section
-      className="py-16 md:py-24 border-y border-slate-200/80 dark:border-white/10 bg-slate-50/60 dark:bg-slate-950/60 backdrop-blur-md"
+      className="py-16 md:py-24 border-y border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)]/60 backdrop-blur-md"
       aria-labelledby="professional-snapshot"
     >
       <Container>
@@ -67,7 +67,7 @@ export function ProfessionalSnapshot() {
             {SNAPSHOT_ITEMS.map((item) => (
               <div
                 key={item.label}
-                className="group relative rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-slate-300 dark:hover:border-white/20"
+                className="group relative rounded-2xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[color:var(--color-border-strong)]"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <div
@@ -76,11 +76,11 @@ export function ProfessionalSnapshot() {
                   >
                     <item.icon className="h-4 w-4" />
                   </div>
-                  <span className="font-mono text-[11px] font-semibold tracking-wider text-slate-500 dark:text-slate-400 uppercase">
+                  <span className="font-mono text-[11px] font-semibold tracking-wider text-[color:var(--color-text-tertiary)] uppercase">
                     {item.label}
                   </span>
                 </div>
-                <p className="text-base font-semibold text-slate-900 dark:text-white font-space">
+                <p className="text-base font-semibold text-[color:var(--color-text-primary)]">
                   {item.value}
                 </p>
               </div>
