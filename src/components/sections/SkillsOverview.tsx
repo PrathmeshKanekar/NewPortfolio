@@ -48,7 +48,7 @@ const TECH_STACK: { category: string; icon: any; items: TechItem[] }[] = [
       { name: "Python", Icon: SiPython, tier: "working" },
       { name: "C++", Icon: SiCplusplus, tier: "exploring" },
       { name: "C", Icon: SiC, tier: "exploring" },
-    ],
+    ], 
   },
   {
     category: "Frontend",
