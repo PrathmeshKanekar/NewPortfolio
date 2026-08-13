@@ -44,18 +44,45 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
-    background-image: radial-gradient(var(--color-border-subtle) 1px, transparent 1px);
-    background-size: 24px 24px;
-    background-attachment: fixed;
+    background-color: var(--color-background);
   }
 
-  /* Theme transition for smooth theme swap (200ms cross-fade) */
-  html:not(.no-transitions) body,
-  html:not(.no-transitions) body * {
-    transition-property: background-color, border-color, color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
+  /* GPU-Accelerated View Transitions for 100% Lag-Free Theme Switch */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
   }
+  
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+  
+  ::view-transition-new(root) {
+    z-index: 9999;
+  }
+
+  .dark::view-transition-old(root) {
+    z-index: 9999;
+  }
+  
+  .dark::view-transition-new(root) {
+    z-index: 1;
+  }
+
+  /* Clean, Ultra-Performant Dot Matrix Background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(var(--color-border-strong) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.18;
+  }
+
+
 
   /* Skip-to-content link (Section 12) */
   .skip-to-content {
@@ -124,4 +151,50 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-weight: 500;
+}
+
+@layer utilities {
+  .animate-gradient-text {
+    background-size: 200% auto;
+    animation: textGradientShift 8s linear infinite;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .animate-gradient-text {
+      animation: none;
+    }
+  }
+}
+
+@keyframes textGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@keyframes gridPulse {
+  0% { opacity: 0.25; }
+  100% { opacity: 0.45; }
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-1000px);
+    opacity: 0;
+  }
+}
+
+.animate-meteor-effect {
+  animation: meteor 5s linear infinite;
 }

@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
+import { toggleThemeWithTransition } from "@/lib/theme-transition";
 
 /** Theme toggle with animated sun/moon cross-fade + rotate */
 export function ThemeToggle({ className }: { className?: string }) {
@@ -28,7 +29,7 @@ export function ThemeToggle({ className }: { className?: string }) {
 
   return (
     <button
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={(e) => toggleThemeWithTransition(resolvedTheme, setTheme, e)}
       className={`inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-2)] transition-colors duration-150 hover:bg-[color:var(--color-surface-hover)] focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent-default)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-surface-base)] ${className ?? ""}`}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >

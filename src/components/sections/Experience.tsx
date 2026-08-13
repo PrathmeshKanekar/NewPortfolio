@@ -23,7 +23,7 @@ export function Experience() {
           />
         </RevealOnScroll>
         <RevealOnScroll delay={0.1}>
-          <div className="max-w-2xl">
+          <div className="w-full">
             {resumeData.experience.map((exp) => (
               <ExperienceCard key={exp.company} experience={exp} />
             ))}

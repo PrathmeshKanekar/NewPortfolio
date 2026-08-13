@@ -77,21 +77,21 @@ export function EngineeringCapabilities() {
             <motion.div
               key={cap.title}
               variants={fadeUpVariants}
-              className="group flex flex-col rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-slate-300 dark:hover:border-white/20"
+              className="group flex flex-col rounded-2xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[color:var(--color-border-strong)]"
             >
               <div
-                className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 mb-6 shadow-inner transition-transform group-hover:scale-105"
+                className="flex h-12 w-12 items-center justify-center rounded-xl bg-[color:var(--color-surface-sunken)] mb-6 transition-transform group-hover:scale-105"
                 style={{ color: cap.accentColor }}
               >
                 <cap.icon className="h-6 w-6" />
               </div>
-              <h3 className="font-space text-lg font-bold text-slate-900 dark:text-white mb-1.5">
+              <h3 className="text-lg font-bold text-[color:var(--color-text-primary)] mb-1.5">
                 {cap.title}
               </h3>
-              <span className="font-mono text-xs font-semibold text-indigo-600 dark:text-indigo-400 mb-4 block">
+              <span className="font-mono text-xs font-semibold bg-gradient-to-r from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] bg-clip-text text-transparent mb-4 block">
                 {cap.tech}
               </span>
-              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mt-auto">
+              <p className="text-sm text-[color:var(--color-text-secondary)] leading-relaxed mt-auto">
                 {cap.desc}
               </p>
             </motion.div>
