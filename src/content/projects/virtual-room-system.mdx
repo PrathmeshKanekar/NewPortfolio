@@ -1,12 +1,26 @@
 ---
-title: "Virtual Room System"
-description: "A system for student attendance and virtual classroom management."
+title: "Student Attendance & Virtual Room System"
+description: "Cross-platform mobile application for geofenced student attendance tracking and virtual classroom management."
 published: true
 featured: true
-order: 4
-date: "2026-08-11"
-techStack: ["Java"]
+order: 2
+date: "2024-01-15"
+techStack: ["Flutter", "Django REST Framework", "PostgreSQL", "Python"]
 ---
 
-# Overview
-A comprehensive system for student attendance and virtual classroom management.
+## 01 / Overview
+
+A cross-platform mobile system engineered for real-time student attendance verification and virtual classroom coordination. It combines mobile location telemetry with backend geofencing algorithms to validate physical presence automatically.
+
+## 02 / Key Features
+
+- **Geofenced Attendance**: Validates student GPS coordinates against designated classroom boundary radiuses before logging attendance.
+- **Role-Based Access Control**: Separate permission interfaces for administrators, instructors, and students.
+- **Virtual Room Sessions**: Dynamic creation of active lecture sessions with live status tracking and anti-spoofing checks.
+- **RESTful Telemetry API**: High-throughput Django REST Framework endpoints handling concurrent device updates.
+
+## 03 / Tech Stack
+
+- **Mobile Client**: Flutter (Dart)
+- **Backend API**: Django REST Framework (Python)
+- **Database**: PostgreSQL with PostGIS extension for spatial queries
