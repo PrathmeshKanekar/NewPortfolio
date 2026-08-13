@@ -10,7 +10,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 /** Closing CTA section on the Home page */
 export function ClosingCTA() {
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden" aria-labelledby="closing-cta">
+    <section className="pt-24 pb-40 md:pt-32 md:pb-48 relative overflow-hidden" aria-labelledby="closing-cta">
       {/* Background elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl" />

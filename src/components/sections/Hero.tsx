@@ -89,7 +89,7 @@ export function Hero() {
     },
   };
 
-  const itemVariants = shouldReduce
+  const itemVariants: any = shouldReduce
     ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
     : {
         hidden: { opacity: 0, y: 12 },
