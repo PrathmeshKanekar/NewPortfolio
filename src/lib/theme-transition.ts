@@ -28,8 +28,16 @@ export function toggleThemeWithTransition(
     Math.max(y, window.innerHeight - y)
   );
 
-  // @ts-expect-error - startViewTransition is a modern browser feature
-  const transition = document.startViewTransition(() => {
+  const doc = document as unknown as {
+    startViewTransition?: (callback: () => void) => { ready: Promise<void> };
+  };
+
+  if (!doc.startViewTransition) {
+    setTheme(newTheme);
+    return;
+  }
+
+  const transition = doc.startViewTransition(() => {
     setTheme(newTheme);
   });
 
