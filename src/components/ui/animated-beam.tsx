@@ -31,7 +31,7 @@ export const AnimatedBeam = ({
   toRef,
   curvature = 0,
   reverse = false,
-  duration = Math.random() * 3 + 4,
+  duration = 5,
   delay = 0,
   pathColor = "gray",
   pathWidth = 2,
