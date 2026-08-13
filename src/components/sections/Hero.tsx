@@ -13,7 +13,7 @@ const EASE_REVEAL: [number, number, number, number] = [0.16, 1, 0.3, 1];
 function EngineeringSystem() {
   const shouldReduce = useReducedMotion();
   
-  const pulseVariant = shouldReduce ? {} : {
+  const pulseVariant: any = shouldReduce ? {} : {
     animate: { opacity: [0.3, 0.7, 0.3], transition: { duration: 3, repeat: Infinity, ease: "easeInOut" } }
   };
 
