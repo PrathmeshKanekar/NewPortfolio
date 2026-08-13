@@ -39,9 +39,9 @@ export function FeaturedProjects({ projects }: FeaturedProjectsProps) {
           viewport={{ once: true, amount: 0.1 }}
           className="grid grid-cols-1 gap-4 md:grid-cols-2"
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <motion.div key={project.slug} variants={fadeUpVariants}>
-              <ProjectCard project={project} />
+              <ProjectCard project={project} featured={index === 0} />
             </motion.div>
           ))}
         </motion.div>

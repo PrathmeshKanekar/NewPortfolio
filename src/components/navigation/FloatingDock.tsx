@@ -31,7 +31,7 @@ import { SITE_CONFIG, RESUME_FILENAME } from "@/lib/constants";
 type DockItemType = {
   label: string;
   href: string;
-  icon: React.ElementType;
+  icon: any;
   external?: boolean;
 };
 
@@ -227,11 +227,11 @@ export function FloatingDock() {
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 z-[var(--z-sticky-header)] hidden md:flex items-center gap-1.5 p-1.5 rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-overlay)]/90 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.1),0_0_1px_rgba(0,0,0,0.2)] dark:shadow-[0_8px_32px_-8px_rgba(0,0,0,0.4),0_0_1px_rgba(255,255,255,0.05)]"
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+        className="fixed bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 z-[var(--z-sticky-header)] hidden md:flex items-center gap-1.5 p-1.5 rounded-full border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-overlay)]/80 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.15),0_2px_8px_-2px_rgba(0,0,0,0.1),0_0_0_1px_rgba(0,0,0,0.03)] dark:shadow-[0_8px_40px_-8px_rgba(0,0,0,0.6),0_2px_12px_-4px_rgba(0,0,0,0.4),0_0_0_1px_rgba(255,255,255,0.05)]"
         style={{
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          backdropFilter: "blur(24px) saturate(1.2)",
+          WebkitBackdropFilter: "blur(24px) saturate(1.2)",
         } as React.CSSProperties}
         onMouseMove={(e) => mouseX.set(e.pageX)}
         onMouseLeave={() => mouseX.set(Infinity)}

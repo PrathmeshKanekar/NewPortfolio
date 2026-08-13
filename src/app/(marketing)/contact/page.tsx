@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/common/SectionHeading";
 import { SITE_CONFIG, RESUME_FILENAME } from "@/lib/constants";
 import { Mail, MapPin, Download, ArrowRight } from "lucide-react";
 import { Github, Linkedin } from "@/components/common/Icons";
+import { ContactEmailButton } from "@/components/cards/ContactEmailButton";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -25,18 +26,7 @@ export default function ContactPage() {
 
           {/* Contact methods */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
-            <a
-              href={`mailto:${SITE_CONFIG.email}`}
-              className="group flex items-center gap-4 rounded-lg border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] p-5 transition-all duration-200 hover:border-[color:var(--color-border-default)] hover:bg-[color:var(--color-surface-raised)]"
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[color:var(--color-surface-hover)]">
-                <Mail className="h-4 w-4 text-[color:var(--color-text-secondary)]" />
-              </div>
-              <div>
-                <p className="text-xs text-[color:var(--color-text-tertiary)] mb-0.5">Email</p>
-                <p className="text-sm font-medium text-[color:var(--color-text-primary)]">{SITE_CONFIG.email}</p>
-              </div>
-            </a>
+            <ContactEmailButton />
 
             <a
               href="https://github.com/prathmeshkanekar"

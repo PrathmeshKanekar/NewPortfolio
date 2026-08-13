@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/common/ScrollProgress";
 import { SITE_CONFIG } from "@/lib/constants";
 import { AppProviders } from "@/components/providers/AppProviders";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -85,6 +86,8 @@ export default function RootLayout({
           </main>
 
           <Footer />
+
+          <Toaster position="bottom-right" richColors />
         </AppProviders>
       </body>
     </html>
