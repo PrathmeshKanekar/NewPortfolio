@@ -26,8 +26,6 @@ import {
   SiC,
   SiCplusplus,
 } from "react-icons/si";
-import { TbBrandCSharp } from "react-icons/tb";
-import { VscAzure } from "react-icons/vsc";
 import { Code2, Server, Database, Cloud } from "lucide-react";
 import { IconType } from "react-icons";
 
@@ -42,7 +40,7 @@ const TECH_STACK: { category: string; icon: any; items: TechItem[] }[] = [
     category: "Languages & Frameworks",
     icon: Code2,
     items: [
-      { name: "C#", Icon: TbBrandCSharp, tier: "primary" },
+      { name: "C#", Icon: Code2, tier: "primary" },
       { name: "TypeScript", Icon: SiTypescript, tier: "primary" },
       { name: "JavaScript", Icon: SiJavascript, tier: "professional" },
       { name: "Python", Icon: SiPython, tier: "working" },
@@ -87,7 +85,7 @@ const TECH_STACK: { category: string; icon: any; items: TechItem[] }[] = [
     icon: Cloud,
     items: [
       { name: "Docker", Icon: SiDocker, tier: "primary" },
-      { name: "Azure", Icon: VscAzure, tier: "primary" },
+      { name: "Azure", Icon: Cloud, tier: "primary" },
       { name: "Git", Icon: SiGit, tier: "professional" },
       { name: "GitHub", Icon: SiGithub, tier: "professional" },
     ],
