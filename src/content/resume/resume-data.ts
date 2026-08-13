@@ -10,12 +10,26 @@ export const resumeData = {
 
   experience: [
     {
+      company: "Three Star Infotech Pvt. Ltd.",
+      role: "Full Stack Developer",
+      startDate: "MM/YYYY", // Placeholder: User will confirm exact start date (e.g. 02/2024)
+      endDate: "Present",
+      highlights: [
+        "Engineered core banking software modules handling account management workflows, customer onboarding, and joint holder protocols.",
+        "Built component-driven Angular client applications integrated with ASP.NET Core RESTful APIs and C# backend business logic.",
+        "Designed normalized Microsoft SQL Server schemas, stored procedures, and high-performance data access routines.",
+        "Implemented secure API authentication and maker-checker validation workflows utilizing JWT protocols.",
+        "Managed web server application deployments on IIS, Docker containerization, and API load and performance testing."
+      ],
+      stack: ["Angular", "ASP.NET Core", "C#", "SQL Server", "JWT", "Docker", "IIS"]
+    },
+    {
       company: "SaniSoft Infotech Pvt. Ltd.",
       role: "Software Developer",
       startDate: "08/2023",
       endDate: "01/2024",
       highlights: [
-        "Architected enterprise banking modules including customer onboarding and financial transaction workflows.",
+        "Architected enterprise software modules including customer management and financial authorization workflows.",
         "Built reactive Angular V15+ interfaces with Angular Material data tables, forms, and custom modal dialogs.",
         "Engineered ASP.NET Core RESTful Web APIs with Dapper and Entity Framework for high-throughput database reads.",
         "Wrote normalized SQL Server schemas, stored procedures, and authorization checker workflows."

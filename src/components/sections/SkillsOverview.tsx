@@ -14,22 +14,24 @@ import {
   SiCss,
   SiTailwindcss,
   SiBootstrap,
+  SiGreensock,
   SiDotnet,
   SiPostgresql,
   SiDocker,
-  SiGit,
   SiGithub,
   SiFlutter,
   SiNodedotjs,
   SiNextdotjs,
   SiRedis,
+  SiK6,
 } from "react-icons/si";
-import { Code2, Server, Database, Cloud, Cpu, ShieldCheck, Terminal, CpuIcon } from "lucide-react";
+import { Code2, Server, Database, Cloud, Cpu, ShieldCheck, Terminal } from "lucide-react";
 import { IconType } from "react-icons";
 
 interface SkillItem {
   name: string;
   Icon: IconType | any;
+  brandColor?: string;
 }
 
 interface SkillCategory {
@@ -45,13 +47,14 @@ const SKILL_GROUPS: SkillCategory[] = [
     description: "Building responsive, component-driven client web applications.",
     icon: Code2,
     skills: [
-      { name: "Angular 17", Icon: SiAngular },
-      { name: "TypeScript", Icon: SiTypescript },
-      { name: "JavaScript", Icon: SiJavascript },
-      { name: "HTML5/CSS3", Icon: SiCss },
-      { name: "Tailwind CSS", Icon: SiTailwindcss },
-      { name: "Bootstrap", Icon: SiBootstrap },
-      { name: "GSAP", Icon: Code2 },
+      { name: "Angular 17", Icon: SiAngular, brandColor: "#DD0031" },
+      { name: "TypeScript", Icon: SiTypescript, brandColor: "#3178C6" },
+      { name: "JavaScript", Icon: SiJavascript, brandColor: "#F7DF1E" },
+      { name: "HTML5", Icon: SiHtml5, brandColor: "#E34F26" },
+      { name: "CSS3", Icon: SiCss, brandColor: "#1572B6" },
+      { name: "Tailwind CSS", Icon: SiTailwindcss, brandColor: "#06B6D4" },
+      { name: "Bootstrap", Icon: SiBootstrap, brandColor: "#7952B3" },
+      { name: "GSAP", Icon: SiGreensock, brandColor: "#88CE02" },
     ],
   },
   {
@@ -59,12 +62,12 @@ const SKILL_GROUPS: SkillCategory[] = [
     description: "Designing RESTful Web APIs, business logic, and security protocols.",
     icon: Server,
     skills: [
-      { name: "ASP.NET Core Web API", Icon: SiDotnet },
-      { name: "C#", Icon: SiDotnet },
-      { name: "REST APIs", Icon: Server },
-      { name: "Dapper", Icon: Database },
-      { name: "JWT Authentication", Icon: ShieldCheck },
-      { name: "API Security", Icon: ShieldCheck },
+      { name: "ASP.NET Core Web API", Icon: SiDotnet, brandColor: "#512BD4" },
+      { name: "C#", Icon: SiDotnet, brandColor: "#512BD4" },
+      { name: "REST APIs", Icon: Server, brandColor: "#6366F1" },
+      { name: "Dapper", Icon: Database, brandColor: "#CC292B" },
+      { name: "JWT Authentication", Icon: ShieldCheck, brandColor: "#00B4D8" },
+      { name: "API Security", Icon: ShieldCheck, brandColor: "#10B981" },
     ],
   },
   {
@@ -72,13 +75,13 @@ const SKILL_GROUPS: SkillCategory[] = [
     description: "Relational data modeling, indexing, and query optimization.",
     icon: Database,
     skills: [
-      { name: "SQL Server", Icon: Database },
-      { name: "PostgreSQL", Icon: SiPostgresql },
-      { name: "PostGIS", Icon: Database },
-      { name: "SQL Optimization", Icon: Terminal },
-      { name: "Stored Procedures", Icon: Terminal },
-      { name: "Transactions", Icon: ShieldCheck },
-      { name: "Database Design", Icon: Database },
+      { name: "SQL Server", Icon: Database, brandColor: "#CC292B" },
+      { name: "PostgreSQL", Icon: SiPostgresql, brandColor: "#4169E1" },
+      { name: "PostGIS", Icon: SiPostgresql, brandColor: "#336791" },
+      { name: "SQL Optimization", Icon: Terminal, brandColor: "#F59E0B" },
+      { name: "Stored Procedures", Icon: Terminal, brandColor: "#EC4899" },
+      { name: "Transactions", Icon: ShieldCheck, brandColor: "#10B981" },
+      { name: "Database Design", Icon: Database, brandColor: "#6366F1" },
     ],
   },
   {
@@ -86,13 +89,13 @@ const SKILL_GROUPS: SkillCategory[] = [
     icon: Cloud,
     description: "Containerization, web server hosting, and performance validation.",
     skills: [
-      { name: "Docker", Icon: SiDocker },
-      { name: "Azure", Icon: Cloud },
-      { name: "IIS", Icon: Server },
-      { name: "Git/GitHub", Icon: SiGithub },
-      { name: "CI/CD concepts", Icon: Cloud },
-      { name: "Load/Performance Testing", Icon: Terminal },
-      { name: "k6", Icon: Terminal },
+      { name: "Docker", Icon: SiDocker, brandColor: "#2496ED" },
+      { name: "Azure", Icon: Cloud, brandColor: "#0089D6" },
+      { name: "IIS", Icon: Server, brandColor: "#0089D6" },
+      { name: "Git/GitHub", Icon: SiGithub, brandColor: "#181717" },
+      { name: "CI/CD concepts", Icon: Cloud, brandColor: "#6366F1" },
+      { name: "Load/Performance Testing", Icon: Terminal, brandColor: "#8B5CF6" },
+      { name: "k6", Icon: SiK6, brandColor: "#7D64FF" },
     ],
   },
   {
@@ -100,12 +103,12 @@ const SKILL_GROUPS: SkillCategory[] = [
     icon: Cpu,
     description: "Cross-platform mobile, caching, and modern architectural concepts.",
     skills: [
-      { name: "Flutter", Icon: SiFlutter },
-      { name: "Node.js", Icon: SiNodedotjs },
-      { name: "Next.js", Icon: SiNextdotjs },
-      { name: "Redis", Icon: SiRedis },
-      { name: "Microservices concepts", Icon: Server },
-      { name: "System Design", Icon: Cpu },
+      { name: "Flutter", Icon: SiFlutter, brandColor: "#02569B" },
+      { name: "Node.js", Icon: SiNodedotjs, brandColor: "#5FA04E" },
+      { name: "Next.js", Icon: SiNextdotjs, brandColor: "#000000" },
+      { name: "Redis", Icon: SiRedis, brandColor: "#DC382D" },
+      { name: "Microservices concepts", Icon: Server, brandColor: "#6366F1" },
+      { name: "System Design", Icon: Cpu, brandColor: "#8B5CF6" },
     ],
   },
 ];
@@ -113,7 +116,7 @@ const SKILL_GROUPS: SkillCategory[] = [
 export function SkillsOverview() {
   return (
     <section className="py-24 md:py-32 relative bg-slate-50/50 dark:bg-slate-900/50" id="skills">
-      <Container className="max-w-6xl">
+      <Container>
         <RevealOnScroll>
           <SectionHeading
             number="03"
@@ -127,7 +130,7 @@ export function SkillsOverview() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {SKILL_GROUPS.map((group, groupIndex) => (
             <RevealOnScroll key={group.title} delay={0.05 + groupIndex * 0.08}>
-              <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 shadow-soft h-full flex flex-col justify-between hover:shadow-md hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300">
+              <div className="p-6 rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-slate-900/80 shadow-sm h-full flex flex-col justify-between hover:shadow-md hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300">
                 <div>
                   <div className="flex items-center gap-3 mb-3">
                     <div className="p-2.5 bg-indigo-500/10 dark:bg-indigo-500/20 rounded-xl text-indigo-600 dark:text-indigo-400">
@@ -137,7 +140,7 @@ export function SkillsOverview() {
                       {group.title}
                     </h3>
                   </div>
-                  
+
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-5 leading-relaxed">
                     {group.description}
                   </p>
@@ -152,9 +155,12 @@ export function SkillsOverview() {
                         whileInView="visible"
                         viewport={{ once: true }}
                         whileHover={{ y: -2 }}
-                        className="group flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-800/60 shadow-sm hover:border-indigo-500/30 transition-all duration-200"
+                        className="group flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/80 dark:bg-slate-800/60 shadow-sm hover:border-indigo-500/30 transition-all duration-200"
                       >
-                        <skill.Icon className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400 group-hover:scale-110 transition-transform" />
+                        <skill.Icon
+                          className="w-3.5 h-3.5 group-hover:scale-110 transition-transform dark:text-slate-200"
+                          style={{ color: skill.brandColor }}
+                        />
                         <span className="text-xs font-mono font-medium text-slate-700 dark:text-slate-300">
                           {skill.name}
                         </span>

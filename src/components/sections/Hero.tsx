@@ -26,7 +26,7 @@ interface HeroProps {
 
 function ProfilePhoto({ imageSrc = HERO_PHOTO_SRC }: { imageSrc?: string }) {
   return (
-    <div className="relative h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full border border-slate-200 bg-slate-100 shadow-sm dark:border-white/15 dark:bg-slate-900 transition-transform duration-300 hover:scale-105">
+    <div className="relative h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-sunken)] transition-transform duration-300 hover:scale-105">
       {imageSrc ? (
         <Image
           src={imageSrc}
@@ -66,13 +66,13 @@ export function Hero({ imageSrc }: HeroProps) {
   const itemVariants: any = shouldReduce
     ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
     : {
-        hidden: { opacity: 0, y: 16 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.55, ease: EASE_REVEAL },
-        },
-      };
+      hidden: { opacity: 0, y: 16 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.55, ease: EASE_REVEAL },
+      },
+    };
 
   return (
     <section
@@ -95,15 +95,15 @@ export function Hero({ imageSrc }: HeroProps) {
           <motion.h1
             id="hero-heading"
             variants={itemVariants}
-            className="font-space text-[clamp(2.75rem,7vw,5.25rem)] font-bold tracking-tight leading-[1.05] text-slate-900 dark:text-white"
+            className="font-display text-[clamp(2.75rem,7vw,5.25rem)] font-bold tracking-tight leading-[1.05] text-[color:var(--color-text-primary)]"
           >
-            Prathmesh <span className="text-indigo-600 dark:text-indigo-400">Kanekar</span>
+            Prathmesh <span className="bg-gradient-to-r from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] bg-clip-text text-transparent">Kanekar</span>
           </motion.h1>
 
           {/* 3. ROLE (One line: what I do / specialization) */}
           <motion.h2
             variants={itemVariants}
-            className="mt-4 text-lg sm:text-xl font-medium text-slate-700 dark:text-slate-300"
+            className="mt-4 text-lg sm:text-xl font-medium text-[color:var(--color-text-secondary)]"
           >
             Full Stack Developer, focused on enterprise banking software
           </motion.h2>
@@ -111,7 +111,7 @@ export function Hero({ imageSrc }: HeroProps) {
           {/* 4. DESCRIPTION (1-2 lines max) */}
           <motion.p
             variants={itemVariants}
-            className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-slate-600 dark:text-slate-400"
+            className="mt-4 max-w-xl text-base sm:text-lg leading-relaxed text-[color:var(--color-text-tertiary)]"
           >
             Building secure, scalable modules for enterprise core banking systems — from database to UI.
           </motion.p>
@@ -119,54 +119,55 @@ export function Hero({ imageSrc }: HeroProps) {
           {/* 5. CONTACTS (Icon-only links for GitHub, LinkedIn, Email) */}
           <motion.div
             variants={itemVariants}
-            className="mt-6 flex items-center justify-center gap-3"
+            className="mt-8 flex items-center justify-center gap-6"
           >
             <a
               href="https://github.com/prathmeshkanekar"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-slate-600 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-400 dark:hover:border-white/20 dark:hover:bg-slate-800 dark:hover:text-white"
+              className="text-[color:var(--color-text-tertiary)] hover:text-[color:var(--color-accent-default)] transition-colors duration-200"
               aria-label="GitHub Profile"
             >
-              <Github className="h-4 w-4" />
+              <Github className="h-5 w-5" />
             </a>
             <a
               href="https://www.linkedin.com/in/prathmesh-kanekar"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-slate-600 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-400 dark:hover:border-white/20 dark:hover:bg-slate-800 dark:hover:text-white"
+              className="text-[color:var(--color-text-tertiary)] hover:text-[color:var(--color-accent-default)] transition-colors duration-200"
               aria-label="LinkedIn Profile"
             >
-              <Linkedin className="h-4 w-4" />
+              <Linkedin className="h-5 w-5" />
             </a>
             <a
               href={`mailto:${SITE_CONFIG.email}`}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/80 text-slate-600 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none dark:border-white/10 dark:bg-slate-900/80 dark:text-slate-400 dark:hover:border-white/20 dark:hover:bg-slate-800 dark:hover:text-white"
+              className="text-[color:var(--color-text-tertiary)] hover:text-[color:var(--color-accent-default)] transition-colors duration-200"
               aria-label="Email Contact"
             >
-              <Mail className="h-4 w-4" />
+              <Mail className="h-5 w-5" />
             </a>
           </motion.div>
 
           {/* 6. CTA BUTTONS (Exactly two: View My Work & Resume) */}
           <motion.div
             variants={itemVariants}
-            className="mt-8 flex flex-wrap items-center justify-center gap-4"
+            className="mt-8 flex flex-wrap items-center justify-center gap-6"
           >
             <Link
               href="/projects"
-              className="group inline-flex h-11 items-center justify-center gap-2 rounded-full bg-slate-900 px-6 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-600 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none active:scale-[0.98] dark:bg-white dark:text-slate-900 dark:hover:bg-indigo-400"
+              className="group inline-flex items-center justify-center gap-2 text-sm font-medium text-[color:var(--color-text-primary)] hover:text-[color:var(--color-accent-default)] transition-colors"
             >
               View My Work
               <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
 
+            <span className="text-[color:var(--color-border-strong)]">|</span>
+
             <a
               href={`/resume/${RESUME_FILENAME}`}
               download
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:outline-none active:scale-[0.98] dark:border-white/15 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-white/5"
+              className="inline-flex items-center justify-center gap-2 text-sm font-medium text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] transition-colors"
             >
-              <Download className="h-4 w-4" />
               Resume
             </a>
           </motion.div>

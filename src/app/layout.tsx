@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { FloatingDock } from "@/components/navigation/FloatingDock";
 import { Footer } from "@/components/layout/Footer";
@@ -8,16 +8,18 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { Toaster } from "sonner";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
+  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -70,7 +72,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+        className={`${inter.variable} ${playfair.variable} font-sans antialiased`}
       >
         <AppProviders>
           {/* Skip-to-content (Section 12) */}
