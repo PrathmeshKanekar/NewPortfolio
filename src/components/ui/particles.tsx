@@ -105,27 +105,41 @@ export function Particles({
     }
     initCanvas();
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+      },
+      { threshold: 0 }
+    );
+
+    if (canvasContainerRef.current) {
+      observer.observe(canvasContainerRef.current);
+    }
+
     const loop = () => {
-      clearCanvas();
-      circles.current.forEach((circle: any) => {
-        const edge = [
-          circle.x + circle.translateX - circle.size < 0,
-          circle.x + circle.translateX + circle.size > size.current.w,
-          circle.y + circle.translateY - circle.size < 0,
-          circle.y + circle.translateY + circle.size > size.current.h,
-        ];
-        if (edge[0] || edge[1]) circle.dx = -circle.dx;
-        if (edge[2] || edge[3]) circle.dy = -circle.dy;
+      if (isVisible) {
+        clearCanvas();
+        circles.current.forEach((circle: any) => {
+          const edge = [
+            circle.x + circle.translateX - circle.size < 0,
+            circle.x + circle.translateX + circle.size > size.current.w,
+            circle.y + circle.translateY - circle.size < 0,
+            circle.y + circle.translateY + circle.size > size.current.h,
+          ];
+          if (edge[0] || edge[1]) circle.dx = -circle.dx;
+          if (edge[2] || edge[3]) circle.dy = -circle.dy;
 
-        circle.x += circle.dx;
-        circle.y += circle.dy;
+          circle.x += circle.dx;
+          circle.y += circle.dy;
 
-        if (circle.alpha < circle.targetAlpha) {
-          circle.alpha += 0.01;
-        }
+          if (circle.alpha < circle.targetAlpha) {
+            circle.alpha += 0.01;
+          }
 
-        drawCircle(circle, true);
-      });
+          drawCircle(circle, true);
+        });
+      }
       animFrameId.current = window.requestAnimationFrame(loop);
     };
 
@@ -133,6 +147,7 @@ export function Particles({
     window.addEventListener("resize", initCanvas);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", initCanvas);
       if (animFrameId.current) {
         window.cancelAnimationFrame(animFrameId.current);

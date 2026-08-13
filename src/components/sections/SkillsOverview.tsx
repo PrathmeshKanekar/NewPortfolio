@@ -127,25 +127,30 @@ export function SkillsOverview() {
           />
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {SKILL_GROUPS.map((group, groupIndex) => (
             <RevealOnScroll key={group.title} delay={0.05 + groupIndex * 0.08}>
-              <div className="p-6 rounded-2xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)] shadow-sm h-full flex flex-col justify-between hover:shadow-md hover:border-[color:var(--color-border-strong)] transition-all duration-300">
+              <div className="relative h-full flex flex-col justify-between p-7 rounded-3xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]/40 backdrop-blur-xl transition-all duration-500 hover:border-[color:var(--color-border-strong)] hover:shadow-2xl group overflow-hidden">
+                {/* Top Accent Line */}
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[color:var(--color-accent-default)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                 <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2.5 bg-[color:var(--color-accent-subtle)] rounded-xl text-[color:var(--color-accent-default)]">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-[color:var(--color-surface-sunken)] border border-[color:var(--color-border-subtle)] rounded-2xl text-[color:var(--color-accent-default)] shadow-sm group-hover:scale-110 transition-transform duration-300">
                       <group.icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-lg font-bold text-[color:var(--color-text-primary)]">
-                      {group.title}
-                    </h3>
+                    <div>
+                      <h3 className="text-lg font-bold text-[color:var(--color-text-primary)]">
+                        {group.title}
+                      </h3>
+                    </div>
                   </div>
 
-                  <p className="text-xs text-[color:var(--color-text-tertiary)] mb-5 leading-relaxed">
+                  <p className="text-xs text-[color:var(--color-text-tertiary)] mb-6 leading-relaxed">
                     {group.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2.5">
                     {group.skills.map((skill, i) => (
                       <motion.div
                         key={skill.name}
@@ -154,14 +159,14 @@ export function SkillsOverview() {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        whileHover={{ y: -2 }}
-                        className="group flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-sunken)]/80 shadow-sm hover:border-[color:var(--color-accent-default)]/30 transition-all duration-200"
+                        whileHover={{ y: -3, scale: 1.02 }}
+                        className="group/pill flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)]/60 backdrop-blur-sm shadow-sm transition-all duration-300 hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-raised)]"
                       >
                         <skill.Icon
-                          className="w-3.5 h-3.5 group-hover:scale-110 transition-transform"
+                          className="w-4 h-4 group-hover/pill:scale-110 transition-transform duration-200"
                           style={{ color: skill.brandColor }}
                         />
-                        <span className="text-xs font-mono font-medium text-[color:var(--color-text-secondary)]">
+                        <span className="text-xs font-mono font-medium text-[color:var(--color-text-secondary)] group-hover/pill:text-[color:var(--color-text-primary)] transition-colors">
                           {skill.name}
                         </span>
                       </motion.div>

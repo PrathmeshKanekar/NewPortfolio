@@ -63,28 +63,35 @@ export function ProfessionalSnapshot() {
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.1}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {SNAPSHOT_ITEMS.map((item) => (
-              <div
-                key={item.label}
-                className="group relative rounded-2xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[color:var(--color-border-strong)]"
-              >
-                <div className="flex items-center gap-3 mb-3">
+          <div className="relative rounded-3xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]/50 backdrop-blur-xl p-6 sm:p-8 shadow-xl overflow-hidden">
+            {/* Background Glow Accent */}
+            <div className="absolute -top-24 -right-24 w-72 h-72 bg-[color:var(--color-accent-default)]/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
+              {SNAPSHOT_ITEMS.map((item, index) => (
+                <div
+                  key={item.label}
+                  className="group flex items-start gap-4 p-4 rounded-2xl transition-all duration-300 hover:bg-[color:var(--color-surface-hover)]/60"
+                >
                   <div
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[color:var(--color-surface-sunken)] to-[color:var(--color-surface-base)] shadow-[inset_0_1px_1px_rgba(255,255,255,0.4)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] border border-[color:var(--color-border-subtle)] group-hover:scale-105 transition-transform"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[color:var(--color-surface-sunken)] border border-[color:var(--color-border-subtle)] shadow-inner transition-transform duration-300 group-hover:scale-110"
                     style={{ color: item.brandColor }}
                   >
-                    <item.icon className="h-4 w-4" />
+                    <item.icon className="h-5 w-5" />
                   </div>
-                  <span className="font-mono text-[11px] font-semibold tracking-wider text-[color:var(--color-text-tertiary)] uppercase">
-                    {item.label}
-                  </span>
+
+                  <div className="flex flex-col gap-1">
+                    <span className="font-mono text-[11px] font-bold tracking-widest text-[color:var(--color-text-tertiary)] uppercase flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: item.brandColor }} />
+                      {item.label}
+                    </span>
+                    <p className="text-base font-semibold text-[color:var(--color-text-primary)] leading-snug">
+                      {item.value}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-base font-semibold text-[color:var(--color-text-primary)]">
-                  {item.value}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </RevealOnScroll>
       </Container>

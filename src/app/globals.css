@@ -45,27 +45,54 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
     background-color: var(--color-background);
-    background-image: 
-      radial-gradient(circle at top left, var(--color-accent-subtle) 0%, transparent 40%),
-      radial-gradient(circle at bottom right, var(--color-accent-subtle) 0%, transparent 40%);
-    background-attachment: fixed;
+  }
+
+  /* GPU-Accelerated View Transitions for 100% Lag-Free Theme Switch */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+  
+  ::view-transition-old(root) {
+    z-index: 1;
+  }
+  
+  ::view-transition-new(root) {
+    z-index: 9999;
+  }
+
+  .dark::view-transition-old(root) {
+    z-index: 9999;
+  }
+  
+  .dark::view-transition-new(root) {
+    z-index: 1;
+  }
+
+  /* Premium Animated Dot Matrix Background (No square boxes) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: transparent;
+    background-image: radial-gradient(var(--color-border-strong) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 10%, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 10%, black 40%, transparent 100%);
+    opacity: 0.45;
   }
   
   /* Fallback for reduced motion */
   @media (prefers-reduced-motion: no-preference) {
-    body {
-      animation: ambientMesh 20s ease-in-out infinite alternate;
-      background-size: 150% 150%;
+    body::before {
+      animation: gridPulse 8s ease-in-out infinite alternate;
     }
   }
 
-  /* Theme transition for smooth theme swap (200ms cross-fade) */
-  html:not(.no-transitions) body,
-  html:not(.no-transitions) body * {
-    transition-property: background-color, border-color, color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
-  }
+
 
   /* Skip-to-content link (Section 12) */
   .skip-to-content {
@@ -155,7 +182,29 @@
   100% { background-position: 0% 50%; }
 }
 
-@keyframes ambientMesh {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+@keyframes gridPulse {
+  0% { opacity: 0.25; }
+  100% { opacity: 0.45; }
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-1000px);
+    opacity: 0;
+  }
+}
+
+.animate-meteor-effect {
+  animation: meteor 5s linear infinite;
 }
