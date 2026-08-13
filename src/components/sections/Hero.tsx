@@ -8,7 +8,6 @@ import Image from "next/image";
 import { Github, Linkedin } from "@/components/common/Icons";
 import { Container } from "@/components/common/Container";
 import { SITE_CONFIG, RESUME_FILENAME } from "@/lib/constants";
-import { Particles } from "@/components/ui/particles";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 
 // ============================================================================
@@ -87,9 +86,8 @@ export function Hero({ imageSrc }: HeroProps) {
       className="relative flex flex-col justify-center min-h-[calc(100vh-80px)] pt-20 pb-32 overflow-hidden"
       aria-labelledby="hero-heading"
     >
-      {/* Ambient Background Glow & Micro Particles */}
+      {/* Ambient Background Glow */}
       <BackgroundBeams />
-      <Particles className="absolute inset-0 -z-10" quantity={25} />
 
       <Container>
         <motion.div

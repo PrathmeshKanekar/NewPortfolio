@@ -8,18 +8,17 @@ interface MeteorsProps {
   className?: string;
 }
 
-export const Meteors = ({ number = 20, className }: MeteorsProps) => {
-  const [meteorStyles, setMeteorStyles] = useState<Array<React.CSSProperties>>([]);
+const generateStyles = (count: number) => {
+  return [...new Array(count)].map(() => ({
+    top: -5,
+    left: Math.floor(Math.random() * (1200 - -400) + -400) + "px",
+    animationDelay: Math.random() * (0.8 - 0.2) + 0.2 + "s",
+    animationDuration: Math.floor(Math.random() * (10 - 2) + 2) + "s",
+  }));
+};
 
-  useEffect(() => {
-    const styles = [...new Array(number)].map(() => ({
-      top: -5,
-      left: Math.floor(Math.random() * (1200 - -400) + -400) + "px",
-      animationDelay: Math.random() * (0.8 - 0.2) + 0.2 + "s",
-      animationDuration: Math.floor(Math.random() * (10 - 2) + 2) + "s",
-    }));
-    setMeteorStyles(styles);
-  }, [number]);
+export const Meteors = ({ number = 20, className }: MeteorsProps) => {
+  const [meteorStyles] = useState<Array<React.CSSProperties>>(() => generateStyles(number));
 
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden select-none -z-10">

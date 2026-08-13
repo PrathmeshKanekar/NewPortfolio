@@ -70,26 +70,16 @@
     z-index: 1;
   }
 
-  /* Premium Animated Dot Matrix Background (No square boxes) */
+  /* Clean, Ultra-Performant Dot Matrix Background */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    background-color: transparent;
-    background-image: radial-gradient(var(--color-border-strong) 1.5px, transparent 1.5px);
-    background-size: 28px 28px;
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 10%, black 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 10%, black 40%, transparent 100%);
-    opacity: 0.45;
-  }
-  
-  /* Fallback for reduced motion */
-  @media (prefers-reduced-motion: no-preference) {
-    body::before {
-      animation: gridPulse 8s ease-in-out infinite alternate;
-    }
+    background-image: radial-gradient(var(--color-border-strong) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.18;
   }
 
 
