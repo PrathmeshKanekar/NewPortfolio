@@ -16,7 +16,7 @@ export function getAllProjects(): Project[] {
     role: "Full Stack Engineer",
     coverImage: "",
     coverImageAlt: doc.frontmatter.title
-  })).sort((a, b) => b.year - a.year);
+  })).sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 }
 
 export function getFeaturedProjects(): Project[] {
