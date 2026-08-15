@@ -3,7 +3,6 @@ import { ProfessionalSnapshot } from "@/components/sections/ProfessionalSnapshot
 import { SkillsOverview } from "@/components/sections/SkillsOverview";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Experience } from "@/components/sections/Experience";
-import { EngineeringCapabilities } from "@/components/sections/EngineeringCapabilities";
 import { ClosingCTA } from "@/components/sections/ClosingCTA";
 import { getFeaturedProjects } from "@/content/projects/projects-data";
 
@@ -51,10 +50,9 @@ export default function HomePage() {
       />
       <Hero />
       <ProfessionalSnapshot />
+      <Experience />
       <SkillsOverview />
       <FeaturedProjects projects={featuredProjects} />
-      <Experience />
-      <EngineeringCapabilities />
       <ClosingCTA />
     </>
   );

@@ -57,9 +57,8 @@ export function GithubOpenSource() {
         <RevealOnScroll>
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <SectionHeading
-              number="07"
               eyebrow="Open Source"
-              heading="GitHub"
+              heading="GitHub & Open Source"
               id="github-heading"
               className="mb-0"
             />

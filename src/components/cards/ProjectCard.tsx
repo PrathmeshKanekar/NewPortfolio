@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 import type { Project } from "@/types/project";
 import Tilt from "react-parallax-tilt";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface ProjectCardProps {
   project: Project;
@@ -18,14 +20,13 @@ interface ProjectCardProps {
 /** Professional case study card with browser frame, metrics, and BorderBeam */
 export function ProjectCard({ project, featured = false, className }: ProjectCardProps) {
   return (
-    <Tilt tiltMaxAngleX={4} tiltMaxAngleY={4} scale={1.01} transitionSpeed={2000} className="h-full">
-      <Link href={`/projects/${project.slug}`}>
-        <div
-          className={cn(
-            "group relative flex flex-col overflow-hidden rounded-2xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)]/80 shadow-sm backdrop-blur-md h-full transition-all duration-300 hover:shadow-lg hover:border-[color:var(--color-accent-default)]/40",
-            className
-          )}
-        >
+    <Link href={`/projects/${project.slug}`} className="h-full block">
+      <div
+        className={cn(
+          "group relative flex flex-col overflow-hidden rounded-2xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)] shadow-sm h-full transition-all duration-200 hover:shadow-md hover:border-[color:var(--color-border-strong)]",
+          className
+        )}
+      >
           {/* Cover Image in Browser Device Frame */}
           <div className="relative w-full aspect-[16/9] border-b border-[color:var(--color-border-default)] bg-[color:var(--color-surface-sunken)] overflow-hidden">
             {/* Top Browser Bar */}
@@ -68,10 +69,10 @@ export function ProjectCard({ project, featured = false, className }: ProjectCar
           <div className="p-6 flex flex-col flex-1">
             {/* Metric pill callout if available */}
             {project.metrics && project.metrics.length > 0 && (
-              <div className="mb-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[color:var(--color-accent-subtle)] border border-[color:var(--color-accent-default)]/20 text-[11px] font-mono font-semibold text-[color:var(--color-accent-default)] self-start">
+              <Badge variant="outline" className="mb-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[color:var(--color-accent-subtle)] border-[color:var(--color-accent-default)]/20 text-[11px] font-mono font-semibold text-[color:var(--color-accent-default)] self-start">
                 <TrendingUp className="w-3 h-3" />
                 {project.metrics[0].value} {project.metrics[0].label}
-              </div>
+              </Badge>
             )}
 
             <div className="flex items-start justify-between gap-4 mb-2">
@@ -113,27 +114,26 @@ export function ProjectCard({ project, featured = false, className }: ProjectCar
 
             <div className="mt-auto flex flex-wrap gap-1.5">
               {project.stack.slice(0, 5).map((tech) => (
-                <span
+                <Badge
                   key={tech}
-                  className="font-mono text-[11px] font-medium px-2.5 py-0.5 bg-[color:var(--color-surface-sunken)] border border-[color:var(--color-border-subtle)] rounded-full text-[color:var(--color-text-secondary)]"
+                  variant="outline"
+                  className="font-mono text-[11px] font-medium px-2.5 py-0.5 bg-[color:var(--color-surface-sunken)] border-[color:var(--color-border-subtle)] rounded-full text-[color:var(--color-text-secondary)]"
                 >
                   {tech}
-                </span>
+                </Badge>
               ))}
               {project.stack.length > 5 && (
-                <span className="font-mono text-[11px] font-medium px-2 py-0.5 text-[color:var(--color-text-tertiary)]">
+                <Badge
+                  variant="outline"
+                  className="font-mono text-[11px] font-medium px-2 py-0.5 text-[color:var(--color-text-tertiary)] border-[color:var(--color-border-subtle)] rounded-full"
+                >
                   +{project.stack.length - 5}
-                </span>
+                </Badge>
               )}
             </div>
           </div>
 
-          {/* BorderBeam effect for featured projects */}
-          {featured && (
-            <BorderBeam size={200} duration={8} delay={0} colorFrom="var(--color-gradient-start)" colorTo="var(--color-gradient-end)" />
-          )}
-        </div>
-      </Link>
-    </Tilt>
+      </div>
+    </Link>
   );
 }

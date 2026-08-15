@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { fadeUpVariants } from "@/lib/animation-variants";
+
 import {
   SiAngular,
   SiTypescript,
@@ -25,89 +25,59 @@ import {
   SiRedis,
   SiK6,
 } from "react-icons/si";
-import { Code2, Server, Database, Cloud, Cpu, ShieldCheck, Terminal } from "lucide-react";
+import { Server, Database, Cloud, ShieldCheck, Terminal, Code2, Cpu } from "lucide-react";
 import { IconType } from "react-icons";
 
 interface SkillItem {
   name: string;
   Icon: IconType | any;
-  brandColor?: string;
+  brandColor: string;
 }
 
-interface SkillCategory {
-  title: string;
-  description: string;
-  icon: any;
+interface SkillGroup {
+  category: string;
   skills: SkillItem[];
 }
 
-const SKILL_GROUPS: SkillCategory[] = [
+const SKILL_GROUPS: SkillGroup[] = [
   {
-    title: "Frontend Development",
-    description: "Building responsive, component-driven client web applications.",
-    icon: Code2,
+    category: "Tech Stack & Languages",
     skills: [
       { name: "Angular 17", Icon: SiAngular, brandColor: "#DD0031" },
       { name: "TypeScript", Icon: SiTypescript, brandColor: "#3178C6" },
       { name: "JavaScript", Icon: SiJavascript, brandColor: "#F7DF1E" },
+      { name: "ASP.NET Core", Icon: SiDotnet, brandColor: "#512BD4" },
+      { name: "C#", Icon: SiDotnet, brandColor: "#512BD4" },
+      { name: "Node.js", Icon: SiNodedotjs, brandColor: "#5FA04E" },
+      { name: "Next.js", Icon: SiNextdotjs, brandColor: "#000000" },
       { name: "HTML5", Icon: SiHtml5, brandColor: "#E34F26" },
       { name: "CSS3", Icon: SiCss, brandColor: "#1572B6" },
       { name: "Tailwind CSS", Icon: SiTailwindcss, brandColor: "#06B6D4" },
       { name: "Bootstrap", Icon: SiBootstrap, brandColor: "#7952B3" },
-      { name: "GSAP", Icon: SiGreensock, brandColor: "#88CE02" },
+      { name: "Flutter", Icon: SiFlutter, brandColor: "#02569B" },
     ],
   },
   {
-    title: "Backend Development",
-    description: "Designing RESTful Web APIs, business logic, and security protocols.",
-    icon: Server,
-    skills: [
-      { name: "ASP.NET Core Web API", Icon: SiDotnet, brandColor: "#512BD4" },
-      { name: "C#", Icon: SiDotnet, brandColor: "#512BD4" },
-      { name: "REST APIs", Icon: Server, brandColor: "#6366F1" },
-      { name: "Dapper", Icon: Database, brandColor: "#CC292B" },
-      { name: "JWT Authentication", Icon: ShieldCheck, brandColor: "#00B4D8" },
-      { name: "API Security", Icon: ShieldCheck, brandColor: "#10B981" },
-    ],
-  },
-  {
-    title: "Database Engineering",
-    description: "Relational data modeling, indexing, and query optimization.",
-    icon: Database,
+    category: "Databases & Backend Infrastructure",
     skills: [
       { name: "SQL Server", Icon: Database, brandColor: "#CC292B" },
       { name: "PostgreSQL", Icon: SiPostgresql, brandColor: "#4169E1" },
       { name: "PostGIS", Icon: SiPostgresql, brandColor: "#336791" },
-      { name: "SQL Optimization", Icon: Terminal, brandColor: "#F59E0B" },
-      { name: "Stored Procedures", Icon: Terminal, brandColor: "#EC4899" },
-      { name: "Transactions", Icon: ShieldCheck, brandColor: "#10B981" },
-      { name: "Database Design", Icon: Database, brandColor: "#6366F1" },
+      { name: "Redis", Icon: SiRedis, brandColor: "#DC382D" },
+      { name: "REST APIs", Icon: Server, brandColor: "#6366F1" },
+      { name: "Dapper ORM", Icon: Database, brandColor: "#E0234E" },
+      { name: "JWT Auth", Icon: ShieldCheck, brandColor: "#00B4D8" },
+      { name: "SQL Stored Procs", Icon: Terminal, brandColor: "#F59E0B" },
     ],
   },
   {
-    title: "DevOps & Cloud",
-    icon: Cloud,
-    description: "Containerization, web server hosting, and performance validation.",
+    category: "DevOps, Cloud & Testing",
     skills: [
       { name: "Docker", Icon: SiDocker, brandColor: "#2496ED" },
-      { name: "Azure", Icon: Cloud, brandColor: "#0089D6" },
-      { name: "IIS", Icon: Server, brandColor: "#0089D6" },
-      { name: "Git/GitHub", Icon: SiGithub, brandColor: "#181717" },
-      { name: "CI/CD concepts", Icon: Cloud, brandColor: "#6366F1" },
-      { name: "Load/Performance Testing", Icon: Terminal, brandColor: "#8B5CF6" },
-      { name: "k6", Icon: SiK6, brandColor: "#7D64FF" },
-    ],
-  },
-  {
-    title: "Other & Architecture",
-    icon: Cpu,
-    description: "Cross-platform mobile, caching, and modern architectural concepts.",
-    skills: [
-      { name: "Flutter", Icon: SiFlutter, brandColor: "#02569B" },
-      { name: "Node.js", Icon: SiNodedotjs, brandColor: "#5FA04E" },
-      { name: "Next.js", Icon: SiNextdotjs, brandColor: "#000000" },
-      { name: "Redis", Icon: SiRedis, brandColor: "#DC382D" },
-      { name: "Microservices concepts", Icon: Server, brandColor: "#6366F1" },
+      { name: "Azure Cloud", Icon: Cloud, brandColor: "#0089D6" },
+      { name: "GitHub", Icon: SiGithub, brandColor: "#181717" },
+      { name: "IIS Web Server", Icon: Server, brandColor: "#0089D6" },
+      { name: "k6 Performance", Icon: SiK6, brandColor: "#7D64FF" },
       { name: "System Design", Icon: Cpu, brandColor: "#8B5CF6" },
     ],
   },
@@ -115,63 +85,38 @@ const SKILL_GROUPS: SkillCategory[] = [
 
 export function SkillsOverview() {
   return (
-    <section className="py-24 md:py-32 relative bg-[color:var(--color-surface-sunken)]/50" id="skills">
+    <section className="py-8 md:py-12 relative" id="skills">
       <Container>
         <RevealOnScroll>
           <SectionHeading
-            number="03"
-            eyebrow="Capabilities"
-            heading="Technical Arsenal"
-            description="Verified technical skills across full stack development, enterprise banking domain, databases, and DevOps."
+            eyebrow="Technical Skills"
+            heading="Skills & Expertise"
+            description="Core technologies and frameworks I work with daily across full stack development, databases, and infrastructure."
             id="skills"
           />
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {SKILL_GROUPS.map((group, groupIndex) => (
-            <RevealOnScroll key={group.title} delay={0.05 + groupIndex * 0.08}>
-              <div className="relative h-full flex flex-col justify-between p-7 rounded-3xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]/40 backdrop-blur-xl transition-all duration-500 hover:border-[color:var(--color-border-strong)] hover:shadow-2xl group overflow-hidden">
-                {/* Top Accent Line */}
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[color:var(--color-accent-default)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="space-y-8 mt-6">
+          {SKILL_GROUPS.map((group, groupIdx) => (
+            <RevealOnScroll key={group.category} delay={groupIdx * 0.1}>
+              <div className="space-y-3">
+                <h3 className="text-xs font-mono font-bold tracking-widest text-[color:var(--color-text-tertiary)] uppercase flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--color-text-primary)]" />
+                  {group.category}
+                </h3>
 
-                <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-[color:var(--color-surface-sunken)] border border-[color:var(--color-border-subtle)] rounded-2xl text-[color:var(--color-accent-default)] shadow-sm group-hover:scale-110 transition-transform duration-300">
-                      <group.icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-[color:var(--color-text-primary)]">
-                        {group.title}
-                      </h3>
-                    </div>
-                  </div>
-
-                  <p className="text-xs text-[color:var(--color-text-tertiary)] mb-6 leading-relaxed">
-                    {group.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2.5">
-                    {group.skills.map((skill, i) => (
-                      <motion.div
-                        key={skill.name}
-                        custom={i}
-                        variants={fadeUpVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        whileHover={{ y: -3, scale: 1.02 }}
-                        className="group/pill flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)]/60 backdrop-blur-sm shadow-sm transition-all duration-300 hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-raised)]"
-                      >
-                        <skill.Icon
-                          className="w-4 h-4 group-hover/pill:scale-110 transition-transform duration-200"
-                          style={{ color: skill.brandColor }}
-                        />
-                        <span className="text-xs font-mono font-medium text-[color:var(--color-text-secondary)] group-hover/pill:text-[color:var(--color-text-primary)] transition-colors">
-                          {skill.name}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <motion.div
+                      key={skill.name}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] text-xs sm:text-sm font-medium text-[color:var(--color-text-primary)] transition-all duration-200 hover:border-[color:var(--color-border-strong)] hover:shadow-xs"
+                    >
+                      <skill.Icon className="h-4 w-4 shrink-0" style={{ color: skill.brandColor }} />
+                      <span>{skill.name}</span>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </RevealOnScroll>

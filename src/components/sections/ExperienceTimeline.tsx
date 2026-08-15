@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { fadeUpVariants, staggerContainerVariants } from "@/lib/animation-variants";
 import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface ExperienceItem {
   company: string;
@@ -48,29 +50,31 @@ export function ExperienceTimeline({ items, className }: ExperienceTimelineProps
             </svg>
           </div>
           {/* Card */}
-          <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
-              <h3 className="font-space text-lg font-bold text-slate-900 dark:text-white">{item.role}</h3>
-              <time className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-full w-fit">
-                {item.duration}
-              </time>
-            </div>
-            <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400 mb-4">{item.company}</div>
-            <ul className="list-disc list-outside ml-4 space-y-2 mb-4 text-[14px] leading-relaxed text-slate-600 dark:text-slate-400 marker:text-emerald-500">
-              {item.responsibilities.map((resp, i) => (
-                <li key={i}>{resp}</li>
-              ))}
-            </ul>
-            {item.technologies && item.technologies.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
-                {item.technologies.map((tech, i) => (
-                  <span key={i} className="font-mono text-[11px] font-medium px-2 py-1 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded text-slate-600 dark:text-slate-400">
-                    {tech}
-                  </span>
-                ))}
+          <Card className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-0 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 overflow-hidden">
+            <CardContent className="p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
+                <h3 className="font-space text-lg font-bold text-slate-900 dark:text-white">{item.role}</h3>
+                <Badge variant="outline" className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400 px-3 py-1 bg-slate-100 dark:bg-white/5 border-none rounded-full w-fit">
+                  {item.duration}
+                </Badge>
               </div>
-            )}
-          </div>
+              <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400 mb-4">{item.company}</div>
+              <ul className="list-disc list-outside ml-4 space-y-2 mb-4 text-[14px] leading-relaxed text-slate-600 dark:text-slate-400 marker:text-emerald-500">
+                {item.responsibilities.map((resp, i) => (
+                  <li key={i}>{resp}</li>
+                ))}
+              </ul>
+              {item.technologies && item.technologies.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
+                  {item.technologies.map((tech, i) => (
+                    <Badge key={i} variant="outline" className="font-mono text-[11px] font-medium px-2 py-1 bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10 rounded text-slate-600 dark:text-slate-400">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </motion.div>
       ))}
     </motion.div>

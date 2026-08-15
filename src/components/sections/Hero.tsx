@@ -7,15 +7,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Github, Linkedin } from "@/components/common/Icons";
 import { Container } from "@/components/common/Container";
-import { SITE_CONFIG, RESUME_FILENAME } from "@/lib/constants";
+import { SITE_CONFIG, RESUME_FILENAME, SOCIAL_LINKS } from "@/lib/constants";
 import { BackgroundBeams } from "@/components/ui/background-beams";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { VelocityScroll } from "@/components/ui/velocity-scroll";
 
-// ============================================================================
-// EASING & PROPS
 // ============================================================================
 
 const EASE_REVEAL: [number, number, number, number] = [0.16, 1, 0.3, 1];
-const HERO_PHOTO_SRC = ""; // Set to absolute image path e.g. "/images/prathmesh.jpg"
+const HERO_PHOTO_SRC = "/me.png";
 
 interface HeroProps {
   imageSrc?: string;
@@ -27,24 +29,20 @@ interface HeroProps {
 
 function ProfilePhoto({ imageSrc = HERO_PHOTO_SRC }: { imageSrc?: string }) {
   return (
-    <div className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-full p-[2px] overflow-hidden group shadow-2xl transition-all duration-500 hover:shadow-[0_0_40px_rgba(var(--color-accent-rgb,99,102,241),0.25)]">
-      {/* Subtle animated gradient ring */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[color:var(--color-gradient-start)] via-[color:var(--color-accent-default)] to-[color:var(--color-gradient-end)] animate-[spin_6s_linear_infinite] opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-      
+    <div className="relative h-32 w-32 sm:h-36 sm:w-36 rounded-full p-1 overflow-hidden group shadow-xl transition-all duration-300 border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]">
       {/* Inner container */}
-      <div className="relative h-full w-full rounded-full overflow-hidden border-2 border-[color:var(--color-background)] bg-[color:var(--color-surface-sunken)] transition-transform duration-500 group-hover:scale-95">
+      <div className="relative h-full w-full rounded-full overflow-hidden border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)]">
         {imageSrc ? (
           <Image
             src={imageSrc}
-            alt="Prathmesh Kanekar — Full Stack Developer"
+            alt="Prathmesh Kanekar"
             fill
             priority
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mN88P/BfwAJhAPk6G0tawAAAABJRU5ErkJggg=="
-            className="object-cover object-top"
+            unoptimized
+            className="object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-[color:var(--color-surface-sunken)] font-mono text-2xl font-bold tracking-tighter text-[color:var(--color-text-primary)]">
+          <div className="flex h-full w-full items-center justify-center font-mono text-2xl font-bold text-[color:var(--color-text-primary)]">
             PK
           </div>
         )}
@@ -83,7 +81,7 @@ export function Hero({ imageSrc }: HeroProps) {
 
   return (
     <section
-      className="relative flex flex-col justify-center min-h-[calc(100vh-80px)] pt-20 pb-32 overflow-hidden"
+      className="relative flex flex-col justify-center py-16 md:py-24 overflow-hidden"
       aria-labelledby="hero-heading"
     >
       {/* Ambient Background Glow */}
@@ -94,104 +92,99 @@ export function Hero({ imageSrc }: HeroProps) {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="mx-auto flex max-w-3xl flex-col items-center text-center relative z-10"
+          className="mx-auto max-w-3xl relative z-10"
         >
-          {/* 1. PHOTO */}
-          <motion.div variants={itemVariants} className="mb-8 relative">
-            <ProfilePhoto imageSrc={imageSrc} />
-          </motion.div>
+          {/* Top Flex Row: Text + Avatar */}
+          <div className="flex flex-col-reverse sm:flex-row items-center sm:items-start justify-between gap-6 text-center sm:text-left">
+            <div className="flex-1 space-y-4">
+              <motion.div variants={itemVariants}>
+                <Badge variant="outline" className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] shadow-xs">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[color:var(--color-status-success)] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[color:var(--color-status-success)]"></span>
+                  </span>
+                  <span className="font-mono text-xs font-semibold tracking-wider text-[color:var(--color-text-secondary)]">
+                    Available for projects & roles
+                  </span>
+                </Badge>
+              </motion.div>
 
-          {/* 2. NAME */}
-          <motion.h1
-            id="hero-heading"
-            variants={itemVariants}
-            className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-[color:var(--color-text-primary)]"
-          >
-            Prathmesh <span className="bg-gradient-to-br from-[color:var(--color-text-primary)] via-[color:var(--color-text-primary)] to-[color:var(--color-text-tertiary)] bg-clip-text text-transparent">Kanekar</span>
-          </motion.h1>
+              <motion.h1
+                id="hero-heading"
+                variants={itemVariants}
+                className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[color:var(--color-text-primary)] leading-[1.1]"
+              >
+                Hi, I&apos;m Prathmesh{" "}
+                <span className="inline-block animate-bounce-short">👋</span>
+              </motion.h1>
 
-          {/* 3. ROLE */}
-          <motion.div variants={itemVariants} className="mt-6">
-            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]/60 backdrop-blur-md shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[color:var(--color-accent-default)] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[color:var(--color-accent-default)]"></span>
-              </span>
-              <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider text-[color:var(--color-text-secondary)]">
-                Full Stack Developer, focused on enterprise banking software
-              </span>
+              <motion.p
+                variants={itemVariants}
+                className="text-base sm:text-lg text-[color:var(--color-text-secondary)] leading-relaxed max-w-xl"
+              >
+                Full Stack Developer specializing in <span className="text-[color:var(--color-text-primary)] font-semibold">enterprise core banking systems</span>, scalable web apps, and modern design systems.
+              </motion.p>
             </div>
-          </motion.div>
 
-          {/* 4. DESCRIPTION */}
-          <motion.p
-            variants={itemVariants}
-            className="mt-8 max-w-xl text-base sm:text-lg leading-relaxed text-[color:var(--color-text-secondary)] text-balance"
-          >
-            Building secure, scalable modules for <span className="text-[color:var(--color-text-primary)] font-semibold">enterprise core banking systems</span> — from database architecture to high-performance UI.
-          </motion.p>
+            <motion.div variants={itemVariants} className="shrink-0">
+              <ProfilePhoto imageSrc={imageSrc} />
+            </motion.div>
+          </div>
 
-          {/* 5. CONTACTS */}
+          {/* CTA Buttons & Social Icons */}
           <motion.div
             variants={itemVariants}
-            className="mt-8 flex items-center justify-center gap-4"
+            className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center sm:justify-start gap-4"
           >
-            <a
-              href="https://github.com/prathmeshkanekar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]/40 text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-hover)] transition-all duration-300 shadow-sm"
-              aria-label="GitHub Profile"
-            >
-              <Github className="h-5 w-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/prathmesh-kanekar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]/40 text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-hover)] transition-all duration-300 shadow-sm"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a
-              href={`mailto:${SITE_CONFIG.email}`}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]/40 text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-hover)] transition-all duration-300 shadow-sm"
-              aria-label="Email Contact"
-            >
-              <Mail className="h-5 w-5" />
-            </a>
-          </motion.div>
-
-          {/* 6. CTA BUTTONS */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-10 flex flex-wrap items-center justify-center gap-6"
-          >
-            <Link
-              href="/projects"
-              className="group inline-flex items-center justify-center gap-2 text-sm font-semibold text-[color:var(--color-text-primary)] hover:text-[color:var(--color-text-primary)] transition-all duration-300 relative"
-            >
-              <span className="relative z-10 flex items-center gap-2 px-3 py-1.5">
+            <Link href="/projects">
+              <Button
+                size="lg"
+                className="h-11 px-6 font-semibold text-sm gap-2 rounded-xl bg-[color:var(--color-text-primary)] text-[color:var(--color-text-inverse)] hover:bg-[color:var(--color-text-primary)]/90 shadow-sm transition-all"
+              >
                 View My Work
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 text-[color:var(--color-accent-default)]" />
-              </span>
-              <span className="absolute inset-0 bg-[color:var(--color-surface-hover)] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-95 group-hover:scale-100 -z-0 border border-[color:var(--color-border-subtle)]" />
+                <ArrowRight className="h-4 w-4" />
+              </Button>
             </Link>
 
-            <span className="text-[color:var(--color-border-subtle)] text-sm font-mono">•</span>
-
-            <a
-              href={`/resume/${RESUME_FILENAME}`}
-              download
-              className="group inline-flex items-center justify-center gap-2 text-sm font-semibold text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] transition-all duration-300 relative"
-            >
-              <span className="relative z-10 flex items-center gap-2 px-3 py-1.5">
-                <Download className="h-4 w-4 text-[color:var(--color-text-tertiary)] group-hover:text-[color:var(--color-text-primary)] transition-colors" />
-                Resume
-              </span>
-              <span className="absolute inset-0 bg-[color:var(--color-surface-hover)] rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-95 group-hover:scale-100 -z-0 border border-[color:var(--color-border-subtle)]" />
+            <a href={`/resume/${RESUME_FILENAME}`} download>
+              <Button variant="outline" size="lg" className="h-11 px-6 font-semibold text-sm gap-2 rounded-xl border-[color:var(--color-border-default)] text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)]">
+                <Download className="h-4 w-4" />
+                Download Resume
+              </Button>
             </a>
+
+            <div className="flex items-center gap-1.5 pl-2 border-l border-[color:var(--color-border-subtle)]">
+              {/* GitHub Button */}
+              <a
+                href={SOCIAL_LINKS[0].href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub Profile"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] text-[color:var(--color-text-secondary)] transition-all duration-150 hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-hover)] hover:text-[color:var(--color-text-primary)] active:scale-95"
+              >
+                <Github className="h-4.5 w-4.5" />
+              </a>
+
+              {/* LinkedIn Button */}
+              <a
+                href={SOCIAL_LINKS[1].href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn Profile"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] text-[color:var(--color-text-secondary)] transition-all duration-150 hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-hover)] hover:text-[color:var(--color-text-primary)] active:scale-95"
+              >
+                <Linkedin className="h-4.5 w-4.5" />
+              </a>
+
+              {/* Email Button */}
+              <a
+                href={`mailto:${SITE_CONFIG.email}`}
+                aria-label="Send Email"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] text-[color:var(--color-text-secondary)] transition-all duration-150 hover:border-[color:var(--color-border-strong)] hover:bg-[color:var(--color-surface-hover)] hover:text-[color:var(--color-text-primary)] active:scale-95"
+              >
+                <Mail className="h-4.5 w-4.5" />
+              </a>
+            </div>
           </motion.div>
         </motion.div>
       </Container>

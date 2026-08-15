@@ -8,12 +8,12 @@ const EASE_EXIT: [number, number, number, number] = [0.7, 0, 0.84, 0];
 
 /** Fade up reveal — the default for all section content */
 export const fadeUpVariants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.4,
       ease: EASE_REVEAL,
     },
   },

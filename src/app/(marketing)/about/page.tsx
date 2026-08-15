@@ -21,7 +21,6 @@ export default function AboutPage() {
       <section className="py-24 md:py-32" aria-labelledby="about-heading">
         <Container>
           <SectionHeading
-            number="01"
             eyebrow="About Me"
             heading="The Story So Far"
             id="about-heading"
@@ -47,7 +46,6 @@ export default function AboutPage() {
       >
         <Container>
           <SectionHeading
-            number="02"
             eyebrow="Career Timeline"
             heading="Experience"
             id="experience-heading"
@@ -64,7 +62,6 @@ export default function AboutPage() {
       <section className="py-24 md:py-32" aria-labelledby="education-heading">
         <Container>
           <SectionHeading
-            number="03"
             eyebrow="Education"
             heading="Academic Background"
             id="education-heading"
