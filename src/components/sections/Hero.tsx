@@ -29,17 +29,15 @@ interface HeroProps {
 
 function ProfilePhoto({ imageSrc = HERO_PHOTO_SRC }: { imageSrc?: string }) {
   return (
-    <div className="relative h-32 w-32 sm:h-36 sm:w-36 rounded-full p-1 overflow-hidden group shadow-xl transition-all duration-300 border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)]">
+    <div className="relative h-40 w-40 sm:h-52 sm:w-52 rounded-full p-1 overflow-hidden shadow-xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] flex-shrink-0">
       {/* Inner container */}
       <div className="relative h-full w-full rounded-full overflow-hidden border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)]">
         {imageSrc ? (
-          <Image
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
             src={imageSrc}
             alt="Prathmesh Kanekar"
-            fill
-            priority
-            unoptimized
-            className="object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover object-[50%_0%] scale-115 origin-top"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center font-mono text-2xl font-bold text-[color:var(--color-text-primary)]">
