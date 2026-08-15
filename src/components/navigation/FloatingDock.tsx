@@ -89,14 +89,16 @@ function DockIcon({ item, isActive }: { item: DockItemType; isActive: boolean })
   );
 }
 
+const emptySubscribe = () => () => {};
+
 function DockThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
   const [hovered, setHovered] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <div className="relative group flex items-center justify-center">

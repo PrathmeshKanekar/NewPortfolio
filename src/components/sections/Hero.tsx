@@ -33,10 +33,13 @@ function ProfilePhoto({ imageSrc = HERO_PHOTO_SRC }: { imageSrc?: string }) {
       {/* Inner container */}
       <div className="relative h-full w-full rounded-full overflow-hidden border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)]">
         {imageSrc ? (
-          <img
+          <Image
             src={imageSrc}
             alt="Prathmesh Kanekar"
-            className="h-full w-full object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
+            fill
+            priority
+            unoptimized
+            className="object-cover object-[center_15%] transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center font-mono text-2xl font-bold text-[color:var(--color-text-primary)]">
