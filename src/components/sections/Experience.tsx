@@ -10,22 +10,26 @@ import { resumeData } from "@/content/resume/resume-data";
 export function Experience() {
   return (
     <section
-      className="py-24 md:py-32 bg-[color:var(--color-surface-sunken)] border-y border-[color:var(--color-border-subtle)]"
+      className="py-8 md:py-12"
       aria-labelledby="experience-heading"
     >
       <Container>
         <RevealOnScroll>
           <SectionHeading
-            number="05"
-            eyebrow="Career Timeline"
-            heading="Experience"
+            eyebrow="Career History"
+            heading="Work Experience"
+            description="My professional journey in software engineering and enterprise core banking development."
             id="experience-heading"
           />
         </RevealOnScroll>
         <RevealOnScroll delay={0.1}>
           <div className="w-full">
-            {resumeData.experience.map((exp) => (
-              <ExperienceCard key={exp.company} experience={exp} />
+            {resumeData.experience.map((exp, index) => (
+              <ExperienceCard
+                key={exp.company}
+                experience={exp}
+                isLast={index === resumeData.experience.length - 1}
+              />
             ))}
           </div>
         </RevealOnScroll>

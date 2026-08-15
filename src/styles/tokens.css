@@ -15,26 +15,38 @@
      ═══════════════════════════════════════════════════ */
   :root {
     /* — Surfaces — */
-    --color-surface-base: #FAFAF9; /* Stone 50 */
+    --color-surface-base: #FAFAF9;
+    /* Stone 50 */
     --color-surface-raised: #FFFFFF;
     --color-surface-overlay: rgba(255, 255, 255, 0.85);
-    --color-surface-sunken: #F5F5F4; /* Stone 100 */
-    --color-surface-hover: #E7E5E4; /* Stone 200 */
-    --color-surface-pressed: #D6D3D1; /* Stone 300 */
+    --color-surface-sunken: #F5F5F4;
+    /* Stone 100 */
+    --color-surface-hover: #E7E5E4;
+    /* Stone 200 */
+    --color-surface-pressed: #D6D3D1;
+    /* Stone 300 */
 
     /* — Text — */
-    --color-text-primary: #1C1917; /* Stone 900 */
-    --color-text-secondary: #57534E; /* Stone 600 */
-    --color-text-tertiary: #A8A29E; /* Stone 400 */
-    --color-text-disabled: #D6D3D1; /* Stone 300 */
+    --color-text-primary: #1C1917;
+    /* Stone 900 */
+    --color-text-secondary: #57534E;
+    /* Stone 600 */
+    --color-text-tertiary: #A8A29E;
+    /* Stone 400 */
+    --color-text-disabled: #D6D3D1;
+    /* Stone 300 */
     --color-text-inverse: #FAFAF9;
     --color-text-on-accent: #FFFFFF;
 
     /* — Borders — */
-    --color-border-subtle: #E7E5E4; /* Stone 200 */
-    --color-border-default: #D6D3D1; /* Stone 300 */
-    --color-border-strong: #A8A29E; /* Stone 400 */
-    --color-border-focus: #0F766E; /* Teal 600 */
+    --color-border-subtle: #E7E5E4;
+    /* Stone 200 */
+    --color-border-default: #D6D3D1;
+    /* Stone 300 */
+    --color-border-strong: #A8A29E;
+    /* Stone 400 */
+    --color-border-focus: #0F766E;
+    /* Teal 600 */
 
     /* — Accent (Teal-600 for light) — */
     --color-accent-default: #0F766E;
@@ -119,26 +131,38 @@
      ═══════════════════════════════════════════════════ */
   .dark {
     /* — Surfaces (elevation via lightness steps: +3%, +6%, +9%) — */
-    --color-surface-base: #0C0A09; /* Stone 950 */
-    --color-surface-raised: #1C1917; /* Stone 900 */
+    --color-surface-base: #0C0A09;
+    /* Stone 950 */
+    --color-surface-raised: #1C1917;
+    /* Stone 900 */
     --color-surface-overlay: rgba(28, 25, 23, 0.85);
     --color-surface-sunken: #000000;
-    --color-surface-hover: #292524; /* Stone 800 */
-    --color-surface-pressed: #44403C; /* Stone 700 */
+    --color-surface-hover: #292524;
+    /* Stone 800 */
+    --color-surface-pressed: #44403C;
+    /* Stone 700 */
 
     /* — Text — */
-    --color-text-primary: #FAFAF9; /* Stone 50 */
-    --color-text-secondary: #A8A29E; /* Stone 400 */
-    --color-text-tertiary: #78716C; /* Stone 500 */
-    --color-text-disabled: #57534E; /* Stone 600 */
+    --color-text-primary: #FAFAF9;
+    /* Stone 50 */
+    --color-text-secondary: #A8A29E;
+    /* Stone 400 */
+    --color-text-tertiary: #78716C;
+    /* Stone 500 */
+    --color-text-disabled: #57534E;
+    /* Stone 600 */
     --color-text-inverse: #1C1917;
     --color-text-on-accent: #FFFFFF;
 
     /* — Borders — */
-    --color-border-subtle: #292524; /* Stone 800 */
-    --color-border-default: #44403C; /* Stone 700 */
-    --color-border-strong: #78716C; /* Stone 500 */
-    --color-border-focus: #2DD4BF; /* Teal 400 */
+    --color-border-subtle: #292524;
+    /* Stone 800 */
+    --color-border-default: #44403C;
+    /* Stone 700 */
+    --color-border-strong: #78716C;
+    /* Stone 500 */
+    --color-border-focus: #2DD4BF;
+    /* Teal 400 */
 
     /* — Accent (Teal-400 for dark) — */
     --color-accent-default: #2DD4BF;

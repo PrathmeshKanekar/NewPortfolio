@@ -37,6 +37,13 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -45,41 +52,6 @@
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
     background-color: var(--color-background);
-  }
-
-  /* GPU-Accelerated View Transitions for 100% Lag-Free Theme Switch */
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
-  
-  ::view-transition-old(root) {
-    z-index: 1;
-  }
-  
-  ::view-transition-new(root) {
-    z-index: 9999;
-  }
-
-  .dark::view-transition-old(root) {
-    z-index: 9999;
-  }
-  
-  .dark::view-transition-new(root) {
-    z-index: 1;
-  }
-
-  /* Clean, Ultra-Performant Dot Matrix Background */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image: radial-gradient(var(--color-border-strong) 1px, transparent 1px);
-    background-size: 24px 24px;
-    opacity: 0.18;
   }
 
 
@@ -154,6 +126,12 @@
 }
 
 @layer utilities {
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
   .animate-gradient-text {
     background-size: 200% auto;
     animation: textGradientShift 8s linear infinite;

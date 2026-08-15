@@ -1,10 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import {
-  fadeUpVariants,
-  reducedMotionVariants,
-} from "@/lib/animation-variants";
+import React from "react";
 import { cn } from "@/lib/utils";
 
 interface RevealOnScrollProps {
@@ -13,25 +9,10 @@ interface RevealOnScrollProps {
   delay?: number;
 }
 
-/** Wraps children in a scroll-triggered fade-up reveal (Section 11/27) */
+/** Pure zero-lag instant container for maximum 60fps scroll performance */
 export function RevealOnScroll({
   children,
   className,
-  delay = 0,
 }: RevealOnScrollProps) {
-  const shouldReduce = useReducedMotion();
-  const variants = shouldReduce ? reducedMotionVariants : fadeUpVariants;
-
-  return (
-    <motion.div
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ delay }}
-      className={cn(className)}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={cn(className)}>{children}</div>;
 }

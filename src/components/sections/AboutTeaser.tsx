@@ -38,7 +38,6 @@ export function AboutTeaser() {
       <Container>
         <RevealOnScroll>
           <SectionHeading
-            number="02"
             eyebrow="Engineering Focus"
             heading="What I Build"
             id="about-teaser"

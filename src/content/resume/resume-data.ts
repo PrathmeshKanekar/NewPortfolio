@@ -12,16 +12,13 @@ export const resumeData = {
     {
       company: "Three Star Infotech Pvt. Ltd.",
       role: "Full Stack Developer",
-      startDate: "MM/YYYY", // Placeholder: User will confirm exact start date (e.g. 02/2024)
+      startDate: "11/2024",
       endDate: "Present",
       highlights: [
-        "Engineered core banking software modules handling account management workflows, customer onboarding, and joint holder protocols.",
-        "Built component-driven Angular client applications integrated with ASP.NET Core RESTful APIs and C# backend business logic.",
-        "Designed normalized Microsoft SQL Server schemas, stored procedures, and high-performance data access routines.",
-        "Implemented secure API authentication and maker-checker validation workflows utilizing JWT protocols.",
-        "Managed web server application deployments on IIS, Docker containerization, and API load and performance testing."
+        "Architecting enterprise core banking software modules, joint holder protocols, and secure maker-checker workflows.",
+        "Developing component-driven Angular 17 frontends integrated with ASP.NET Core Web APIs and SQL Server databases."
       ],
-      stack: ["Angular", "ASP.NET Core", "C#", "SQL Server", "JWT", "Docker", "IIS"]
+      stack: ["Angular 17", "ASP.NET Core", "C#", "SQL Server", "JWT", "Docker"]
     },
     {
       company: "SaniSoft Infotech Pvt. Ltd.",
@@ -29,24 +26,21 @@ export const resumeData = {
       startDate: "08/2023",
       endDate: "01/2024",
       highlights: [
-        "Architected enterprise software modules including customer management and financial authorization workflows.",
-        "Built reactive Angular V15+ interfaces with Angular Material data tables, forms, and custom modal dialogs.",
-        "Engineered ASP.NET Core RESTful Web APIs with Dapper and Entity Framework for high-throughput database reads.",
-        "Wrote normalized SQL Server schemas, stored procedures, and authorization checker workflows."
+        "Built enterprise customer management systems with reactive Angular interfaces and Angular Material components.",
+        "Engineered high-throughput ASP.NET Core Web APIs using Dapper ORM and optimized SQL Server procedures."
       ],
-      stack: ["Angular", "ASP.NET Core", "C#", "SQL Server", "Dapper", "TypeScript"]
+      stack: ["Angular", "ASP.NET Core", "C#", "SQL Server", "Dapper"]
     },
     {
       company: "iGAP Technologies Pvt. Ltd.",
-      role: "Trainee Developer / Intern",
+      role: "Trainee Developer",
       startDate: "01/2023",
       endDate: "07/2023",
       highlights: [
-        "Mastered full stack fundamentals across HTML5, CSS3, Bootstrap, JavaScript, and TypeScript.",
-        "Built single-page application (SPA) frontends in Angular integrated with backend REST services.",
-        "Developed C# .NET Core Web API endpoints connecting to MySQL and MS SQL databases."
+        "Developed single-page application (SPA) frontends in Angular connected to .NET Core Web API services.",
+        "Created RESTful endpoints and managed database interactions across MS SQL and MySQL environments."
       ],
-      stack: ["Angular", "TypeScript", "C#", ".NET Core", "MySQL", "MS SQL", "Bootstrap"]
+      stack: ["Angular", "TypeScript", "C#", ".NET Core", "MS SQL"]
     }
   ] as Experience[],
 

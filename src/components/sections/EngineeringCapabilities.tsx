@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/common/Container";
 import { SectionHeading } from "@/components/common/SectionHeading";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
-import { staggerContainerVariants, fadeUpVariants } from "@/lib/animation-variants";
+import { staggerContainerVariants } from "@/lib/animation-variants";
+import { BentoGrid, BentoCard } from "@/components/ui/bento-grid";
 import { Code2, Server, Database, ShieldCheck, Cloud, Cpu } from "lucide-react";
 
 const CAPABILITIES = [
@@ -55,13 +56,13 @@ const CAPABILITIES = [
 /** Large capability cards section */
 export function EngineeringCapabilities() {
   return (
-    <section className="py-24 md:py-32" aria-labelledby="capabilities-heading">
+    <section className="py-8 md:py-12" aria-labelledby="capabilities-heading">
       <Container>
         <RevealOnScroll>
           <SectionHeading
-            number="06"
-            eyebrow="Architecture"
-            heading="Engineering Capabilities"
+            eyebrow="Core Capabilities"
+            heading="Specializations"
+            description="Key technical domains and architecture patterns I specialize in."
             id="capabilities-heading"
           />
         </RevealOnScroll>
@@ -71,31 +72,21 @@ export function EngineeringCapabilities() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="mt-8"
         >
-          {CAPABILITIES.map((cap) => (
-            <motion.div
-              key={cap.title}
-              variants={fadeUpVariants}
-              className="group flex flex-col rounded-2xl border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[color:var(--color-border-strong)]"
-            >
-              <div
-                className="flex h-12 w-12 items-center justify-center rounded-xl bg-[color:var(--color-surface-sunken)] mb-6 transition-transform group-hover:scale-105"
-                style={{ color: cap.accentColor }}
-              >
-                <cap.icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-lg font-bold text-[color:var(--color-text-primary)] mb-1.5">
-                {cap.title}
-              </h3>
-              <span className="font-mono text-xs font-semibold bg-gradient-to-r from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] bg-clip-text text-transparent mb-4 block">
-                {cap.tech}
-              </span>
-              <p className="text-sm text-[color:var(--color-text-secondary)] leading-relaxed mt-auto">
-                {cap.desc}
-              </p>
-            </motion.div>
-          ))}
+          <BentoGrid className="auto-rows-[16rem] md:grid-cols-3">
+            {CAPABILITIES.map((cap, index) => (
+              <BentoCard
+                key={cap.title}
+                name={cap.title}
+                description={cap.desc}
+                Icon={cap.icon}
+                featured={index === 0 || index === 3}
+                cta={cap.tech}
+                href="#skills"
+              />
+            ))}
+          </BentoGrid>
         </motion.div>
       </Container>
     </section>

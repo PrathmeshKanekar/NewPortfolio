@@ -73,7 +73,6 @@ export function AboutMe() {
       <Container>
         <RevealOnScroll>
           <SectionHeading
-            number="08"
             eyebrow="Personal"
             heading="About & Engineering Mindset"
             description="How I architect systems, solve enterprise data challenges, and build reliable software."

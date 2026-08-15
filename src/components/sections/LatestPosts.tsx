@@ -28,7 +28,6 @@ export function LatestPosts({ posts }: LatestPostsProps) {
       <Container>
         <RevealOnScroll>
           <SectionHeading
-            number="04"
             eyebrow="From the Blog"
             heading="Latest Writing"
             description="Thoughts on architecture, engineering, and building systems that last."

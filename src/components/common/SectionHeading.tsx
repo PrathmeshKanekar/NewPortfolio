@@ -10,10 +10,9 @@ interface SectionHeadingProps {
   className?: string;
   id?: string;
   align?: "left" | "center";
-  number?: string;
 }
 
-/** Consistent section heading with eyebrow + heading + optional description */
+/** Human-crafted, authentic section heading component */
 export function SectionHeading({
   eyebrow,
   heading,
@@ -21,78 +20,64 @@ export function SectionHeading({
   className,
   id,
   align = "left",
-  number,
 }: SectionHeadingProps) {
   const headingId = id ?? heading.toLowerCase().replace(/\s+/g, "-");
   const shouldReduce = useReducedMotion();
 
-  // Split heading into words for staggering
-  const words = heading.split(" ");
-  const wordVariants = {
-    hidden: { opacity: 0, y: shouldReduce ? 0 : 8 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.08,
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1] as const,
-      },
-    }),
-  };
-
   return (
     <div
       className={cn(
-        "mb-12 md:mb-16",
-        align === "center" && "flex flex-col items-center text-center",
+        "mb-10 md:mb-14",
+        align === "center" && "flex flex-col items-center text-center mx-auto max-w-3xl",
         className
       )}
     >
+      {/* 1. Eyebrow */}
       {eyebrow && (
-        <div className={cn("mb-4 flex items-center gap-3", align === "center" && "justify-center")}>
-          {number && (
-            <span className="font-mono text-[13px] font-bold tracking-widest bg-gradient-to-br from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] bg-clip-text text-transparent">
-              {number}
-            </span>
+        <motion.p
+          initial={{ opacity: 0, y: shouldReduce ? 0 : 4 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3 }}
+          className={cn(
+            "mb-2.5 font-mono text-xs font-semibold tracking-widest text-[color:var(--color-accent-default)] uppercase",
+            align === "center" && "text-center"
           )}
-          {number && <span className="h-px w-6 bg-gradient-to-r from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] opacity-60" />}
-          <p className="font-sans text-[12px] font-semibold tracking-[0.15em] text-[color:var(--color-text-tertiary)] uppercase">
-            {eyebrow}
-          </p>
-        </div>
+        >
+          {eyebrow}
+        </motion.p>
       )}
-      <div className={cn("flex flex-col gap-3", align === "center" && "items-center")}>
+
+      {/* 2. Main Title */}
+      <motion.div
+        initial={{ opacity: 0, y: shouldReduce ? 0 : 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.05 }}
+        className={cn("flex flex-col gap-2", align === "center" && "items-center")}
+      >
         <h2
           id={headingId}
-          className="font-display text-3xl md:text-4xl font-bold tracking-tight text-[color:var(--color-text-primary)] flex flex-wrap gap-x-[0.25em]"
+          className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-[color:var(--color-text-primary)] leading-tight"
         >
-          {words.map((word, i) => (
-            <motion.span
-              key={i}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={wordVariants}
-              className="inline-block"
-            >
-              {word}
-            </motion.span>
-          ))}
+          {heading}
         </h2>
-        <motion.div 
-          initial={{ scaleX: 0, opacity: 0 }}
-          whileInView={{ scaleX: 1, opacity: 0.8 }}
-          viewport={{ once: true }}
-          transition={{ delay: words.length * 0.08, duration: 0.6, ease: "easeOut" }}
-          className="h-[3px] w-12 rounded-full bg-gradient-to-r from-[color:var(--color-gradient-start)] to-[color:var(--color-gradient-end)] origin-left" 
-        />
-      </div>
+      </motion.div>
+
+      {/* 3. Description */}
       {description && (
-        <p className="mt-4 max-w-2xl text-lg text-[color:var(--color-text-secondary)] leading-relaxed">
+        <motion.p
+          initial={{ opacity: 0, y: shouldReduce ? 0 : 6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className={cn(
+            "mt-3 text-base sm:text-lg text-[color:var(--color-text-secondary)] leading-relaxed max-w-2xl",
+            align === "center" && "mx-auto"
+          )}
+        >
           {description}
-        </p>
+        </motion.p>
       )}
     </div>
   );

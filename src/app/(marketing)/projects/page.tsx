@@ -20,7 +20,6 @@ export default function ProjectsPage() {
     <section className="py-24 md:py-32" aria-labelledby="projects-heading">
       <Container>
         <SectionHeading
-          number="01"
           eyebrow="Portfolio"
           heading="All Projects"
           description="Enterprise systems I've designed, built, and shipped."
