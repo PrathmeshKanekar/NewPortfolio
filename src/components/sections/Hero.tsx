@@ -120,7 +120,7 @@ export function Hero({ imageSrc }: HeroProps) {
                 variants={itemVariants}
                 className="text-base sm:text-lg text-[color:var(--color-text-secondary)] leading-relaxed max-w-xl"
               >
-                Full Stack Developer specializing in <span className="text-[color:var(--color-text-primary)] font-semibold">enterprise core banking systems</span>, scalable web apps, and modern design systems.
+                Full Stack Developer specializing in scalable web apps, and modern design systems.
               </motion.p>
             </div>
 

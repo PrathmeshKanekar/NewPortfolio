@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { toggleThemeWithTransition } from "@/lib/theme-transition";
+import { Dock, DockItem, DockSeparator } from "@/components/ui/dock";
 import {
   Home,
   User,
@@ -20,15 +21,15 @@ import {
   Moon,
   Menu,
   X,
-  ExternalLink
+  ExternalLink,
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/common/Icons";
-import { SITE_CONFIG, RESUME_FILENAME } from "@/lib/constants";
+import { RESUME_FILENAME } from "@/lib/constants";
 
 type DockItemType = {
   label: string;
   href: string;
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
   external?: boolean;
 };
 
@@ -48,94 +49,19 @@ const UTILITY_NAV: DockItemType[] = [
   { label: "Resume", href: `/resume/${RESUME_FILENAME}`, icon: FileText, external: true },
 ];
 
-function DockIcon({ item, isActive }: { item: DockItemType; isActive: boolean }) {
-  const [hovered, setHovered] = useState(false);
-  const Icon = item.icon;
-
-  return (
-    <div className="relative group flex items-center justify-center">
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 2, scale: 0.95 }}
-            transition={{ duration: 0.15 }}
-            className="absolute -top-10 px-2 py-1 rounded-md bg-[color:var(--color-tooltip-bg)] text-[color:var(--color-tooltip-text)] text-[11px] font-medium whitespace-nowrap shadow-md pointer-events-none"
-          >
-            {item.label}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <a
-        href={item.href}
-        target={item.external ? "_blank" : "_self"}
-        rel={item.external ? "noopener noreferrer" : ""}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className={cn(
-          "relative flex items-center justify-center h-10 w-10 rounded-full transition-all duration-200 hover:scale-110 hover:-translate-y-0.5",
-          isActive ? "text-[color:var(--color-text-primary)]" : "text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)]",
-          !isActive && "hover:bg-[color:var(--color-surface-hover)]"
-        )}
-      >
-        {isActive && (
-          <div className="absolute inset-0 rounded-full bg-[color:var(--color-surface-sunken)] -z-10" />
-        )}
-        <Icon className="h-5 w-5" />
-      </a>
-    </div>
-  );
-}
-
 const emptySubscribe = () => () => {};
 
-function DockThemeToggle() {
+export function FloatingDock() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const { theme, setTheme } = useTheme();
   const mounted = React.useSyncExternalStore(
     emptySubscribe,
     () => true,
     () => false
   );
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <div className="relative group flex items-center justify-center">
-      <AnimatePresence>
-        {hovered && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 2, scale: 0.95 }}
-            transition={{ duration: 0.15 }}
-            className="absolute -top-10 px-2 py-1 rounded-md bg-[color:var(--color-tooltip-bg)] text-[color:var(--color-tooltip-text)] text-[11px] font-medium whitespace-nowrap shadow-md pointer-events-none"
-          >
-            {theme === "dark" ? "Light Mode" : "Dark Mode"}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <button
-        onClick={(e) => toggleThemeWithTransition(theme, setTheme, e)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className="relative flex items-center justify-center h-10 w-10 rounded-full text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-hover)] transition-all duration-200 hover:scale-110 hover:-translate-y-0.5"
-        aria-label="Toggle theme"
-      >
-        {mounted && theme === "dark" ? (
-          <Moon className="h-5 w-5" />
-        ) : (
-          <Sun className="h-5 w-5" />
-        )}
-      </button>
-    </div>
-  );
-}
-
-export function FloatingDock() {
-  const pathname = usePathname();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const checkIsActive = (href: string) => {
     const basePath = href.split("#")[0] || "/";
@@ -144,37 +70,84 @@ export function FloatingDock() {
     return basePath === "/" ? pathname === "/" : pathname.startsWith(basePath);
   };
 
+  const handleNavigate = (item: DockItemType, e: React.MouseEvent) => {
+    if (item.external) {
+      window.open(item.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    if (item.href.includes("#")) {
+      const [path, hash] = item.href.split("#");
+      if (pathname === (path || "/")) {
+        const el = document.getElementById(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+      }
+    }
+    router.push(item.href);
+  };
+
   return (
     <>
-      {/* DESKTOP DOCK */}
-      <div
-        className="fixed bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 z-[var(--z-sticky-header)] hidden md:flex items-center gap-1.5 p-1.5 rounded-full border border-[color:var(--color-border-default)] bg-[color:var(--color-surface-raised)] shadow-xl"
-      >
-        <div className="flex items-center gap-1">
-          {MAIN_NAV.map((item) => (
-            <DockIcon key={item.label} item={item} isActive={checkIsActive(item.href)} />
-          ))}
-        </div>
+      {/* DESKTOP SPATIAL 3D DOCK */}
+      <div className="fixed bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 z-[var(--z-sticky-header)] hidden md:flex items-center">
+        <Dock distance={160}>
+          {/* Main Navigation Items */}
+          {MAIN_NAV.map((item) => {
+            const Icon = item.icon;
+            const isActive = checkIsActive(item.href);
+            return (
+              <DockItem
+                key={item.label}
+                label={item.label}
+                active={isActive}
+                onClick={(e) => handleNavigate(item, e)}
+              >
+                <Icon className="h-5 w-5" />
+              </DockItem>
+            );
+          })}
 
-        <div className="w-px h-6 bg-[color:var(--color-border-default)] mx-1" />
+          <DockSeparator />
 
-        <div className="flex items-center gap-1">
-          {UTILITY_NAV.map((item) => (
-            <DockIcon key={item.label} item={item} isActive={false} />
-          ))}
-        </div>
+          {/* External Socials & Resume */}
+          {UTILITY_NAV.map((item) => {
+            const Icon = item.icon;
+            return (
+              <DockItem
+                key={item.label}
+                label={item.label}
+                onClick={(e) => handleNavigate(item, e)}
+              >
+                <Icon className="h-5 w-5" />
+              </DockItem>
+            );
+          })}
 
-        <div className="w-px h-6 bg-[color:var(--color-border-default)] mx-1" />
+          <DockSeparator />
 
-        <DockThemeToggle />
+          {/* Theme Toggle Item */}
+          <DockItem
+            label={mounted && theme === "dark" ? "Light Mode" : "Dark Mode"}
+            onClick={(e) => toggleThemeWithTransition(theme, setTheme, e)}
+          >
+            {mounted && theme === "dark" ? (
+              <Sun className="h-5 w-5 text-amber-400" />
+            ) : (
+              <Moon className="h-5 w-5 text-slate-700" />
+            )}
+          </DockItem>
+        </Dock>
       </div>
 
       {/* MOBILE COMPACT DOCK */}
-      <div 
+      <div
         className="fixed left-0 right-0 z-[var(--z-sticky-header)] md:hidden px-4 pointer-events-none"
         style={{ bottom: "max(1rem, env(safe-area-inset-bottom))" }}
       >
-        <div className="pointer-events-auto mx-auto max-w-sm rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] shadow-lg p-1.5 flex items-center justify-between">
+        <div className="pointer-events-auto mx-auto max-w-sm rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] shadow-lg p-1.5 flex items-center justify-between backdrop-blur-xl">
           {[MAIN_NAV[0], MAIN_NAV[3], MAIN_NAV[4]].map((item) => {
             const isActive = checkIsActive(item.href);
             const Icon = item.icon;
@@ -183,8 +156,8 @@ export function FloatingDock() {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  "relative flex flex-col items-center justify-center h-12 flex-1 rounded-full",
-                  isActive ? "text-[color:var(--color-text-primary)]" : "text-[color:var(--color-text-secondary)]"
+                  "relative flex flex-col items-center justify-center h-12 flex-1 rounded-full transition-colors",
+                  isActive ? "text-[color:var(--color-text-primary)] font-medium" : "text-[color:var(--color-text-secondary)]"
                 )}
               >
                 {isActive && (
@@ -216,7 +189,7 @@ export function FloatingDock() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[var(--z-overlay)] bg-black/40 md:hidden flex flex-col justify-end"
+            className="fixed inset-0 z-[var(--z-overlay)] bg-black/50 backdrop-blur-sm md:hidden flex flex-col justify-end"
           >
             <motion.div
               initial={{ y: "100%" }}
@@ -234,7 +207,7 @@ export function FloatingDock() {
                   <X className="h-4 w-4" />
                 </button>
               </div>
-              
+
               <div className="p-6 grid grid-cols-2 gap-4">
                 <div className="space-y-4">
                   <p className="text-[10px] font-mono uppercase text-[color:var(--color-text-tertiary)] tracking-wider">Navigation</p>
@@ -269,6 +242,25 @@ export function FloatingDock() {
                         <ExternalLink className="h-3 w-3 opacity-40 ml-auto" />
                       </a>
                     ))}
+
+                    <div className="pt-2">
+                      <button
+                        onClick={(e) => toggleThemeWithTransition(theme, setTheme, e)}
+                        className="text-sm font-medium text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] flex items-center gap-2"
+                      >
+                        {mounted && theme === "dark" ? (
+                          <>
+                            <Sun className="h-4 w-4 text-amber-400" />
+                            Light Mode
+                          </>
+                        ) : (
+                          <>
+                            <Moon className="h-4 w-4 text-slate-700" />
+                            Dark Mode
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -279,3 +271,4 @@ export function FloatingDock() {
     </>
   );
 }
+

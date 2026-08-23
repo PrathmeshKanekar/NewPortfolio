@@ -57,9 +57,9 @@ export const metadata: Metadata = {
     google: process.env.GOOGLE_SITE_VERIFICATION,
   },
   icons: {
-    icon: "/icon.png",
-    shortcut: "/favicon.png",
-    apple: "/icon.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
 };
