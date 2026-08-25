@@ -1,16 +1,10 @@
 "use client";
 
 /**
- * Spatial 3D Dock Component
- * Inspired by Jack UI (https://jack-ui-ten.vercel.app/docs/components/dock)
- * Features:
- * - 3D Perspective & preserve-3d hardware acceleration
- * - 5-Point Cascading Cover Flow (rotateY)
- * - Domino Flip-up effect (rotateX)
- * - Spatial Z-axis popping & Y elevation
- * - Magnetic spring scaling
- * - Tooltip labels with blur transitions
- * - Floor glow aura for active state
+ * Ultimate Hybrid Dock Component
+ * Combining:
+ * 1. Magic UI (https://portfolio-magicui.vercel.app/) — High-contrast black pill tooltips with triangle arrow notch, clean glass pill container, and fluid distance calculation.
+ * 2. Jack UI (https://jack-ui-ten.vercel.app/docs/components/dock) — 3D spatial perspective, Z-axis popping, Y-elevation, domino tilt, and active floor glow platform.
  */
 
 import React, { createContext, useContext, useRef, useState, useId } from "react";
@@ -28,6 +22,7 @@ import { cn } from "@/lib/utils";
 type DockContextValue = {
   mouseX: ReturnType<typeof useMotionValue<number>>;
   distance: number;
+  magnification: number;
   pillLayoutId: string;
 };
 
@@ -37,28 +32,33 @@ export interface DockProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
   className?: string;
   distance?: number;
+  magnification?: number;
 }
 
-// Snappy physical spring config
-const SPRING_CONFIG = { mass: 0.1, stiffness: 350, damping: 25 };
+const DEFAULT_DISTANCE = 140;
+const DEFAULT_MAGNIFICATION = 58;
+
+// Physical liquid spring config
+const SPRING_CONFIG = { mass: 0.08, stiffness: 350, damping: 20 };
 
 export function Dock({
   children,
   className,
-  distance = 150,
+  distance = DEFAULT_DISTANCE,
+  magnification = DEFAULT_MAGNIFICATION,
   ...rest
 }: DockProps) {
   const mouseX = useMotionValue(Infinity);
   const pillLayoutId = useId();
 
   return (
-    <DockContext.Provider value={{ mouseX, distance, pillLayoutId }}>
+    <DockContext.Provider value={{ mouseX, distance, magnification, pillLayoutId }}>
       <motion.div
         onMouseMove={(e) => mouseX.set(e.clientX)}
         onMouseLeave={() => mouseX.set(Infinity)}
         style={{ perspective: 1200 }}
         className={cn(
-          "relative mx-auto flex h-auto w-max items-end gap-2.5 rounded-full border border-neutral-200/80 dark:border-white/[0.12] bg-gradient-to-b from-white/80 to-neutral-50/90 dark:from-neutral-950/85 dark:to-neutral-900/90 px-4 py-2.5 shadow-[0_24px_48px_-12px_rgba(0,0,0,0.08),0_4px_12px_-4px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.5)] dark:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.8),0_0_40px_rgba(255,255,255,0.03),inset_0_1px_1.5px_rgba(255,255,255,0.15)] ring-1 ring-white/50 dark:ring-transparent backdrop-blur-3xl transition-colors",
+          "relative mx-auto flex h-16 w-max items-center gap-2 rounded-full border border-stone-200/80 dark:border-stone-800/80 bg-white/85 dark:bg-stone-950/85 px-3 py-2 shadow-[0_20px_50px_rgba(0,0,0,0.12)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-1 ring-white/60 dark:ring-transparent backdrop-blur-2xl transition-colors",
           className
         )}
         {...rest}
@@ -75,7 +75,6 @@ export interface DockItemProps extends HTMLMotionProps<"button"> {
   onClick?: (e: React.MouseEvent) => void;
   active?: boolean;
   label?: string;
-  as?: React.ElementType;
 }
 
 export function DockItem({
@@ -88,14 +87,14 @@ export function DockItem({
 }: DockItemProps) {
   const dock = useContext(DockContext);
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLButtonElement | HTMLDivElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
   const [hovered, setHovered] = useState(false);
 
   if (!dock) {
     throw new Error("DockItem must be used within a Dock component");
   }
 
-  const { mouseX, distance, pillLayoutId } = dock;
+  const { mouseX, distance, magnification, pillLayoutId } = dock;
 
   const distanceCalc = useTransform(mouseX, (val: number) => {
     const bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
@@ -103,99 +102,102 @@ export function DockItem({
   });
 
   const maxDist = distance;
-  const halfDist = distance / 2;
 
-  // 3D Spatial Transforms
-  const rotateXSync = useTransform(
+  // 1. Dynamic Width & Height Magnification (Magic UI style)
+  const sizeSync = useTransform(
     distanceCalc,
-    [-maxDist, -halfDist, 0, halfDist, maxDist],
-    [0, 15, 0, 15, 0]
+    [-maxDist, 0, maxDist],
+    [40, magnification, 40]
   );
-  const rotateYSync = useTransform(
-    distanceCalc,
-    [-maxDist, -halfDist, 0, halfDist, maxDist],
-    [0, -35, 0, 35, 0]
-  );
+  const size = useSpring(sizeSync, SPRING_CONFIG);
+
+  // 2. Spatial 3D Transforms (Jack UI style)
   const ySync = useTransform(
     distanceCalc,
-    [-maxDist, -halfDist, 0, halfDist, maxDist],
-    [0, -10, -25, -10, 0]
+    [-maxDist, 0, maxDist],
+    [0, -14, 0]
   );
   const zSync = useTransform(
     distanceCalc,
-    [-maxDist, -halfDist, 0, halfDist, maxDist],
-    [0, -15, 40, -15, 0]
+    [-maxDist, 0, maxDist],
+    [0, 35, 0]
   );
-  const scaleSync = useTransform(
+  const rotateXSync = useTransform(
     distanceCalc,
-    [-maxDist, -halfDist, 0, halfDist, maxDist],
-    [1, 1.05, 1.35, 1.05, 1]
+    [-maxDist, 0, maxDist],
+    [0, 10, 0]
   );
-  const opacitySync = useTransform(
+  const rotateYSync = useTransform(
     distanceCalc,
-    [-maxDist, -halfDist, 0, halfDist, maxDist],
-    [0.75, 0.9, 1, 0.9, 0.75]
+    [-maxDist, -maxDist / 2, 0, maxDist / 2, maxDist],
+    [0, -20, 0, 20, 0]
   );
 
-  const rotateX = useSpring(rotateXSync, SPRING_CONFIG);
-  const rotateY = useSpring(rotateYSync, SPRING_CONFIG);
   const y = useSpring(ySync, SPRING_CONFIG);
   const z = useSpring(zSync, SPRING_CONFIG);
-  const scale = useSpring(scaleSync, SPRING_CONFIG);
-  const opacity = useSpring(opacitySync, SPRING_CONFIG);
+  const rotateX = useSpring(rotateXSync, SPRING_CONFIG);
+  const rotateY = useSpring(rotateYSync, SPRING_CONFIG);
 
   return (
-    <div className="relative flex flex-col items-center group" style={{ transformStyle: "preserve-3d" }}>
+    <div className="relative flex flex-col items-center justify-center" style={{ transformStyle: "preserve-3d" }}>
+      {/* Magic UI Style High-Contrast Tooltip Badge */}
       <AnimatePresence>
         {hovered && label && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.8, filter: "blur(8px)" }}
-            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, y: 5, scale: 0.8, filter: "blur(4px)" }}
-            transition={{ type: "spring", mass: 0.1, stiffness: 250, damping: 20 }}
-            className="absolute -top-12 z-50 whitespace-nowrap rounded-md border border-black/10 dark:border-white/10 bg-white/90 dark:bg-neutral-900/90 px-2.5 py-1 text-[11px] font-medium text-neutral-800 dark:text-neutral-100 shadow-md backdrop-blur-xl pointer-events-none"
+            initial={{ opacity: 0, y: 8, x: "-50%", scale: 0.88 }}
+            animate={{ opacity: 1, y: 0, x: "-50%", scale: 1 }}
+            exit={{ opacity: 0, y: 4, x: "-50%", scale: 0.88 }}
+            transition={{ duration: 0.15 }}
+            className="absolute -top-14 left-1/2 z-[100] whitespace-nowrap rounded-xl bg-neutral-900 px-3 py-1.5 text-xs font-semibold text-white dark:bg-white dark:text-neutral-900 shadow-md pointer-events-none flex flex-col items-center"
           >
-            {label}
+            <span>{label}</span>
+            {/* Triangle Arrow Notch */}
+            <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-neutral-900 dark:border-t-white" />
           </motion.div>
         )}
       </AnimatePresence>
 
       <motion.button
-        ref={ref as any}
+        ref={ref}
         onClick={onClick}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          rotateX: reduce ? 0 : rotateX,
-          rotateY: reduce ? 0 : rotateY,
+          width: reduce ? 40 : size,
+          height: reduce ? 40 : size,
           y: reduce ? 0 : y,
           z: reduce ? 0 : z,
-          scale: reduce ? 1 : scale,
-          opacity: reduce ? 1 : opacity,
+          rotateX: reduce ? 0 : rotateX,
+          rotateY: reduce ? 0 : rotateY,
           transformStyle: "preserve-3d",
         }}
-        whileTap={{ scale: 0.85, z: 20 }}
+        whileTap={{ scale: 0.88 }}
         className={cn(
-          "relative flex shrink-0 items-center justify-center rounded-full border border-neutral-200/80 dark:border-white/[0.15] bg-white/60 dark:bg-neutral-900/60 shadow-sm transition-colors duration-300 backdrop-blur-md cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-cyan-500",
-          "h-10 w-10",
-          hovered && "border-neutral-300 dark:border-white/[0.3] bg-white/90 dark:bg-neutral-800/90 shadow-[0_8px_16px_rgba(0,0,0,0.08)] dark:shadow-[0_10px_20px_rgba(0,0,0,0.5),0_0_15px_rgba(255,255,255,0.05)]",
-          active && "border-cyan-500/60 bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 font-semibold shadow-[0_0_15px_rgba(6,182,212,0.3)]",
-          !active && "text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white",
+          "relative flex items-center justify-center rounded-full border transition-colors duration-200 cursor-pointer outline-none",
+          // Active state styling with Portfolio Teal accent theme
+          active
+            ? "border-teal-600/70 dark:border-teal-400/80 bg-teal-500/15 dark:bg-teal-400/20 text-teal-700 dark:text-teal-300 font-bold shadow-[0_0_16px_rgba(15,118,110,0.25)] dark:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
+            : "border-stone-200/70 dark:border-stone-800/70 bg-stone-100/60 dark:bg-stone-900/60 text-stone-600 dark:text-stone-300 hover:bg-stone-200/80 dark:hover:bg-stone-800/80 hover:text-stone-900 dark:hover:text-white",
+          hovered && !active && "border-stone-300 dark:border-stone-700 bg-white dark:bg-stone-800 shadow-md",
           className
         )}
         {...rest}
       >
-        <div className="flex items-center justify-center transition-transform duration-300">
+        <motion.div
+          animate={{ scale: hovered ? 1.12 : 1 }}
+          transition={{ type: "spring", stiffness: 350, damping: 22 }}
+          className="flex items-center justify-center"
+        >
           {children}
-        </div>
+        </motion.div>
       </motion.button>
 
-      {/* Spatial 3D Floor Glow for Active Item */}
+      {/* Jack UI 3D Floor Glow Platform for Active Item */}
       {active && (
         <motion.div
           layoutId={`${pillLayoutId}-platform`}
-          transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 25 }}
-          className="absolute -bottom-2 h-1 w-6 rounded-full bg-cyan-500/40 dark:bg-cyan-400/50 shadow-[0_0_12px_3px_rgba(34,211,238,0.4)] blur-[1.5px] pointer-events-none"
+          transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 350, damping: 25 }}
+          className="absolute -bottom-2.5 h-1 w-5 rounded-full bg-teal-600/60 dark:bg-teal-400/70 shadow-[0_0_14px_3px_rgba(15,118,110,0.4)] dark:shadow-[0_0_14px_3px_rgba(45,212,191,0.5)] blur-[1.5px] pointer-events-none"
           style={{ rotateX: 60 }}
         />
       )}
@@ -209,10 +211,10 @@ export interface DockSeparatorProps extends React.HTMLAttributes<HTMLDivElement>
 
 export function DockSeparator({ className, ...rest }: DockSeparatorProps) {
   return (
-    <div className="relative flex flex-col items-center group h-10 justify-center" {...rest}>
+    <div className="relative flex h-full items-center justify-center px-1" {...rest}>
       <span
         aria-hidden
-        className={cn("mx-1 h-5 w-[1px] bg-black/10 dark:bg-white/10 rounded-full", className)}
+        className={cn("h-6 w-[1px] bg-stone-200 dark:bg-stone-800 rounded-full", className)}
       />
     </div>
   );

@@ -95,17 +95,7 @@ export function Hero({ imageSrc }: HeroProps) {
           {/* Top Flex Row: Text + Avatar */}
           <div className="flex flex-col-reverse sm:flex-row items-center sm:items-start justify-between gap-6 text-center sm:text-left">
             <div className="flex-1 space-y-4">
-              <motion.div variants={itemVariants}>
-                <Badge variant="outline" className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] shadow-xs">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[color:var(--color-status-success)] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[color:var(--color-status-success)]"></span>
-                  </span>
-                  <span className="font-mono text-xs font-semibold tracking-wider text-[color:var(--color-text-secondary)]">
-                    Available for projects & roles
-                  </span>
-                </Badge>
-              </motion.div>
+
 
               <motion.h1
                 id="hero-heading"

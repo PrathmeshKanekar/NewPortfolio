@@ -100,8 +100,7 @@ export function SkillsOverview() {
           {SKILL_GROUPS.map((group, groupIdx) => (
             <RevealOnScroll key={group.category} delay={groupIdx * 0.1}>
               <div className="space-y-3">
-                <h3 className="text-xs font-mono font-bold tracking-widest text-[color:var(--color-text-tertiary)] uppercase flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--color-text-primary)]" />
+                <h3 className="text-xs font-mono font-bold tracking-widest text-[color:var(--color-text-tertiary)] uppercase">
                   {group.category}
                 </h3>
 

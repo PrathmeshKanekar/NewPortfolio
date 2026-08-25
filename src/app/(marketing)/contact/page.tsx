@@ -8,7 +8,7 @@ import { ContactEmailButton } from "@/components/cards/ContactEmailButton";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: `Get in touch with ${SITE_CONFIG.name} — currently ${SITE_CONFIG.availabilityStatus.toLowerCase()}.`,
+  description: `Get in touch with ${SITE_CONFIG.name}.`,
 };
 
 export default function ContactPage() {
@@ -19,7 +19,7 @@ export default function ContactPage() {
           <SectionHeading
             eyebrow="Contact"
             heading="Let's build something useful."
-            description={`I'm currently ${SITE_CONFIG.availabilityStatus.toLowerCase()}. Whether it's a new project, an open role, or a conversation about system design — I'd love to hear from you.`}
+            description="Whether it's a new project, an open role, or a conversation about system design — I'd love to hear from you."
             id="contact-heading"
             align="center"
           />
@@ -86,19 +86,6 @@ export default function ContactPage() {
               Send Email
               <ArrowRight className="h-4 w-4" />
             </a>
-          </div>
-
-          {/* Availability */}
-          <div className="mt-12 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-sunken)] px-4 py-2">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
-              </span>
-              <span className="text-xs font-medium text-[color:var(--color-text-secondary)]">
-                {SITE_CONFIG.availabilityStatus}
-              </span>
-            </div>
           </div>
         </div>
       </Container>
