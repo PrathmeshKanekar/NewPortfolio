@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { Github, Linkedin } from "@/components/common/Icons";
-import { RESUME_FILENAME } from "@/lib/constants";
+import { SITE_CONFIG, RESUME_FILENAME } from "@/lib/constants";
 
 type DockItemType = {
   label: string;
@@ -33,6 +33,7 @@ type DockItemType = {
   external?: boolean;
 };
 
+// 1. Resume menu placed directly after Blog menu
 const MAIN_NAV: DockItemType[] = [
   { label: "Home", href: "/", icon: Home },
   { label: "About", href: "/about", icon: User },
@@ -40,13 +41,13 @@ const MAIN_NAV: DockItemType[] = [
   { label: "Projects", href: "/projects", icon: Code2 },
   { label: "Skills", href: "/#skills", icon: Layers },
   { label: "Blog", href: "/blog", icon: BookOpen },
-  { label: "Contact", href: "/contact", icon: Mail },
+  { label: "Resume", href: `/resume/${RESUME_FILENAME}`, icon: FileText, external: true },
 ];
 
 const UTILITY_NAV: DockItemType[] = [
   { label: "GitHub", href: "https://github.com/prathmeshkanekar", icon: Github, external: true },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/prathmesh-kanekar", icon: Linkedin, external: true },
-  { label: "Resume", href: `/resume/${RESUME_FILENAME}`, icon: FileText, external: true },
+  { label: "Contact", href: "/contact", icon: Mail },
 ];
 
 const emptySubscribe = () => () => {};
@@ -55,6 +56,7 @@ export function FloatingDock() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showSocialsInDock, setShowSocialsInDock] = useState(false);
 
   const { theme, setTheme } = useTheme();
   const mounted = React.useSyncExternalStore(
@@ -62,6 +64,36 @@ export function FloatingDock() {
     () => true,
     () => false
   );
+
+  // Dynamic Scroll Detection: Show socials in navbar ONLY when hero contact section goes UP / off-screen
+  useEffect(() => {
+    if (pathname !== "/") {
+      setShowSocialsInDock(true);
+      return;
+    }
+
+    const checkHeroContact = () => {
+      const el = document.getElementById("hero-contact-buttons");
+      if (!el) {
+        setShowSocialsInDock(true);
+        return;
+      }
+      const rect = el.getBoundingClientRect();
+      // If hero contact buttons are currently visible inside the viewport
+      const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+      // Show in dock ONLY when hero contact buttons have scrolled out of view
+      setShowSocialsInDock(!isVisible);
+    };
+
+    checkHeroContact();
+    window.addEventListener("scroll", checkHeroContact, { passive: true });
+    window.addEventListener("resize", checkHeroContact, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", checkHeroContact);
+      window.removeEventListener("resize", checkHeroContact);
+    };
+  }, [pathname]);
 
   const checkIsActive = (href: string) => {
     const basePath = href.split("#")[0] || "/";
@@ -110,21 +142,35 @@ export function FloatingDock() {
             );
           })}
 
-          <DockSeparator />
-
-          {/* External Socials & Resume */}
-          {UTILITY_NAV.map((item) => {
-            const Icon = item.icon;
-            return (
-              <DockItem
-                key={item.label}
-                label={item.label}
-                onClick={(e) => handleNavigate(item, e)}
+          {/* Social / Contact Items: Animated entrance when Hero contact buttons scroll off-screen */}
+          <AnimatePresence mode="popLayout">
+            {showSocialsInDock && (
+              <motion.div
+                key="utility-social-group"
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.7 }}
+                transition={{ type: "spring", mass: 0.08, stiffness: 350, damping: 22 }}
+                className="flex items-center gap-2.5"
               >
-                <Icon className="h-5 w-5" />
-              </DockItem>
-            );
-          })}
+                <DockSeparator />
+                {UTILITY_NAV.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = checkIsActive(item.href);
+                  return (
+                    <DockItem
+                      key={item.label}
+                      label={item.label}
+                      active={isActive}
+                      onClick={(e) => handleNavigate(item, e)}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </DockItem>
+                  );
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <DockSeparator />
 
@@ -271,4 +317,3 @@ export function FloatingDock() {
     </>
   );
 }
-
