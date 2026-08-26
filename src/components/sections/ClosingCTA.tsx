@@ -30,14 +30,7 @@ export function ClosingCTA() {
         <div className="mx-auto max-w-4xl">
           <RevealOnScroll>
             <div className="relative flex flex-col items-center text-center p-8 md:p-16 rounded-3xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] shadow-md overflow-hidden">
-              {/* Status indicator */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 rounded-full border border-[color:var(--color-status-success)]/30 bg-[color:var(--color-status-success-subtle)] text-[color:var(--color-status-success)] text-xs font-mono font-medium shadow-sm">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[color:var(--color-status-success)] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[color:var(--color-status-success)]"></span>
-                </span>
-                {SITE_CONFIG.availabilityStatus}
-              </div>
+
 
               <h2 id="closing-cta" className="font-space text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[color:var(--color-text-primary)] mb-6">
                 Let&apos;s discuss your next project.

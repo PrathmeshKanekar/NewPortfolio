@@ -4,7 +4,7 @@ export const SITE_CONFIG = {
   name: "Prathmesh Kanekar",
   title: "Full Stack Software Engineer",
   description:
-    "Full Stack Software Engineer focused on building secure, scalable enterprise applications and banking software using Angular, ASP.NET Core, C#, SQL Server, PostgreSQL, Docker, and Azure.",
+    "Full Stack Software Engineer focused on building secure, scalable enterprise applications using Angular, ASP.NET Core, C#, SQL Server, PostgreSQL, Docker, and Azure.",
   url: "https://prathmeshkanekar.in",
   email: "prathmeshkanekar2002@gmail.com",
   location: "Kolhapur, Maharashtra",
