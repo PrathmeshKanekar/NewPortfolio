@@ -67,12 +67,12 @@ export function FloatingDock() {
 
   // Dynamic Scroll Detection: Show socials in navbar ONLY when hero contact section goes UP / off-screen
   useEffect(() => {
-    if (pathname !== "/") {
-      setShowSocialsInDock(true);
-      return;
-    }
-
     const checkHeroContact = () => {
+      if (pathname !== "/") {
+        setShowSocialsInDock(true);
+        return;
+      }
+
       const el = document.getElementById("hero-contact-buttons");
       if (!el) {
         setShowSocialsInDock(true);
@@ -85,11 +85,12 @@ export function FloatingDock() {
       setShowSocialsInDock(!isVisible);
     };
 
-    checkHeroContact();
+    const animId = requestAnimationFrame(checkHeroContact);
     window.addEventListener("scroll", checkHeroContact, { passive: true });
     window.addEventListener("resize", checkHeroContact, { passive: true });
 
     return () => {
+      cancelAnimationFrame(animId);
       window.removeEventListener("scroll", checkHeroContact);
       window.removeEventListener("resize", checkHeroContact);
     };
