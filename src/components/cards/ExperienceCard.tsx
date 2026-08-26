@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import type { Experience } from "@/types/experience";
-import { Building2, ChevronDown, ChevronRight, CheckCircle2 } from "lucide-react";
+import { ChevronDown, ChevronRight, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ExperienceCardProps {
@@ -39,9 +39,6 @@ export function ExperienceCard({ experience, className, isLast }: ExperienceCard
           className="w-full flex items-center justify-between gap-3 text-left focus:outline-none"
         >
           <div className="flex items-center gap-3 min-w-0 flex-1">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[color:var(--color-surface-sunken)] border border-[color:var(--color-border-subtle)] shadow-xs">
-              <Building2 className="w-5 h-5 text-[color:var(--color-text-primary)]" />
-            </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1.5 font-bold text-base sm:text-lg text-[color:var(--color-text-primary)]">
                 <span className="truncate">{experience.company}</span>

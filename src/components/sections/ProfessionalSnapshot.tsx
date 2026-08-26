@@ -73,15 +73,8 @@ export function ProfessionalSnapshot() {
               <KokonutGlowCard
                 key={item.label}
                 glowColor={item.brandColor}
-                className="group flex items-center gap-4 p-5 rounded-2xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] transition-all duration-200 hover:border-[color:var(--color-border-strong)] hover:shadow-sm"
+                className="group flex flex-col justify-center p-5 rounded-2xl border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] transition-all duration-200 hover:border-[color:var(--color-border-strong)] hover:shadow-sm"
               >
-                <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[color:var(--color-surface-sunken)] border border-[color:var(--color-border-subtle)] shadow-xs transition-transform duration-300 group-hover:scale-105"
-                  style={{ color: item.brandColor }}
-                >
-                  <item.icon className="h-5 w-5" />
-                </div>
-
                 <div className="flex flex-col gap-1">
                   <span className="font-mono text-[10px] font-bold tracking-widest uppercase text-[color:var(--color-text-tertiary)] flex items-center gap-1.5">
                     <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ backgroundColor: item.brandColor }} />
